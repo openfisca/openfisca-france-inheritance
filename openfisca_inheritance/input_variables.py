@@ -26,7 +26,7 @@
 from openfisca_core.columns import EnumCol, FloatCol, IntCol
 
 from .base import QUIFAM, QUIFOY, QUIMEN, reference_input_variable
-from .entities import Individus
+from .entities import Individus, Successions
 
 
 reference_input_variable(
@@ -83,4 +83,39 @@ reference_input_variable(
     entity_class = Individus,
     label = "Salaire brut",
     name = 'salaire_brut',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Actif de communauté",
+    name = 'actif_de_communaute',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Passif de communauté",
+    name = 'passif_de_communaute',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Actif propre",
+    name = 'actif_propre',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Passif propre",
+    name = 'passif_propre',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = "Assurance Vie",
+    name = 'assurance_vie',
     )

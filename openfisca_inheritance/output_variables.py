@@ -27,7 +27,7 @@ from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import SimpleFormula
 
 from .base import reference_formula
-from .entities import Individus
+from .entities import Individus, Successions
 
 
 @reference_formula
@@ -72,3 +72,13 @@ class salaire_net(SimpleFormula):
 
     def function(self, salaire_brut):
         return salaire_brut * 0.8
+        
+@reference_formula
+class actif_imposable(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Actif imposable"
+    period_unit = u'year'
+
+    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+        return (actif_de_communaute - passif_de_communaute)/2 + actif_propre - passif_propre - assurance_vie

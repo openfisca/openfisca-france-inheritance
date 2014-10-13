@@ -84,10 +84,25 @@ class Menages(entities.AbstractEntity):
         }
     symbol = 'men'
 
+class Successions(entities.AbstractEntity):
+    column_by_name = collections.OrderedDict()
+    key_plural = 'successions'
+    key_singular = 'succession'
+    label = u'Déclaration de succession'
+    max_cardinality_by_role_key = {'epoux_survivant': 1, 'enfants': 9, 'collateraux': 9, u'legataires': 9}
+    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']    
+    label_by_role_key = {
+        'epoux survivant': u'Epoux survivant',
+        'enfants': u'Enfants',
+        'collateraux': u'Collatéraux',
+        'legataires': u'Légataires',
+        }    
+    symbol = 'succ'
 
 entity_class_by_symbol = dict(
     fam = Familles,
     foy = FoyersFiscaux,
     ind = Individus,
     men = Menages,
+    succ = Successions,   
     )
