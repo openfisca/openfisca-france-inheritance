@@ -1,0 +1,13 @@
+*~
+*.egg-info
+*.mo
+*.pyc
+*.pyo
+/.project
+/.pydevproject
+/.settings
+/.spyderproject
+/.spyderworkspace
+/build
+/dist
+
