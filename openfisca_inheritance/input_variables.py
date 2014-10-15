@@ -45,21 +45,21 @@ from .entities import Individus, Successions
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Individus,
+    entity_class = Successions,
     label = u"Actif propre",
     name = 'actif_propre',
     )
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Individus,
+    entity_class = Successions,
     label = u"Passif propre",
     name = 'passif_propre',
     )
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Individus,
+    entity_class = Successions,
     label = "Assurance Vie",
     name = 'assurance_vie',
     )

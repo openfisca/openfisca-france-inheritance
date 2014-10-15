@@ -23,8 +23,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from __future__ import division
+
+from numpy import maximum as max_
+
+from openfisca_core.accessors import law
 from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import SimpleFormula
+
 
 from .base import reference_formula
 from .entities import Individus, Successions
@@ -77,7 +83,7 @@ from .entities import Individus, Successions
 @reference_formula
 class actif_imposable(SimpleFormula):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Successions
     label = "Actif imposable"
     period_unit = u'year'
 
@@ -96,6 +102,7 @@ class is_enfant(SimpleFormula):
     def function(self, quisucc):
         return quisucc >= 2
 
+
 @reference_formula
 class nombre_enfants(SimpleFormula):
     column = FloatCol
@@ -105,16 +112,43 @@ class nombre_enfants(SimpleFormula):
 
     def function(self, is_enfant_holder):
         return self.sum_by_entity(is_enfant_holder)
-        
+
+
 @reference_formula
 class part_taxable(SimpleFormula):
     column = FloatCol
     entity_class = Successions
-    label = "Droits de succession"
+    label = "Nombre d'enfants"
     period_unit = u'year'
 
+    def function(self, actif_imposable, nombre_enfants,
+                 abattement_par_part = law.succession.ligne_directe.abattement):
+        return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
+
+
+@reference_formula
+class droits(SimpleFormula):
+    column = FloatCol
+    entity_class = Individus
+    label = "Droits"
+    period_unit = u'year'
+
+    def function(self, part_taxable_holder, is_enfant, 
+                 bareme = law.succession.ligne_directe.bareme):  # TODO rework
+        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
+        droits = bareme.calc(part_taxable)
+        return droits
+
+
+#@reference_formula
+#class part_taxable(SimpleFormula):
+#    column = FloatCol
+#    entity_class = Successions
+#    label = "Droits de succession"
+#    period_unit = u'year'
+#
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, actif_imposable, nombre_enfants):
-        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
-        return part_taxable
+#    def function(self, actif_imposable, nombre_enfants):
+#        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
+#        return part_taxable

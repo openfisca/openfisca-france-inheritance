@@ -31,8 +31,10 @@ TaxBenefitSystem = openfisca_inheritance.init_country()
 tax_benefit_system = TaxBenefitSystem()
 scenario = tax_benefit_system.new_scenario()
 scenario.init_simple_succession(
-    decede = dict(actif_propre = 50000, passif_propre = 1000),
+    succession = dict(actif_propre = 1000000, passif_propre = 10000),
+    decede = {},
     enfants = [
+        {},
         {},
         {},
         {},
@@ -45,6 +47,7 @@ simulation = scenario.new_simulation(debug = True)
 print 'id', simulation.get_holder('id').array
 print 'quisucc', simulation.get_holder('quisucc').array
 print 'idsucc', simulation.get_holder('idsucc').array
-print 'actif_propre', simulation.get_holder('actif_propre').array
 print 'actif_imposable', simulation.calculate("actif_imposable")
 print 'nombre_enfants', simulation.calculate("nombre_enfants")
+print 'part_taxable', simulation.calculate("part_taxable")
+print 'droits', simulation.calculate("droits")

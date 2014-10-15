@@ -1,6 +1,10 @@
-<NODE code="root" deb="2006-01-01" fin="2013-12-31">
+<NODE code="root" deb="2006-01-01" fin="2014-12-31">
   <NODE code="succession" description="Droits de succession">
-    <BAREME code="ligne_directe" description="Succesion en ligne directe">
+    <NODE code="ligne_directe" description="Succesion en ligne directe">
+      <CODE code="abattement" description="Abattement" format="integer" type="monetary">
+        <VALUE deb="2012-01-01" fin="2014-12-31" valeur="100000" />
+      </CODE>
+      <BAREME code="bareme" description="Barème de la part en ligne directe">
       <TRANCHE code="tranche0">
         <SEUIL>
           <VALUE deb="2012-01-01" fin="2014-12-31" valeur="0" />
@@ -57,7 +61,8 @@
           <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".45" />
         </TAUX>
       </TRANCHE>
-    </BAREME>
+      </BAREME>
+    </NODE>
   </NODE>
   <NODE code="csg" description="Contribution sociale généralisée (CSG)">
     <NODE code="act" description="Revenus d'activité">
