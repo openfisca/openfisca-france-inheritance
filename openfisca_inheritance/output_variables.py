@@ -30,55 +30,58 @@ from .base import reference_formula
 from .entities import Individus, Successions
 
 
-@reference_formula
-class revenu_disponible(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = u"Revenu disponible"
-    period_unit = u'year'
+#@reference_formula
+#class revenu_disponible(SimpleFormula):
+#    column = FloatCol
+#    entity_class = Individus
+#    label = u"Revenu disponible"
+#    period_unit = u'year'
+#
+#    def function(self, rsa, salaire_imposable):
+#        return rsa + salaire_imposable * 0.7
+#
+#
+#@reference_formula
+#class rsa(SimpleFormula):
+#    column = FloatCol
+#    entity_class = Individus
+#    label = u"RSA"
+#    period_unit = u'month'
+#
+#    def function(self, salaire_imposable):
+#        return (salaire_imposable < 500) * 333
+#
+#
+#@reference_formula
+#class salaire_imposable(SimpleFormula):
+#    column = FloatCol
+#    entity_class = Individus
+#    label = u"Salaire imposable"
+#    period_unit = u'year'
+#
+#    def function(self, salaire_net):
+#        return salaire_net * 0.9
+#
+#
+#@reference_formula
+#class salaire_net(SimpleFormula):
+#    column = FloatCol
+#    entity_class = Individus
+#    label = u"Salaire net"
+#    period_unit = u'year'
+#
+#    def function(self, salaire_brut):
+#        return salaire_brut * 0.8
 
-    def function(self, rsa, salaire_imposable):
-        return rsa + salaire_imposable * 0.7
-
-
-@reference_formula
-class rsa(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = u"RSA"
-    period_unit = u'month'
-
-    def function(self, salaire_imposable):
-        return (salaire_imposable < 500) * 333
-
-
-@reference_formula
-class salaire_imposable(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = u"Salaire imposable"
-    period_unit = u'year'
-
-    def function(self, salaire_net):
-        return salaire_net * 0.9
-
-
-@reference_formula
-class salaire_net(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = u"Salaire net"
-    period_unit = u'year'
-
-    def function(self, salaire_brut):
-        return salaire_brut * 0.8
         
 @reference_formula
 class actif_imposable(SimpleFormula):
     column = FloatCol
-    entity_class = Successions
+    entity_class = Individus
     label = "Actif imposable"
     period_unit = u'year'
 
-    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
-        return (actif_de_communaute - passif_de_communaute)/2 + actif_propre - passif_propre - assurance_vie
+#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+    def function(self, actif_propre, passif_propre, assurance_vie):
+        return actif_propre - passif_propre - assurance_vie

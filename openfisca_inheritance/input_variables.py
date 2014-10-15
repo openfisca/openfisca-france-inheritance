@@ -23,99 +23,43 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import EnumCol, FloatCol, IntCol
+from openfisca_core.columns import FloatCol
 
-from .base import QUIFAM, QUIFOY, QUIMEN, reference_input_variable
+from .base import reference_input_variable
 from .entities import Individus, Successions
 
 
-reference_input_variable(
-    column = IntCol(is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Identifiant de la famille",
-    name = 'idfam',
-    )
+#reference_input_variable(
+#    column = FloatCol,
+#    entity_class = Successions,
+#    label = u"Actif de communauté",
+#    name = 'actif_de_communaute',
+#    )
 
-reference_input_variable(
-    column = IntCol(is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Identifiant du foyer",
-    name = 'idfoy',
-    )
-    
-reference_input_variable(
-    column = IntCol(is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Identifiant du ménage",
-    name = 'idmen',
-    )
-
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    label = u"Numéro d'ordre individuel",
-    name = 'noi',
-    )
-
-reference_input_variable(
-    column = EnumCol(QUIFAM, is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Role dans la famille",
-    name = 'quifam',
-    )
-
-reference_input_variable(
-    column = EnumCol(QUIFOY, is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Role dans le foyer",
-    name = 'quifoy',
-    )
-
-reference_input_variable(
-    column = EnumCol(QUIMEN, is_period_invariant = True),    
-    entity_class = Individus,
-    label = u"Role dans le ménage",
-    name = 'quimen',
-    )
+#reference_input_variable(
+#    column = FloatCol,
+#    entity_class = Successions,
+#    label = u"Passif de communauté",
+#    name = 'passif_de_communaute',
+#    )
 
 reference_input_variable(
     column = FloatCol,
     entity_class = Individus,
-    label = "Salaire brut",
-    name = 'salaire_brut',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Successions,
-    label = u"Actif de communauté",
-    name = 'actif_de_communaute',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Successions,
-    label = u"Passif de communauté",
-    name = 'passif_de_communaute',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Successions,
     label = u"Actif propre",
     name = 'actif_propre',
     )
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Successions,
+    entity_class = Individus,
     label = u"Passif propre",
     name = 'passif_propre',
     )
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Successions,
+    entity_class = Individus,
     label = "Assurance Vie",
     name = 'assurance_vie',
     )
