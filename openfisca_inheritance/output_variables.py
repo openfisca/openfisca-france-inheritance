@@ -85,3 +85,36 @@ class actif_imposable(SimpleFormula):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
     def function(self, actif_propre, passif_propre, assurance_vie):
         return actif_propre - passif_propre - assurance_vie
+
+
+@reference_formula
+class is_enfant(SimpleFormula):
+    column = FloatCol
+    entity_class = Individus
+    label = "Est un enfant"
+    period_unit = u'year'
+    def function(self, quisucc):
+        return quisucc >= 2
+
+@reference_formula
+class nombre_enfants(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Nombre d'enfants"
+    period_unit = u'year'
+
+    def function(self, is_enfant_holder):
+        return self.sum_by_entity(is_enfant_holder)
+        
+@reference_formula
+class part_taxable(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Droits de succession"
+    period_unit = u'year'
+
+#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+    def function(self, actif_imposable, nombre_enfants):
+        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
+        return part_taxable

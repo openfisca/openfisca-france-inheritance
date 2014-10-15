@@ -35,10 +35,16 @@ scenario.init_simple_succession(
     enfants = [
         {},
         {},
+        {},
         ],
     year = 2014,
     )
-pprint(scenario.test_case)
+
+#pprint(scenario.test_case)
 simulation = scenario.new_simulation(debug = True)
-print simulation.get_holder('actif_propre').array
-print simulation.calculate("actif_imposable")
+print 'id', simulation.get_holder('id').array
+print 'quisucc', simulation.get_holder('quisucc').array
+print 'idsucc', simulation.get_holder('idsucc').array
+print 'actif_propre', simulation.get_holder('actif_propre').array
+print 'actif_imposable', simulation.calculate("actif_imposable")
+print 'nombre_enfants', simulation.calculate("nombre_enfants")

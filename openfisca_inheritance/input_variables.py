@@ -23,9 +23,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import FloatCol
+from openfisca_core.columns import EnumCol, FloatCol, IntCol, StrCol
 
-from .base import reference_input_variable
+from .base import QUISUCC, reference_input_variable 
 from .entities import Individus, Successions
 
 
@@ -62,4 +62,25 @@ reference_input_variable(
     entity_class = Individus,
     label = "Assurance Vie",
     name = 'assurance_vie',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    label = "Succession auquel appartient l'individu",
+    name = 'idsucc',
+    )
+
+reference_input_variable(
+    column = EnumCol(QUISUCC),
+    entity_class = Individus,
+    label = "Role de l'individu dans la succession",
+    name = 'quisucc',
+    )
+    
+reference_input_variable(
+    column = StrCol,
+    entity_class = Individus,
+    label = "Identifiant de l'individu",
+    name = 'id',
     )
