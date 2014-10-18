@@ -32,11 +32,11 @@ def test_celib():
     TaxBenefitSystem = openfisca_inheritance.init_country()
     tax_benefit_system = TaxBenefitSystem()
     scenario = tax_benefit_system.new_scenario()
-    scenario.init_single_entity(
-        parent1 = dict(salaire_brut = 50000, rsa = 1000),
-        period = 2014, # periods.period("year", 2014),
+    scenario.init_simple_succession(
+        decede = dict(salaire_brut = 50000, rsa = 1000),
+        enfants = [
+            {},
+            ],
+        year = 2014,
         )
-#    scenario.init_single_entity(parent1 = {"salaire_brut": 50000})
     simulation = scenario.new_simulation(debug = True)
-    print simulation.calculate("revenu_disponible")
-    boom
