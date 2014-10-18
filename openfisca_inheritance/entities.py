@@ -40,6 +40,7 @@ class Individus(entities.AbstractEntity):
 
 class Successions(entities.AbstractEntity):
     column_by_name = collections.OrderedDict()
+    index_for_person_variable_name = 'idsucc'
     key_plural = 'successions'
     key_singular = 'succession'
     label = u'Déclaration de succession'
@@ -49,17 +50,37 @@ class Successions(entities.AbstractEntity):
 #        'collateraux': 9,
 #        'legataires': 9,
 #        }
-#    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']    
+    name_key = 'nom_succession'
+    role_for_person_variable_name = 'quisucc'
+#    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']
 #    label_by_role_key = {
 #        'epoux survivant': u'Epoux survivant',
 #        'enfants': u'Enfants',
 #        'collateraux': u'Collatéraux',
 #        'legataires': u'Légataires',
-#        }    
+#        }
     symbol = 'succ'
+
+    def iter_member_persons_role_and_id(self, member):
+        role = 0
+
+        decede_id = member['decede']
+        assert decede_id is not None
+        yield role, decede_id
+        role += 1
+
+        epoux_survivant_id = member.get('epoux_survivant')
+        if epoux_survivant_id is not None:
+            yield role, epoux_survivant_id
+        role += 1
+
+        enfants_id = member.get('enfants')
+        if enfants_id is not None:
+            for enfant_role, enfant_id in enumerate(enfants_id, role):
+                yield enfant_role, enfant_id
 
 
 entity_class_by_symbol = dict(
-    ind = Individus,   
-    succ = Successions,   
+    ind = Individus,
+    succ = Successions,
     )
