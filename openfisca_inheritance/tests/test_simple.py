@@ -23,8 +23,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#from openfisca_core import periods
-
 import openfisca_inheritance
 
 
@@ -39,4 +37,4 @@ def test_celib():
             ],
         year = 2014,
         )
-    simulation = scenario.new_simulation(debug = True)
+    scenario.new_simulation(debug = True)

@@ -25,7 +25,7 @@
 
 from openfisca_core.columns import EnumCol, FloatCol, IntCol, StrCol
 
-from .base import QUISUCC, reference_input_variable 
+from .base import QUISUCC, reference_input_variable
 from .entities import Individus, Successions
 
 
@@ -77,7 +77,7 @@ reference_input_variable(
     label = "Role de l'individu dans la succession",
     name = 'quisucc',
     )
-    
+
 reference_input_variable(
     column = StrCol,
     entity_class = Individus,
