@@ -29,7 +29,7 @@ from numpy import maximum as max_
 
 from openfisca_core.accessors import law
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import SimpleFormula
+from openfisca_core.formulas import SimpleFormulaColumn
 
 
 from .base import reference_formula
@@ -37,7 +37,7 @@ from .entities import Individus, Successions
 
 
 #@reference_formula
-#class revenu_disponible(SimpleFormula):
+#class revenu_disponible(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Revenu disponible"
@@ -48,7 +48,7 @@ from .entities import Individus, Successions
 #
 #
 #@reference_formula
-#class rsa(SimpleFormula):
+#class rsa(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"RSA"
@@ -59,7 +59,7 @@ from .entities import Individus, Successions
 #
 #
 #@reference_formula
-#class salaire_imposable(SimpleFormula):
+#class salaire_imposable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Salaire imposable"
@@ -70,7 +70,7 @@ from .entities import Individus, Successions
 #
 #
 #@reference_formula
-#class salaire_net(SimpleFormula):
+#class salaire_net(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Salaire net"
@@ -79,9 +79,9 @@ from .entities import Individus, Successions
 #    def function(self, salaire_brut):
 #        return salaire_brut * 0.8
 
-        
+
 @reference_formula
-class actif_imposable(SimpleFormula):
+class actif_imposable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Actif imposable"
@@ -94,7 +94,7 @@ class actif_imposable(SimpleFormula):
 
 
 @reference_formula
-class is_enfant(SimpleFormula):
+class is_enfant(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Est un enfant"
@@ -104,7 +104,7 @@ class is_enfant(SimpleFormula):
 
 
 @reference_formula
-class nombre_enfants(SimpleFormula):
+class nombre_enfants(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Nombre d'enfants"
@@ -115,7 +115,7 @@ class nombre_enfants(SimpleFormula):
 
 
 @reference_formula
-class part_taxable(SimpleFormula):
+class part_taxable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Nombre d'enfants"
@@ -127,13 +127,13 @@ class part_taxable(SimpleFormula):
 
 
 @reference_formula
-class droits(SimpleFormula):
+class droits(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Droits"
     period_unit = u'year'
 
-    def function(self, part_taxable_holder, is_enfant, 
+    def function(self, part_taxable_holder, is_enfant,
                  bareme = law.succession.ligne_directe.bareme):  # TODO rework
         part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
         droits = bareme.calc(part_taxable)
@@ -141,7 +141,7 @@ class droits(SimpleFormula):
 
 
 #@reference_formula
-#class part_taxable(SimpleFormula):
+#class part_taxable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Successions
 #    label = "Droits de succession"
