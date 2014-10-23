@@ -46,6 +46,9 @@ from .entities import Individus, Successions
 #    def function(self, rsa, salaire_imposable):
 #        return rsa + salaire_imposable * 0.7
 #
+#    def get_ouput_period(self, period):
+#        return period
+#
 #
 #@reference_formula
 #class rsa(SimpleFormulaColumn):
@@ -92,6 +95,9 @@ class actif_imposable(SimpleFormulaColumn):
     def function(self, actif_propre, passif_propre, assurance_vie):
         return actif_propre - passif_propre - assurance_vie
 
+    def get_ouput_period(self, period):
+        return period
+
 
 @reference_formula
 class is_enfant(SimpleFormulaColumn):
@@ -99,8 +105,12 @@ class is_enfant(SimpleFormulaColumn):
     entity_class = Individus
     label = "Est un enfant"
     period_unit = u'year'
+
     def function(self, quisucc):
         return quisucc >= 2
+
+    def get_ouput_period(self, period):
+        return period
 
 
 @reference_formula
@@ -113,6 +123,9 @@ class nombre_enfants(SimpleFormulaColumn):
     def function(self, is_enfant_holder):
         return self.sum_by_entity(is_enfant_holder)
 
+    def get_ouput_period(self, period):
+        return period
+
 
 @reference_formula
 class part_taxable(SimpleFormulaColumn):
@@ -124,6 +137,9 @@ class part_taxable(SimpleFormulaColumn):
     def function(self, actif_imposable, nombre_enfants,
                  abattement_par_part = law.succession.ligne_directe.abattement):
         return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
+
+    def get_ouput_period(self, period):
+        return period
 
 
 @reference_formula
@@ -139,6 +155,9 @@ class droits(SimpleFormulaColumn):
         droits = bareme.calc(part_taxable)
         return droits
 
+    def get_ouput_period(self, period):
+        return period
+
 
 #@reference_formula
 #class part_taxable(SimpleFormulaColumn):
@@ -152,3 +171,6 @@ class droits(SimpleFormulaColumn):
 #    def function(self, actif_imposable, nombre_enfants):
 #        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
 #        return part_taxable
+#
+#    def get_ouput_period(self, period):
+#        return period
