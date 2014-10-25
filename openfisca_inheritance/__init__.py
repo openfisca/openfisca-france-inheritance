@@ -28,7 +28,6 @@ import os
 from openfisca_core import taxbenefitsystems
 
 from . import entities, scenarios, input_variables, output_variables
-from .base import column_by_name, prestation_by_name
 from .entities import entity_class_by_symbol
 
 
@@ -36,18 +35,13 @@ project_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def init_country():
-    class TaxBenefitSystem(taxbenefitsystems.AbstractTaxBenefitSystem):
+    class TaxBenefitSystem(taxbenefitsystems.XmlBasedTaxBenefitSystem):
         """French tax benefit system"""
         entity_class_by_key_plural = {
             entity_class.key_plural: entity_class
             for entity_class in entities.entity_class_by_symbol.itervalues()
             }
-        PARAM_FILE = os.path.join(project_dir, 'param.xml')
-
-    # Define class attributes after class declaration to avoid "name is not defined" exceptions.
-    TaxBenefitSystem.column_by_name = column_by_name
-    TaxBenefitSystem.entity_class_by_symbol = entity_class_by_symbol
-    TaxBenefitSystem.prestation_by_name = prestation_by_name
-    TaxBenefitSystem.Scenario = scenarios.Scenario
+        legislation_xml_file_path = os.path.join(project_dir, 'param.xml')
+        Scenario = scenarios.Scenario
 
     return TaxBenefitSystem

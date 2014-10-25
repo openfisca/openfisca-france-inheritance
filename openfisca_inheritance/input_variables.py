@@ -23,10 +23,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import EnumCol, FloatCol, IntCol, StrCol
+from openfisca_core.columns import EnumCol, FloatCol, IntCol, reference_input_variable, StrCol
+from openfisca_core.enumerations import Enum
 
-from .base import QUISUCC, reference_input_variable
 from .entities import Individus, Successions
+
+
+QUISUCC = Enum(['decede', 'epoux_survivant', 'enfant1', 'enfant2', 'enfant3', 'enfant4', 'enfant5',
+    'enfant6', 'enfant7', 'enfant8', 'enfant9' ])
 
 
 #reference_input_variable(
