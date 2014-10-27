@@ -30,10 +30,12 @@ from numpy import maximum as max_
 from openfisca_core.accessors import law
 from openfisca_core.columns import FloatCol
 #from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import reference_formula, SimpleFormulaColumn
+from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
+
+from .entities import entity_class_by_symbol, Individus, Successions
 
 
-from .entities import Individus, Successions
+reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
 
 
 #@reference_formula
