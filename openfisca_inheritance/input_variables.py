@@ -46,15 +46,15 @@ from .entities import Individus, Successions
 reference_input_variable(
     column = FloatCol,
     entity_class = Successions,
-    label = u"Actif propre",
-    name = 'actif_propre',
+    label = u"Actif de Communauté",
+    name = 'actif_de_communaute',
     )
 
 reference_input_variable(
     column = FloatCol,
     entity_class = Successions,
-    label = u"Passif propre",
-    name = 'passif_propre',
+    label = u"Actif propre",
+    name = 'actif_propre',
     )
 
 reference_input_variable(
@@ -65,6 +65,13 @@ reference_input_variable(
     )
 
 reference_input_variable(
+    column = StrCol,
+    entity_class = Individus,
+    label = "Identifiant de l'individu",
+    name = 'id',
+    )
+
+reference_input_variable(
     column = IntCol,
     entity_class = Individus,
     label = "Succession auquel appartient l'individu",
@@ -72,15 +79,29 @@ reference_input_variable(
     )
 
 reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = "Part epoux",
+    name = 'part_epoux',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Passif de Communauté",
+    name = 'passif_de_communaute',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Successions,
+    label = u"Passif propre",
+    name = 'passif_propre',
+    )
+
+reference_input_variable(
     column = EnumCol(QUISUCC),
     entity_class = Individus,
     label = "Role de l'individu dans la succession",
     name = 'quisucc',
-    )
-    
-reference_input_variable(
-    column = StrCol,
-    entity_class = Individus,
-    label = "Identifiant de l'individu",
-    name = 'id',
     )

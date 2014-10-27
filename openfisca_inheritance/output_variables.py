@@ -79,7 +79,6 @@ from .entities import Individus, Successions
 #    def function(self, salaire_brut):
 #        return salaire_brut * 0.8
 
-        
 @reference_formula
 class actif_imposable(SimpleFormula):
     column = FloatCol
@@ -89,9 +88,48 @@ class actif_imposable(SimpleFormula):
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, actif_propre, passif_propre, assurance_vie):
-        return actif_propre - passif_propre - assurance_vie
+    def function(self, part_epoux, actif_de_communaute, passif_de_communaute,\
+                 actif_propre, passif_propre, assurance_vie):
+        return (1-part_epoux)*((actif_de_communaute - passif_de_communaute) / 2 \
+                + actif_propre - passif_propre - assurance_vie)
 
+@reference_formula
+class actif_transmis(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Actif transmis"
+    period_unit = u'year'
+
+#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+    def function(self, part_epoux, actif_de_communaute, passif_de_communaute,\
+                 actif_propre, passif_propre):
+        return ((actif_de_communaute - passif_de_communaute) / 2 \
+                + actif_propre - passif_propre)
+        
+@reference_formula
+class droits(SimpleFormula):
+    column = FloatCol
+    entity_class = Individus
+    label = "Droits sur parts"
+    period_unit = u'year'
+
+    def function(self, part_taxable_holder, is_enfant, 
+                 bareme = law.succession.ligne_directe.bareme):  # TODO rework
+        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
+        droits = bareme.calc(part_taxable)
+        return droits
+
+@reference_formula
+class droits_sur_succ(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Droits sur succession"
+    period_unit = u'year'
+
+    def function(self, droits):
+        droits_sur_succ = self.sum_by_entity(droits)
+        return droits_sur_succ
 
 @reference_formula
 class is_enfant(SimpleFormula):
@@ -101,7 +139,6 @@ class is_enfant(SimpleFormula):
     period_unit = u'year'
     def function(self, quisucc):
         return quisucc >= 2
-
 
 @reference_formula
 class nombre_enfants(SimpleFormula):
@@ -113,6 +150,15 @@ class nombre_enfants(SimpleFormula):
     def function(self, is_enfant_holder):
         return self.sum_by_entity(is_enfant_holder)
 
+@reference_formula
+class part_recue(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = u"Part reçue"
+    period_unit = u'year'
+
+    def function(self, actif_imposable, nombre_enfants):
+        return actif_imposable / nombre_enfants
 
 @reference_formula
 class part_taxable(SimpleFormula):
@@ -125,20 +171,38 @@ class part_taxable(SimpleFormula):
                  abattement_par_part = law.succession.ligne_directe.abattement):
         return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
 
-
 @reference_formula
-class droits(SimpleFormula):
+class taux_sur_part_recue(SimpleFormula):
     column = FloatCol
     entity_class = Individus
-    label = "Droits"
+    label = "Taux d'imposition sur la part recue"
     period_unit = u'year'
 
-    def function(self, part_taxable_holder, is_enfant, 
-                 bareme = law.succession.ligne_directe.bareme):  # TODO rework
-        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
-        droits = bareme.calc(part_taxable)
-        return droits
+    def function(self, droits, part_recue_holder):
+        taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
+        return taux_sur_part_recue
 
+@reference_formula
+class taux_sur_succ(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Taux d'imposition sur la succession"
+    period_unit = u'year'
+
+    def function(self, droits, droits_sur_succ, actif_imposable):
+        taux_sur_succ = droits_sur_succ / actif_imposable
+        return taux_sur_succ
+
+@reference_formula
+class taux_sur_transmis(SimpleFormula):
+    column = FloatCol
+    entity_class = Successions
+    label = "Taux d'imposition sur la succession"
+    period_unit = u'year'
+
+    def function(self, droits, droits_sur_succ, actif_transmis, assurance_vie):
+        taux_sur_transmis = droits_sur_succ / actif_transmis
+        return taux_sur_transmis
 
 #@reference_formula
 #class part_taxable(SimpleFormula):
