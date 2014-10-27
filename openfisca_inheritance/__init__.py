@@ -27,16 +27,15 @@ import os
 
 from openfisca_core import taxbenefitsystems
 
-from . import entities, scenarios, input_variables, output_variables
-from .entities import entity_class_by_symbol
-
+from . import input_variables, output_variables  # noqa
+from . import entities, scenarios
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def init_country():
     class TaxBenefitSystem(taxbenefitsystems.XmlBasedTaxBenefitSystem):
-        """French tax benefit system"""
+        """French Inheritance system"""
         entity_class_by_key_plural = {
             entity_class.key_plural: entity_class
             for entity_class in entities.entity_class_by_symbol.itervalues()

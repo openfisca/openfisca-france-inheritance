@@ -32,57 +32,11 @@ from openfisca_core.columns import FloatCol
 #from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
 
-from .entities import entity_class_by_symbol, Individus, Successions
+from .entities import Donations, entity_class_by_symbol, Individus, Successions
 
 
 reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
 
-
-#@reference_formula
-#class revenu_disponible(SimpleFormulaColumn):
-#    column = FloatCol
-#    entity_class = Individus
-#    label = u"Revenu disponible"
-#    period_unit = u'year'
-#
-#    def function(self, rsa, salaire_imposable):
-#        return rsa + salaire_imposable * 0.7
-#
-#    def get_output_period(self, period):
-#        return period
-#
-#
-#@reference_formula
-#class rsa(SimpleFormulaColumn):
-#    column = FloatCol
-#    entity_class = Individus
-#    label = u"RSA"
-#    period_unit = u'month'
-#
-#    def function(self, salaire_imposable):
-#        return (salaire_imposable < 500) * 333
-#
-#
-#@reference_formula
-#class salaire_imposable(SimpleFormulaColumn):
-#    column = FloatCol
-#    entity_class = Individus
-#    label = u"Salaire imposable"
-#    period_unit = u'year'
-#
-#    def function(self, salaire_net):
-#        return salaire_net * 0.9
-#
-#
-#@reference_formula
-#class salaire_net(SimpleFormulaColumn):
-#    column = FloatCol
-#    entity_class = Individus
-#    label = u"Salaire net"
-#    period_unit = u'year'
-#
-#    def function(self, salaire_brut):
-#        return salaire_brut * 0.8
 
 @reference_formula
 class actif_imposable(SimpleFormulaColumn):
@@ -118,6 +72,22 @@ class actif_transmis(SimpleFormulaColumn):
 
     def get_output_period(self, period):
         return period
+        
+
+@reference_formula
+class don_recu(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Donations
+    label = "Don reçu"
+    period_unit = u'year'
+
+#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+    def function(self, don, nombre_enfants_donataires):
+        return don / nombre_enfants_donataires
+
+    def get_output_period(self, period):
+        return period
 
 
 @reference_formula
@@ -143,7 +113,21 @@ class is_enfant(SimpleFormulaColumn):
     period_unit = u'year'
 
     def function(self, quisucc):
-        return quisucc >= 2
+        return quisucc >= 100
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class is_enfant_donataire(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = "Est un enfant donataire"
+    period_unit = u'year'
+
+    def function(self, quidon):
+        return quidon >= 100
 
     def get_output_period(self, period):
         return period
@@ -161,6 +145,21 @@ class nombre_enfants(SimpleFormulaColumn):
 
     def get_output_period(self, period):
         return period
+
+
+@reference_formula
+class nombre_enfants_donataires(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Donations
+    label = "Nombre d'enfants donataires"
+    period_unit = u'year'
+
+    def function(self, is_enfant_donataire_holder):
+        return self.sum_by_entity(is_enfant_donataire_holder)
+
+    def get_output_period(self, period):
+        return period
+
 
 @reference_formula
 class part_recue(SimpleFormulaColumn):

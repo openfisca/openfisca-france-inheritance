@@ -62,28 +62,19 @@ class Successions(entities.AbstractEntity):
     symbol = 'succ'
 
     def iter_member_persons_role_and_id(self, member):
-        role = 0
-
         decede_id = member['decede']
         assert decede_id is not None
-        yield role, decede_id
-        role += 1
+        yield 0, decede_id
 
         epoux_survivant_id = member.get('epoux_survivant')
         if epoux_survivant_id is not None:
-            yield role, epoux_survivant_id
-        role += 1
+            yield 1, epoux_survivant_id
 
         enfants_id = member.get('enfants')
         if enfants_id is not None:
-            for enfant_role, enfant_id in enumerate(enfants_id, role):
+            for enfant_role, enfant_id in enumerate(enfants_id, 100):
                 yield enfant_role, enfant_id
 
-
-entity_class_by_symbol = dict(
-    ind = Individus,
-    succ = Successions,
-    )
 
 
 class Donations(entities.AbstractEntity):
@@ -98,8 +89,8 @@ class Donations(entities.AbstractEntity):
 #        'collateraux': 9,
 #        'legataires': 9,
 #        }
-    name_key = 'nom_succession'
-    role_for_person_variable_name = 'quisucc'
+    name_key = 'nom_donation'
+    role_for_person_variable_name = 'quidon'
 #    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']
 #    label_by_role_key = {
 #        'epoux survivant': u'Epoux survivant',
@@ -107,28 +98,25 @@ class Donations(entities.AbstractEntity):
 #        'collateraux': u'Collatéraux',
 #        'legataires': u'Légataires',
 #        }
-    symbol = 'succ'
+    symbol = 'don'
 
     def iter_member_persons_role_and_id(self, member):
-        role = 0
+        donateur_id = member['donateur']
+        assert donateur_id is not None
+        yield 0, donateur_id
 
-        decede_id = member['decede']
-        assert decede_id is not None
-        yield role, decede_id
-        role += 1
+#        epoux_donataire_id = member.get('epoux donataire')
+#        if epoux_donataire_id is not None:
+#            yield 1, epoux_donataire_id
 
-        epoux_survivant_id = member.get('epoux_survivant')
-        if epoux_survivant_id is not None:
-            yield role, epoux_survivant_id
-        role += 1
-
-        enfants_id = member.get('enfants')
-        if enfants_id is not None:
-            for enfant_role, enfant_id in enumerate(enfants_id, role):
+        enfants_donataires_id = member.get('enfants donataires')
+        if enfants_donataires_id is not None:
+            for enfant_role, enfant_id in enumerate(enfants_donataires_id, 100):
                 yield enfant_role, enfant_id
 
 
 entity_class_by_symbol = dict(
     ind = Individus,
     succ = Successions,
+    don = Donations,
     )

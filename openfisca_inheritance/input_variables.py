@@ -26,7 +26,7 @@
 from openfisca_core.columns import EnumCol, FloatCol, IntCol, reference_input_variable, StrCol
 from openfisca_core.enumerations import Enum
 
-from .entities import Individus, Successions
+from .entities import Individus, Successions, Donations
 
 
 QUISUCC = Enum(['decede', 'epoux_survivant', 'enfant1', 'enfant2', 'enfant3', 'enfant4', 'enfant5',
@@ -49,6 +49,13 @@ QUISUCC = Enum(['decede', 'epoux_survivant', 'enfant1', 'enfant2', 'enfant3', 'e
 
 reference_input_variable(
     column = FloatCol,
+    entity_class = Donations,
+    label = u"Don",
+    name = 'don',
+    )
+
+reference_input_variable(
+    column = FloatCol,
     entity_class = Successions,
     label = u"Actif de Communauté",
     name = 'actif_de_communaute',
@@ -68,6 +75,7 @@ reference_input_variable(
     name = 'assurance_vie',
     )
 
+
 reference_input_variable(
     column = StrCol,
     entity_class = Individus,
@@ -75,6 +83,12 @@ reference_input_variable(
     name = 'id',
     )
 
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    label = "Donation auquel appartient l'individu",
+    name = 'iddon',
+    )
 reference_input_variable(
     column = IntCol,
     entity_class = Individus,
@@ -108,6 +122,13 @@ reference_input_variable(
     entity_class = Individus,
     label = "Role de l'individu dans la succession",
     name = 'quisucc',
+    )
+
+reference_input_variable(
+    column = EnumCol(QUISUCC),
+    entity_class = Individus,
+    label = "Role de l'individu dans la succession",
+    name = 'quidon',
     )
 
 #reference_input_variable(

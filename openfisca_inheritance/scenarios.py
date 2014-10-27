@@ -84,7 +84,43 @@ class Scenario(scenarios.AbstractScenario):
                 (individu['id'], individu)
                 for individu in individus
                 )),
+            'donations': {},
             'successions': collections.OrderedDict((
                 (succession['id'], succession),
                 )),
+            }
+
+    def init_simple_donation(self, donateur = None, enfants_donataires = None,
+            epoux_donataire = None, donation = None, year = None):
+        assert donateur is not None
+        assert enfants_donataires
+        assert year is not None
+        individus = []
+        donation = {} if donation is None else donation.copy()
+        id = donation.get('id')
+        if id is None:
+            donation['id'] = 'don0'
+        for index, individu in enumerate([donateur] + enfants_donataires):
+            if individu is None:
+                continue
+            id = individu.get('id')
+            if id is None:
+                individu = individu.copy()
+                individu['id'] = id = 'ind{}'.format(index)
+            individus.append(individu)
+            if index == 0:
+                donation['donateur'] = individu['id']
+            else:
+                donation.setdefault('enfants_donataires', []).append(individu['id'])
+
+        self.period = periods.period('year', year)
+        self.test_case = {
+            'individus': collections.OrderedDict((
+                (individu['id'], individu)
+                for individu in individus
+                )),
+            'donations': collections.OrderedDict((
+                (donation['id'], donation),
+                )),
+            'successions': {},
             }
