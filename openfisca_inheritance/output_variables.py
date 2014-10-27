@@ -29,15 +29,17 @@ from numpy import maximum as max_
 
 from openfisca_core.accessors import law
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import SimpleFormula
+#from openfisca_core.enumerations import Enum
+from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
+
+from .entities import entity_class_by_symbol, Individus, Successions
 
 
-from .base import reference_formula
-from .entities import Individus, Successions
+reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
 
 
 #@reference_formula
-#class revenu_disponible(SimpleFormula):
+#class revenu_disponible(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Revenu disponible"
@@ -46,9 +48,12 @@ from .entities import Individus, Successions
 #    def function(self, rsa, salaire_imposable):
 #        return rsa + salaire_imposable * 0.7
 #
+#    def get_output_period(self, period):
+#        return period
+#
 #
 #@reference_formula
-#class rsa(SimpleFormula):
+#class rsa(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"RSA"
@@ -59,7 +64,7 @@ from .entities import Individus, Successions
 #
 #
 #@reference_formula
-#class salaire_imposable(SimpleFormula):
+#class salaire_imposable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Salaire imposable"
@@ -70,7 +75,7 @@ from .entities import Individus, Successions
 #
 #
 #@reference_formula
-#class salaire_net(SimpleFormula):
+#class salaire_net(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Individus
 #    label = u"Salaire net"
@@ -80,7 +85,7 @@ from .entities import Individus, Successions
 #        return salaire_brut * 0.8
 
 @reference_formula
-class actif_imposable(SimpleFormula):
+class actif_imposable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Actif imposable"
@@ -93,8 +98,12 @@ class actif_imposable(SimpleFormula):
         return (1-part_epoux)*((actif_de_communaute - passif_de_communaute) / 2 \
                 + actif_propre - passif_propre - assurance_vie)
 
+    def get_output_period(self, period):
+        return period
+
+
 @reference_formula
-class actif_transmis(SimpleFormula):
+class actif_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Actif transmis"
@@ -106,9 +115,98 @@ class actif_transmis(SimpleFormula):
                  actif_propre, passif_propre):
         return ((actif_de_communaute - passif_de_communaute) / 2 \
                 + actif_propre - passif_propre)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class droits_sur_succ(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Successions
+    label = "Droits sur succession"
+    period_unit = u'year'
+
+    def function(self, droits):
+        droits_sur_succ = self.sum_by_entity(droits)
+        return droits_sur_succ
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class is_enfant(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = "Est un enfant"
+    period_unit = u'year'
+
+    def function(self, quisucc):
+        return quisucc >= 2
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class nombre_enfants(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Successions
+    label = "Nombre d'enfants"
+    period_unit = u'year'
+
+    def function(self, is_enfant_holder):
+        return self.sum_by_entity(is_enfant_holder)
+
+    def get_output_period(self, period):
+        return period
+
+@reference_formula
+class part_recue(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Successions
+    label = u"Part reçue"
+    period_unit = u'year'
+
+    def function(self, actif_imposable, nombre_enfants):
+        return actif_imposable / nombre_enfants
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class part_taxable(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Successions
+    label = "Nombre d'enfants"
+    period_unit = u'year'
+
+    def function(self, actif_imposable, nombre_enfants,
+                 abattement_par_part = law.succession.ligne_directe.abattement):
+        return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class taux_sur_part_recue(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = "Taux d'imposition sur la part recue"
+    period_unit = u'year'
+    def function(self, droits, part_recue_holder):
+        taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
+        return taux_sur_part_recue
+
+    def get_output_period(self, period):
+        return period
+
         
 @reference_formula
-class droits(SimpleFormula):
+class droits(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Droits sur parts"
@@ -120,70 +218,12 @@ class droits(SimpleFormula):
         droits = bareme.calc(part_taxable)
         return droits
 
-@reference_formula
-class droits_sur_succ(SimpleFormula):
-    column = FloatCol
-    entity_class = Successions
-    label = "Droits sur succession"
-    period_unit = u'year'
+    def get_output_period(self, period):
+        return period
 
-    def function(self, droits):
-        droits_sur_succ = self.sum_by_entity(droits)
-        return droits_sur_succ
 
 @reference_formula
-class is_enfant(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = "Est un enfant"
-    period_unit = u'year'
-    def function(self, quisucc):
-        return quisucc >= 2
-
-@reference_formula
-class nombre_enfants(SimpleFormula):
-    column = FloatCol
-    entity_class = Successions
-    label = "Nombre d'enfants"
-    period_unit = u'year'
-
-    def function(self, is_enfant_holder):
-        return self.sum_by_entity(is_enfant_holder)
-
-@reference_formula
-class part_recue(SimpleFormula):
-    column = FloatCol
-    entity_class = Successions
-    label = u"Part reçue"
-    period_unit = u'year'
-
-    def function(self, actif_imposable, nombre_enfants):
-        return actif_imposable / nombre_enfants
-
-@reference_formula
-class part_taxable(SimpleFormula):
-    column = FloatCol
-    entity_class = Successions
-    label = "Nombre d'enfants"
-    period_unit = u'year'
-
-    def function(self, actif_imposable, nombre_enfants,
-                 abattement_par_part = law.succession.ligne_directe.abattement):
-        return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
-
-@reference_formula
-class taux_sur_part_recue(SimpleFormula):
-    column = FloatCol
-    entity_class = Individus
-    label = "Taux d'imposition sur la part recue"
-    period_unit = u'year'
-
-    def function(self, droits, part_recue_holder):
-        taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
-        return taux_sur_part_recue
-
-@reference_formula
-class taux_sur_succ(SimpleFormula):
+class taux_sur_succ(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
@@ -193,8 +233,12 @@ class taux_sur_succ(SimpleFormula):
         taux_sur_succ = droits_sur_succ / actif_imposable
         return taux_sur_succ
 
+    def get_output_period(self, period):
+        return period
+
+
 @reference_formula
-class taux_sur_transmis(SimpleFormula):
+class taux_sur_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
@@ -204,8 +248,12 @@ class taux_sur_transmis(SimpleFormula):
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis
 
+    def get_output_period(self, period):
+        return period
+
+
 #@reference_formula
-#class part_taxable(SimpleFormula):
+#class part_taxable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Successions
 #    label = "Droits de succession"
@@ -216,3 +264,6 @@ class taux_sur_transmis(SimpleFormula):
 #    def function(self, actif_imposable, nombre_enfants):
 #        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
 #        return part_taxable
+#
+#    def get_output_period(self, period):
+#        return period
