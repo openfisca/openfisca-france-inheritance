@@ -43,7 +43,6 @@ class actif_imposable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Actif imposable"
-    period_unit = u'year'
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -53,7 +52,7 @@ class actif_imposable(SimpleFormulaColumn):
                 + actif_propre - passif_propre - assurance_vie)
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -61,7 +60,6 @@ class actif_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Actif transmis"
-    period_unit = u'year'
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -71,7 +69,7 @@ class actif_transmis(SimpleFormulaColumn):
                 + actif_propre - passif_propre)
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
         
 
 @reference_formula
@@ -79,7 +77,6 @@ class don_recu(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Donations
     label = "Don reçu"
-    period_unit = u'year'
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -87,7 +84,7 @@ class don_recu(SimpleFormulaColumn):
         return don / nombre_enfants_donataires
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -95,14 +92,13 @@ class droits_sur_succ(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Droits sur succession"
-    period_unit = u'year'
 
     def function(self, droits):
         droits_sur_succ = self.sum_by_entity(droits)
         return droits_sur_succ
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -110,13 +106,12 @@ class is_enfant(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Est un enfant"
-    period_unit = u'year'
 
     def function(self, quisucc):
         return quisucc >= 100
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -124,13 +119,12 @@ class is_enfant_donataire(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Est un enfant donataire"
-    period_unit = u'year'
 
     def function(self, quidon):
         return quidon >= 100
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -138,13 +132,12 @@ class nombre_enfants(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Nombre d'enfants"
-    period_unit = u'year'
 
     def function(self, is_enfant_holder):
         return self.sum_by_entity(is_enfant_holder)
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -152,13 +145,12 @@ class nombre_enfants_donataires(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Donations
     label = "Nombre d'enfants donataires"
-    period_unit = u'year'
 
     def function(self, is_enfant_donataire_holder):
         return self.sum_by_entity(is_enfant_donataire_holder)
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -166,13 +158,12 @@ class part_recue(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = u"Part reçue"
-    period_unit = u'year'
 
     def function(self, actif_imposable, nombre_enfants):
         return actif_imposable / nombre_enfants
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -180,14 +171,13 @@ class part_taxable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Nombre d'enfants"
-    period_unit = u'year'
 
     def function(self, actif_imposable, nombre_enfants,
                  abattement_par_part = law.succession.ligne_directe.abattement):
         return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -195,13 +185,13 @@ class taux_sur_part_recue(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Taux d'imposition sur la part recue"
-    period_unit = u'year'
+
     def function(self, droits, part_recue_holder):
         taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
         return taux_sur_part_recue
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
         
 @reference_formula
@@ -209,7 +199,6 @@ class droits(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Droits sur parts"
-    period_unit = u'year'
 
     def function(self, part_taxable_holder, is_enfant, 
                  bareme = law.succession.ligne_directe.bareme):  # TODO rework
@@ -218,7 +207,7 @@ class droits(SimpleFormulaColumn):
         return droits
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -226,14 +215,13 @@ class taux_sur_succ(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
-    period_unit = u'year'
 
     def function(self, droits, droits_sur_succ, actif_imposable):
         taux_sur_succ = droits_sur_succ / actif_imposable
         return taux_sur_succ
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -241,14 +229,13 @@ class taux_sur_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
-    period_unit = u'year'
 
     def function(self, droits, droits_sur_succ, actif_transmis, assurance_vie):
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis
 
     def get_output_period(self, period):
-        return period
+        return period.start.offset('first-of', 'year').period('year')
 
 
 #@reference_formula
@@ -256,7 +243,6 @@ class taux_sur_transmis(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Successions
 #    label = "Droits de succession"
-#    period_unit = u'year'
 #
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -265,4 +251,4 @@ class taux_sur_transmis(SimpleFormulaColumn):
 #        return part_taxable
 #
 #    def get_output_period(self, period):
-#        return period
+#        return period.start.offset('first-of', 'year').period('year')

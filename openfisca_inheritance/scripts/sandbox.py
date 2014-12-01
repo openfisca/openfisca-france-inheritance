@@ -49,27 +49,27 @@ simulation = scenario.new_simulation(debug = True)
 #print 'id', simulation.get_holder('id').array
 #print 'quisucc', simulation.get_holder('quisucc').array
 #print 'idsucc', simulation.get_holder('idsucc').array
-#print 'actif_imposable', simulation.calculate("actif_imposable")
-#print 'nombre_enfants', simulation.calculate("nombre_enfants")
-#print 'part_taxable', simulation.calculate("part_taxable")
+print 'actif_imposable', simulation.calculate("actif_imposable")
+print 'nombre_enfants', simulation.calculate("nombre_enfants")
+print 'part_taxable', simulation.calculate("part_taxable")
 #print 'droits', simulation.calculate("droits")
 #print 'taux_sur_part_recue', simulation.calculate("taux_sur_part_recue")
 #print 'droits_sur_succ', simulation.calculate("droits_sur_succ")
 #print 'taux_sur_transmis', simulation.calculate("taux_sur_transmis")
 
-scenario_donation = tax_benefit_system.new_scenario()
-scenario_donation.init_simple_donation(
-    donation = dict(don = 100000000),
-    donateur = {},  
-    enfants_donataires = [
-        {},
-        {},
-        {},
-        {},
-        ],
-    year = 2014,
-    )
-
-#pprint(scenario.test_case)
-simulation_donation = scenario_donation.new_simulation(debug = True)
-print 'don_recu', simulation_donation.calculate("don_recu")
+#scenario_donation = tax_benefit_system.new_scenario()
+#scenario_donation.init_simple_donation(
+#    donation = dict(don = 100000000),
+#    donateur = {},  
+#    enfants_donataires = [
+#        {},
+#        {},
+#        {},
+#        {},
+#        ],
+#    year = 2014,
+#    )
+#
+##pprint(scenario.test_case)
+#simulation_donation = scenario_donation.new_simulation(debug = True)
+#print 'don_recu', simulation_donation.calculate("don_recu")
