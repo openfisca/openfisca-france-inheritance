@@ -49,13 +49,6 @@ QUISUCC = Enum(['decede', 'epoux_survivant', 'enfant1', 'enfant2', 'enfant3', 'e
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Donations,
-    label = u"Don",
-    name = 'don',
-    )
-
-reference_input_variable(
-    column = FloatCol,
     entity_class = Successions,
     label = u"Actif de Communauté",
     name = 'actif_de_communaute',
@@ -75,6 +68,19 @@ reference_input_variable(
     name = 'assurance_vie',
     )
 
+reference_input_variable(
+    column = IntCol,
+    entity_class = Donations,
+    label = u"Année de la donation",
+    name = 'date',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Donations,
+    label = u"Don",
+    name = 'don',
+    )
 
 reference_input_variable(
     column = StrCol,
@@ -89,6 +95,7 @@ reference_input_variable(
     label = "Donation auquel appartient l'individu",
     name = 'iddon',
     )
+    
 reference_input_variable(
     column = IntCol,
     entity_class = Individus,
@@ -130,6 +137,7 @@ reference_input_variable(
     label = "Role de l'individu dans la succession",
     name = 'quidon',
     )
+
 
 #reference_input_variable(
 #    column = StrCol,
