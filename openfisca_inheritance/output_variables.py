@@ -27,9 +27,8 @@ from __future__ import division
 
 from numpy import maximum as max_
 
-from openfisca_core.accessors import law
 from openfisca_core.columns import FloatCol
-#from openfisca_core.enumerations import Enum
+# from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
 
 from .entities import Donations, entity_class_by_symbol, Individus, Successions
@@ -46,13 +45,18 @@ class actif_imposable(SimpleFormulaColumn):
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, part_epoux, actif_de_communaute, passif_de_communaute,\
-                 actif_propre, passif_propre, assurance_vie):
-        return (1-part_epoux)*((actif_de_communaute - passif_de_communaute) / 2 \
-                + actif_propre - passif_propre - assurance_vie)
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        part_epoux = simulation.calculate('part_epoux', period)
+        actif_de_communaute = simulation.calculate('actif_de_communaute', period)
+        passif_de_communaute = simulation.calculate('passif_de_communaute', period)
+        actif_propre = simulation.calculate('actif_propre', period)
+        passif_propre = simulation.calculate('passif_propre', period)
+        assurance_vie = simulation.calculate('assurance_vie', period)
+        return period, (1 - part_epoux) * (
+            (actif_de_communaute - passif_de_communaute) / 2 +
+            actif_propre - passif_propre - assurance_vie
+            )
 
 
 @reference_formula
@@ -63,28 +67,32 @@ class actif_transmis(SimpleFormulaColumn):
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, part_epoux, actif_de_communaute, passif_de_communaute,\
-                 actif_propre, passif_propre):
-        return ((actif_de_communaute - passif_de_communaute) / 2 \
-                + actif_propre - passif_propre)
+    def function(self, simulation, period):
+        period.start.offset('first-of', 'year').period('year')
+        # part_epoux = simulation.calculate('part_epoux', period)
+        actif_de_communaute = simulation.calculate('actif_de_communaute', period)
+        passif_de_communaute = simulation.calculate('passif_de_communaute', period)
+        actif_propre = simulation.calculate('actif_propre', period)
+        passif_propre = simulation.calculate('passif_propre', period)
 
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
-        
+        return period, (
+            (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre
+            )
+
 
 @reference_formula
 class don_recu(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Donations
-    label = "Don reçu"
+    label = u"Don reçu"
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, don, nombre_enfants_donataires):
-        return don / nombre_enfants_donataires
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        don = simulation.calculate('don', period)
+        nombre_enfants_donataires = simulation.calculate('nombre_enfants_donataires', period)
+        return period, don / nombre_enfants_donataires
 
 
 @reference_formula
@@ -93,12 +101,11 @@ class droits_sur_succ(SimpleFormulaColumn):
     entity_class = Successions
     label = "Droits sur succession"
 
-    def function(self, droits):
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        droits = simulation.calculate('droits', period)
         droits_sur_succ = self.sum_by_entity(droits)
-        return droits_sur_succ
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+        return period, droits_sur_succ
 
 
 @reference_formula
@@ -107,11 +114,10 @@ class is_enfant(SimpleFormulaColumn):
     entity_class = Individus
     label = "Est un enfant"
 
-    def function(self, quisucc):
-        return quisucc >= 100
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        quisucc = simulation.calculate('quisucc', period)
+        return period, quisucc >= 100
 
 
 @reference_formula
@@ -120,11 +126,10 @@ class is_enfant_donataire(SimpleFormulaColumn):
     entity_class = Individus
     label = "Est un enfant donataire"
 
-    def function(self, quidon):
-        return quidon >= 100
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        quidon = simulation.calculate('quidon', period)
+        return period, quidon >= 100
 
 
 @reference_formula
@@ -133,11 +138,10 @@ class nombre_enfants(SimpleFormulaColumn):
     entity_class = Successions
     label = "Nombre d'enfants"
 
-    def function(self, is_enfant_holder):
-        return self.sum_by_entity(is_enfant_holder)
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        is_enfant_holder = simulation.calculate('is_enfant_holder', period)
+        return period, self.sum_by_entity(is_enfant_holder)
 
 
 @reference_formula
@@ -146,11 +150,10 @@ class nombre_enfants_donataires(SimpleFormulaColumn):
     entity_class = Donations
     label = "Nombre d'enfants donataires"
 
-    def function(self, is_enfant_donataire_holder):
-        return self.sum_by_entity(is_enfant_donataire_holder)
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        is_enfant_donataire_holder = simulation.calculate('is_enfant_donataire_holder', period)
+        return period, self.sum_by_entity(is_enfant_donataire_holder)
 
 
 @reference_formula
@@ -159,11 +162,11 @@ class part_recue(SimpleFormulaColumn):
     entity_class = Successions
     label = u"Part reçue"
 
-    def function(self, actif_imposable, nombre_enfants):
-        return actif_imposable / nombre_enfants
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        actif_imposable = simulation.calculate('actif_imposable', period)
+        nombre_enfants = simulation.calculate('nombre_enfants', period)
+        return period, actif_imposable / nombre_enfants
 
 
 @reference_formula
@@ -172,12 +175,12 @@ class part_taxable(SimpleFormulaColumn):
     entity_class = Successions
     label = "Nombre d'enfants"
 
-    def function(self, actif_imposable, nombre_enfants,
-                 abattement_par_part = law.succession.ligne_directe.abattement):
-        return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        actif_imposable = simulation.calculate('actif_imposable', period)
+        nombre_enfants = simulation.calculate('nombre_enfants', period)
+        abattement_par_part = simulation.legislation_at(period).succession.ligne_directe.abattement
+        return period, max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
 
 
 @reference_formula
@@ -186,28 +189,28 @@ class taux_sur_part_recue(SimpleFormulaColumn):
     entity_class = Individus
     label = "Taux d'imposition sur la part recue"
 
-    def function(self, droits, part_recue_holder):
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        droits = simulation.calculate('droits', period)
+        part_recue_holder = simulation.calculate('part_recue_holder', period)
         taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
-        return taux_sur_part_recue
+        return period, taux_sur_part_recue
 
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
 
-        
 @reference_formula
 class droits(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
     label = "Droits sur parts"
 
-    def function(self, part_taxable_holder, is_enfant, 
-                 bareme = law.succession.ligne_directe.bareme):  # TODO rework
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        part_taxable_holder = simulation.calculate('part_taxable_holder', period)
+        is_enfant = simulation.calculate('is_enfant', period)
+        bareme = simulation.legislation_at(period).succession.ligne_directe.bareme
         part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
         droits = bareme.calc(part_taxable)
-        return droits
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
+        return period, droits
 
 
 @reference_formula
@@ -216,12 +219,12 @@ class taux_sur_succ(SimpleFormulaColumn):
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
 
-    def function(self, droits, droits_sur_succ, actif_imposable):
+    def function(self, simulation, period):
+        period = period.start.offset('first-of', 'year').period('year')
+        droits_sur_succ = simulation.calculate('droits_sur_succ', period)
+        actif_imposable = simulation.calculate('actif_imposable', period)
         taux_sur_succ = droits_sur_succ / actif_imposable
         return taux_sur_succ
-
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
 
 
 @reference_formula
@@ -230,16 +233,19 @@ class taux_sur_transmis(SimpleFormulaColumn):
     entity_class = Successions
     label = "Taux d'imposition sur la succession"
 
-    def function(self, droits, droits_sur_succ, actif_transmis, assurance_vie):
+    def function(self, simulation, period):
+        # droits = simulation.calculate('droits', period)
+        droits_sur_succ = simulation.calculate('droits_sur_succ', period)
+        actif_transmis = simulation.calculate('actif_transmis', period)
+        # assurance_vie = simulation.calculate('assurance_vie', period)
+        period = period.start.offset('first-of', 'year').period('year')
+
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis
 
-    def get_output_period(self, period):
-        return period.start.offset('first-of', 'year').period('year')
 
-
-#@reference_formula
-#class part_taxable(SimpleFormulaColumn):
+# @reference_formula
+# class part_taxable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Successions
 #    label = "Droits de succession"
