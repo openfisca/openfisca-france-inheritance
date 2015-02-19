@@ -23,8 +23,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import EnumCol, FloatCol, IntCol, reference_input_variable, StrCol
+from openfisca_core.columns import EnumCol, FloatCol, IntCol, StrCol
 from openfisca_core.enumerations import Enum
+from openfisca_core.formulas import reference_input_variable
 
 from .entities import Individus, Successions, Donations
 
@@ -95,7 +96,7 @@ reference_input_variable(
     label = "Donation auquel appartient l'individu",
     name = 'iddon',
     )
-    
+
 reference_input_variable(
     column = IntCol,
     entity_class = Individus,
