@@ -31,7 +31,9 @@ def test_celib():
     tax_benefit_system = TaxBenefitSystem()
     scenario = tax_benefit_system.new_scenario()
     scenario.init_simple_succession(
-        decede = dict(salaire_brut = 50000, rsa = 1000),
+        decede = dict(
+            actif_propre = 250000,
+            ),
         enfants = [
             {},
             ],

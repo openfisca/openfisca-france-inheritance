@@ -47,9 +47,9 @@ class Scenario(scenarios.AbstractScenario):
         test_case = self.test_case
         individus.get_or_new_holder('id').array = np.array(
             [
-                individu_id + (u'-{}'.format(step_index) if step_index > 0 else u'')
+                individu['id'] + (u'-{}'.format(step_index) if step_index > 0 else u'')
                 for step_index in range(steps_count)
-                for individu_index, individu_id in enumerate(test_case[u'individus'].iterkeys())
+                for individu_index, individu in enumerate(test_case[u'individus'])
                 ],
             dtype = object)
 
@@ -80,14 +80,9 @@ class Scenario(scenarios.AbstractScenario):
 
         self.period = periods.period('year', year)
         self.test_case = {
-            'individus': collections.OrderedDict((
-                (individu['id'], individu)
-                for individu in individus
-                )),
-            'donations': {},
-            'successions': collections.OrderedDict((
-                (succession['id'], succession),
-                )),
+            'individus': individus,
+            'donations': [],
+            'successions': [succession],
             }
 
     def init_simple_donation(self, donateur = None, enfants_donataires = None,

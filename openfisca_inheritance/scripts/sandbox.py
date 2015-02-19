@@ -33,7 +33,7 @@ tax_benefit_system = TaxBenefitSystem()
 scenario = tax_benefit_system.new_scenario()
 scenario.init_simple_succession(
     succession = dict(actif_propre = 100000, part_epoux = 0.3),
-    donation = dict(don = 50000, date = 2012),
+#    donation = dict(don = 50000, date = 2012),
     decede = {},
     epoux_survivant = {},    
     enfants = [
