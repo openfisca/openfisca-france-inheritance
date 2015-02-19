@@ -110,12 +110,7 @@ class Scenario(scenarios.AbstractScenario):
 
         self.period = periods.period('year', year)
         self.test_case = {
-            'individus': collections.OrderedDict((
-                (individu['id'], individu)
-                for individu in individus
-                )),
-            'donations': collections.OrderedDict((
-                (donation['id'], donation),
-                )),
-            'successions': {},
+            'individus': individus,
+            'donations': [],
+            'successions': [succession],
             }
