@@ -140,7 +140,7 @@ class nombre_enfants(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
-        is_enfant_holder = simulation.calculate('is_enfant_holder', period)
+        is_enfant_holder = simulation.calculate('is_enfant', period)
         return period, self.sum_by_entity(is_enfant_holder)
 
 
@@ -152,7 +152,7 @@ class nombre_enfants_donataires(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
-        is_enfant_donataire_holder = simulation.calculate('is_enfant_donataire_holder', period)
+        is_enfant_donataire_holder = simulation.calculate('is_enfant_donataire', period)
         return period, self.sum_by_entity(is_enfant_donataire_holder)
 
 
@@ -192,7 +192,7 @@ class taux_sur_part_recue(SimpleFormulaColumn):
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
         droits = simulation.calculate('droits', period)
-        part_recue_holder = simulation.calculate('part_recue_holder', period)
+        part_recue_holder = simulation.calculate('part_recue', period)
         taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
         return period, taux_sur_part_recue
 
@@ -205,7 +205,7 @@ class droits(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
-        part_taxable_holder = simulation.calculate('part_taxable_holder', period)
+        part_taxable_holder = simulation.calculate('part_taxable', period)
         is_enfant = simulation.calculate('is_enfant', period)
         bareme = simulation.legislation_at(period).succession.ligne_directe.bareme
         part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
