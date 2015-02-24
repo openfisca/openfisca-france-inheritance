@@ -144,6 +144,22 @@ class nombre_enfants(SimpleFormulaColumn):
         return period, self.sum_by_entity(is_enfant_holder)
 
 
+# @reference_formula
+# class part_taxable(SimpleFormulaColumn):
+#    column = FloatCol
+#    entity_class = Successions
+#    label = "Droits de succession"
+#
+#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+#    def function(self, actif_imposable, nombre_enfants):
+#        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
+#        return part_taxable
+#
+#    def get_output_period(self, period):
+#        return period.start.offset('first-of', 'year').period('year')
+
+
 @reference_formula
 class nombre_enfants_donataires(SimpleFormulaColumn):
     column = FloatCol
@@ -208,8 +224,9 @@ class droits(SimpleFormulaColumn):
         part_taxable_holder = simulation.calculate('part_taxable', period)
         is_enfant = simulation.calculate('is_enfant', period)
         bareme = simulation.legislation_at(period).succession.ligne_directe.bareme
-        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder) * is_enfant
+        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder, entity = "succession") * is_enfant
         droits = bareme.calc(part_taxable)
+        print bareme
         return period, droits
 
 
@@ -243,18 +260,3 @@ class taux_sur_transmis(SimpleFormulaColumn):
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis
 
-
-# @reference_formula
-# class part_taxable(SimpleFormulaColumn):
-#    column = FloatCol
-#    entity_class = Successions
-#    label = "Droits de succession"
-#
-#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
-#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-#    def function(self, actif_imposable, nombre_enfants):
-#        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
-#        return part_taxable
-#
-#    def get_output_period(self, period):
-#        return period.start.offset('first-of', 'year').period('year')

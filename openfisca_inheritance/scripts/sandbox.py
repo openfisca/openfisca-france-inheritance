@@ -32,7 +32,7 @@ TaxBenefitSystem = openfisca_inheritance.init_country()
 tax_benefit_system = TaxBenefitSystem()
 scenario = tax_benefit_system.new_scenario()
 scenario.init_simple_succession(
-    succession = dict(actif_propre = 100000, part_epoux = 0.3),
+    succession = dict(actif_propre = 1000000, part_epoux = 0.3),
 #    donation = dict(don = 50000, date = 2012),
     decede = {},
     epoux_survivant = {},    
@@ -53,7 +53,7 @@ simulation = scenario.new_simulation(debug = True)
 print 'actif_imposable', simulation.calculate("actif_imposable")
 print 'nombre_enfants', simulation.calculate("nombre_enfants")
 print 'part_taxable', simulation.calculate("part_taxable")
-#print 'droits', simulation.calculate("droits")
+print 'droits', simulation.calculate("droits")
 #print 'taux_sur_part_recue', simulation.calculate("taux_sur_part_recue")
 #print 'droits_sur_succ', simulation.calculate("droits_sur_succ")
 #print 'taux_sur_transmis', simulation.calculate("taux_sur_transmis")
