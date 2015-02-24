@@ -82,7 +82,7 @@
 		<BAREME code="bareme" description="Barème non parent">
 		</BAREME>
 	</NODE>
-	<NODE code="csg" description="Contribution sociale généralisée (CSG)">
+  <NODE code="csg" description="Contribution sociale généralisée (CSG)">
     <NODE code="act" description="Revenus d'activité">
       <BAREME code="deduc" description="CSG déductible">
         <TRANCHE code="tranche0">
