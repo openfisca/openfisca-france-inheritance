@@ -7,65 +7,65 @@
       <BAREME code="bareme" description="Barème de la part en ligne directe">
         <TRANCHE code="tranche0">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="0" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="0" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".05" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".05" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche1">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="8072" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="8072" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".1" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".1" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche2">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="12109" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="12109" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".15" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".15" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche3">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="15932" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="15932" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".2" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".2" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche4">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="552324" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="552324" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".30" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".30" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche5">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="902838" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="902838" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".40" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".40" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche6">
           <SEUIL>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur="1805677" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="1805677" />
           </SEUIL>
           <TAUX>
-            <VALUE deb="2012-01-01" fin="2014-12-31" valeur=".45" />
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur=".45" />
           </TAUX>
         </TRANCHE>
       </BAREME>
     </NODE>
 	<NODE code="frere_soeur_vif_rep" description="Transmission freres soeurs vifs ou representes">
 		<CODE code="abattement" description="Abattement freres soeurs vifs ou representes" format="integer" type="monetary">
-        <VALUE deb="2012-01-01" fin="2014-12-31" valeur="100000" />
+        <VALUE deb="2013-01-01" fin="2014-12-31" valeur="100000" />
 		</CODE>
 		<BAREME code="bareme" description="Barème de la part à freres ou soeurs">
 		</BAREME>
