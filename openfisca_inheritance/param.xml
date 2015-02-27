@@ -1,6 +1,6 @@
 <NODE code="root" deb="2006-01-01" fin="2014-12-31">
   <NODE code="succession" description="Droits de succession">
-    <NODE code="ligne_directe" description="Succesion en ligne directe">
+    <NODE code="ligne_directe" description="Succesions en ligne directe">
       <CODE code="abattement" description="Abattement en ligne directe" format="integer" type="monetary">
         <VALUE deb="2013-01-01" fin="2014-12-31" valeur="100000" />
       </CODE>
