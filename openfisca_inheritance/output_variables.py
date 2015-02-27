@@ -31,7 +31,7 @@ from openfisca_core.columns import FloatCol
 # from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
 
-from .entities import Donations, entity_class_by_symbol, Individus, Successions
+from .entities import entity_class_by_symbol, Individus, Successions  # Donations
 
 
 reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
@@ -41,7 +41,7 @@ reference_formula = make_reference_formula_decorator(entity_class_by_symbol = en
 class actif_imposable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Actif imposable"
+    label = u"Actif imposable"
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -63,7 +63,7 @@ class actif_imposable(SimpleFormulaColumn):
 class actif_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Actif transmis"
+    label = u"Actif transmis"
 
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -80,26 +80,26 @@ class actif_transmis(SimpleFormulaColumn):
             )
 
 
-@reference_formula
-class don_recu(SimpleFormulaColumn):
-    column = FloatCol
-    entity_class = Donations
-    label = u"Don reçu"
-
-#    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
-#        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
-    def function(self, simulation, period):
-        period = period.start.offset('first-of', 'year').period('year')
-        don = simulation.calculate('don', period)
-        nombre_enfants_donataires = simulation.calculate('nombre_enfants_donataires', period)
-        return period, don / nombre_enfants_donataires
+# @reference_formula
+# class don_recu(SimpleFormulaColumn):
+#     column = FloatCol
+#     entity_class = Donations
+#     label = u"Don reçu"
+#
+# #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
+# #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
+#     def function(self, simulation, period):
+#         period = period.start.offset('first-of', 'year').period('year')
+#         don = simulation.calculate('don', period)
+#         nombre_enfants_donataires = simulation.calculate('nombre_enfants_donataires', period)
+#         return period, don / nombre_enfants_donataires
 
 
 @reference_formula
 class droits_sur_succ(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Droits sur succession"
+    label = u"Droits sur succession"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -112,7 +112,7 @@ class droits_sur_succ(SimpleFormulaColumn):
 class is_enfant(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
-    label = "Est un enfant"
+    label = u"Est un enfant"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -124,7 +124,7 @@ class is_enfant(SimpleFormulaColumn):
 class is_enfant_donataire(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
-    label = "Est un enfant donataire"
+    label = u"Est un enfant donataire"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -136,7 +136,7 @@ class is_enfant_donataire(SimpleFormulaColumn):
 class nombre_enfants(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Nombre d'enfants"
+    label = u"Nombre d'enfants"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -148,7 +148,7 @@ class nombre_enfants(SimpleFormulaColumn):
 # class part_taxable(SimpleFormulaColumn):
 #    column = FloatCol
 #    entity_class = Successions
-#    label = "Droits de succession"
+#    label = u"Droits de succession"
 #
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
@@ -160,16 +160,16 @@ class nombre_enfants(SimpleFormulaColumn):
 #        return period.start.offset('first-of', 'year').period('year')
 
 
-@reference_formula
-class nombre_enfants_donataires(SimpleFormulaColumn):
-    column = FloatCol
-    entity_class = Donations
-    label = "Nombre d'enfants donataires"
-
-    def function(self, simulation, period):
-        period = period.start.offset('first-of', 'year').period('year')
-        is_enfant_donataire_holder = simulation.calculate('is_enfant_donataire', period)
-        return period, self.sum_by_entity(is_enfant_donataire_holder)
+# @reference_formula
+# class nombre_enfants_donataires(SimpleFormulaColumn):
+#     column = FloatCol
+#     entity_class = Donations
+#     label = u"Nombre d'enfants donataires"
+#
+#     def function(self, simulation, period):
+#         period = period.start.offset('first-of', 'year').period('year')
+#         is_enfant_donataire_holder = simulation.calculate('is_enfant_donataire', period)
+#         return period, self.sum_by_entity(is_enfant_donataire_holder)
 
 
 @reference_formula
@@ -189,7 +189,7 @@ class part_recue(SimpleFormulaColumn):
 class part_taxable(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Nombre d'enfants"
+    label = u"Nombre d'enfants"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -203,7 +203,7 @@ class part_taxable(SimpleFormulaColumn):
 class taux_sur_part_recue(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
-    label = "Taux d'imposition sur la part recue"
+    label = u"Taux d'imposition sur la part recue"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -217,7 +217,7 @@ class taux_sur_part_recue(SimpleFormulaColumn):
 class droits(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Individus
-    label = "Droits sur parts"
+    label = u"Droits sur parts"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -234,7 +234,7 @@ class droits(SimpleFormulaColumn):
 class taux_sur_succ(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Taux d'imposition sur la succession"
+    label = u"Taux d'imposition sur la succession"
 
     def function(self, simulation, period):
         period = period.start.offset('first-of', 'year').period('year')
@@ -248,7 +248,7 @@ class taux_sur_succ(SimpleFormulaColumn):
 class taux_sur_transmis(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Successions
-    label = "Taux d'imposition sur la succession"
+    label = u"Taux d'imposition sur la succession"
 
     def function(self, simulation, period):
         # droits = simulation.calculate('droits', period)
@@ -259,4 +259,3 @@ class taux_sur_transmis(SimpleFormulaColumn):
 
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis
-

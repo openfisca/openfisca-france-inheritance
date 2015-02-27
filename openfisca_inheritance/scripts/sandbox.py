@@ -24,28 +24,46 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from datetime import date
 from pprint import pprint
+
 import openfisca_inheritance
 
 
 TaxBenefitSystem = openfisca_inheritance.init_country()
 tax_benefit_system = TaxBenefitSystem()
-scenario = tax_benefit_system.new_scenario()
-scenario.init_simple_succession(
+# scenario = tax_benefit_system.new_scenario()
+# scenario.init_simple_succession(
+#     succession = dict(actif_propre = 1000000, part_epoux = 0.3),
+# #    donation = dict(don = 50000, date = 2012),
+#     decede = {},
+#     epoux_survivant = {},
+#     enfants = [
+#         {},
+#         {},
+#         {},
+#         {},
+#         ],
+#     year = 2014,
+#     )
+year = 2014
+simulation = tax_benefit_system.init_single_succession(
     succession = dict(actif_propre = 1000000, part_epoux = 0.3),
-#    donation = dict(don = 50000, date = 2012),
-    decede = {},
-    epoux_survivant = {},    
-    enfants = [
-        {},
-        {},
-        {},
-        {},
+    individus = [
+        dict(id = u"décédé", role_representant = u'décédé', date_deces = date(year, 1, 1)),
+        dict(id = u"épouse", role_representant = u'époux', id_represente = u"décédé"),
+        dict(id = u"père", role_representant = u'parent', id_represente = u"décédé", date_deces = date(year - 1, 1, 1)),
+        dict(id = u"frère1", role_representant = u'enfant', id_represente = u"père"),
+        dict(id = u"frère2", role_representant = u'enfant', id_represente = u"père", date_deces = date(year - 1, 1, 1)),
+        dict(id = u"neveu1", role_representant = u'enfant', id_represente = u"frère2"),
+        dict(id = u"neveu2", role_representant = u'enfant', id_represente = u"frère2"),
         ],
-    year = 2014,
+    year = year,
     )
 
-simulation = scenario.new_simulation(debug = True)
+print 'role_representant', simulation.calculate("role_representant")
+print 'id_represente', simulation.calculate("id_represente")
+print 'date_deces', simulation.calculate("date_deces")
 
 #print 'id', simulation.get_holder('id').array
 #print 'quisucc', simulation.get_holder('quisucc').array
@@ -61,7 +79,7 @@ print 'droits', simulation.calculate("droits")
 #scenario_donation = tax_benefit_system.new_scenario()
 #scenario_donation.init_simple_donation(
 #    donation = dict(don = 100000000),
-#    donateur = {},  
+#    donateur = {},
 #    enfants_donataires = [
 #        {},
 #        {},

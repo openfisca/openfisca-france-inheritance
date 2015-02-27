@@ -41,6 +41,10 @@ def init_country():
             for entity_class in entities.entity_class_by_symbol.itervalues()
             }
         legislation_xml_file_path = os.path.join(project_dir, 'param.xml')
-        Scenario = scenarios.Scenario
+        # Scenario = scenarios.Scenario
+
+        def init_single_succession(self, debug = False, trace = False, individus = None, succession = None, year = None):
+            return scenarios.init_single_succession(debug = debug, trace = trace, individus = individus, succession = succession,
+                tax_benefit_system = self, year = year)
 
     return TaxBenefitSystem
