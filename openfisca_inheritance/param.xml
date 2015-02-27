@@ -63,7 +63,7 @@
         </TRANCHE>
       </BAREME>
     </NODE>
-	<NODE code="frere_soeur_vif_rep" description="Transmission freres soeurs vifs ou representes">
+<!--	<NODE code="frere_soeur_vif_rep" description="Transmission freres soeurs vifs ou representes">
 		<CODE code="abattement" description="Abattement freres soeurs vifs ou representes" format="integer" type="monetary">
         <VALUE deb="2013-01-01" fin="2014-12-31" valeur="100000" />
 		</CODE>
@@ -82,7 +82,8 @@
 		<BAREME code="bareme" description="Barème non parent">
 		</BAREME>
 	</NODE>
-  </NODE>
+--> 
+ </NODE>
   <NODE code="csg" description="Contribution sociale généralisée (CSG)">
     <NODE code="act" description="Revenus d'activité">
       <BAREME code="deduc" description="CSG déductible">
