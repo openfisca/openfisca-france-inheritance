@@ -1,6 +1,30 @@
 <NODE code="root" deb="2006-01-01" fin="2014-12-31">
   <NODE code="succession" description="Droits de succession">
-    <NODE code="ligne_directe" description="Succesions en ligne directe">
+    <NODE code="capiral_assurance_vie" description="Fiscalité sur le capital transmis en assurances vie">
+	  <CODE code="abattement_assurance_vie" description="Abattement sur assurance vie">
+	    <VALUE deb="2002-01-01" fin="2014-12-31" valeur="152500" />
+		<VALUE deb="1998-10-13" fin="2001-12-31" valeur="1000000" />
+	  </CODE>
+	  <BAREME code="bareme" description="Barème de la part transmise en assurance vie">
+        <TRANCHE code="tranche0">
+          <SEUIL>
+			<VALUE deb="1998-10-13" fin="2014-12-31" valeur="0" />
+          </SEUIL>
+          <TAUX>
+			<VALUE deb="1998-10-13" fin="2014-12-31" valeur="0.2" />
+		  </TAUX>
+        </TRANCHE>
+		<TRANCHE code="tranche1">
+          <SEUIL>
+			<VALUE deb="2011-07-31" fin="2014-12-31" valeur="902838" />
+          </SEUIL>
+          <TAUX>
+			<VALUE deb="2011-07-31" fin="2014-12-31" valeur="0.25" />
+		  </TAUX>
+        </TRANCHE>
+	  </BAREME>
+	</NODE>
+	<NODE code="ligne_directe" description="Succesions en ligne directe">
       <CODE code="abattement" description="Abattement en ligne directe" format="integer" type="monetary">
         <VALUE deb="2012-08-17" fin="2014-12-31" valeur="100000" />
 		<VALUE deb="2011-01-01" fin="2012-08-16" valeur="159325" />
@@ -112,7 +136,7 @@
 			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="3400000" />
 		  </SEUIL>
           <TAUX>
-            <VALUE deb="1984-01-01" fin="2014-12-31" valeur=".30" />
+            <VALUE deb="1984-01-01" fin="2014-12-31" valeur=".3" />
           </TAUX>
         </TRANCHE>
         <TRANCHE code="tranche5">
