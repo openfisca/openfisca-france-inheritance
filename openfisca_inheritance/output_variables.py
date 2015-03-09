@@ -107,8 +107,8 @@ class degre_parente_civil(SimpleFormulaColumn):
         for i in itertools.count(0):
             degre_parente_represente = degre_parente[index_represente]
             degre_parente_precedent = degre_parente.copy()
-            degre_parente[((role_representant == ENFANT) | (role_representant == PARENT)) & (degre_parente_represente >= i)] = \
-                degre_parente_represente[((role_representant == ENFANT) | (role_representant == PARENT)) & (degre_parente_represente >= i)] + 1
+            masque = ((role_representant == ENFANT) | (role_representant == PARENT)) & (degre_parente_represente >= i)
+            degre_parente[masque] = degre_parente_represente[masque] + 1
             if (degre_parente == degre_parente_precedent).all():
                 break
 
