@@ -25,13 +25,15 @@
 
 from __future__ import division
 
-from numpy import maximum as max_
+import itertools
 
-from openfisca_core.columns import FloatCol
+from numpy import empty, maximum as max_
+from openfisca_core.columns import FloatCol, IntCol
 # from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import make_reference_formula_decorator, SimpleFormulaColumn
 
 from .entities import entity_class_by_symbol, Individus, Successions  # Donations
+from .input_variables import DECEDE, ENFANT, EPOUX, PARENT
 
 
 reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
@@ -78,6 +80,50 @@ class actif_transmis(SimpleFormulaColumn):
         return period, (
             (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre
             )
+
+
+@reference_formula
+class degre_parente_civil(SimpleFormulaColumn):
+    column = IntCol
+    entity_class = Individus
+    label = u"Degré de parenté, en droit civil, avec le décédé"
+
+    def function(self, simulation, period):
+        index_represente = simulation.calculate('index_represente', period)
+        role_representant = simulation.calculate('role_representant', period)
+
+        holder = self.holder
+        column = holder.column
+        degre_parente = empty(holder.entity.count, dtype = column.dtype)
+        degre_parente.fill(-9999)
+
+        # Initialise les décédes à 0.
+        degre_parente[role_representant == DECEDE] = 0
+
+        # Mets les époux des décédés à -1
+        degre_parente_represente = degre_parente[index_represente]
+        degre_parente[(role_representant == EPOUX) & (degre_parente_represente >= 0)] = -1
+
+        for i in itertools.count(0):
+            degre_parente_represente = degre_parente[index_represente]
+            degre_parente_precedent = degre_parente.copy()
+            degre_parente[((role_representant == ENFANT) | (role_representant == PARENT)) & (degre_parente_represente >= i)] = \
+                degre_parente_represente[((role_representant == ENFANT) | (role_representant == PARENT)) & (degre_parente_represente >= i)] + 1
+            if (degre_parente == degre_parente_precedent).all():
+                break
+
+        return period, degre_parente
+
+
+# @reference_formula
+# class degre_parente_fiscal(SimpleFormulaColumn):
+#     column = IntCol
+#     entity_class = Individus
+#     label = u"Degré de parenté, en droit fiscal, avec le décédé"
+#
+#     def function(self, simulation, period):
+#
+#         return period, degre_parente
 
 
 # @reference_formula

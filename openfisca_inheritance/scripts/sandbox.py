@@ -64,6 +64,7 @@ simulation = tax_benefit_system.init_single_succession(
 print 'role_representant', simulation.calculate("role_representant")
 print 'id_represente', simulation.calculate("id_represente")
 print 'date_deces', simulation.calculate("date_deces")
+print 'degre_parente_civil', simulation.calculate("degre_parente_civil")
 
 #print 'id', simulation.get_holder('id').array
 #print 'quisucc', simulation.get_holder('quisucc').array

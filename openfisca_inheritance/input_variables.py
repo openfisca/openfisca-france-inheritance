@@ -38,6 +38,10 @@ ROLE_REPRESENTANT = Enum([
     u'époux',  # 2
     u'parent',  # 3
     ])
+DECEDE = ROLE_REPRESENTANT[u'décédé']
+ENFANT = ROLE_REPRESENTANT[u'enfant']
+EPOUX = ROLE_REPRESENTANT[u'époux']
+PARENT = ROLE_REPRESENTANT[u'parent']
 
 QUISUCC = Enum([
     'decede',
@@ -127,6 +131,13 @@ reference_input_variable(
     entity_class = Individus,
     label = u"Succession auquel appartient l'individu",
     name = u'idsucc',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    label = u"Index de l'individu représenté par cet individu",
+    name = u'index_represente',
     )
 
 reference_input_variable(

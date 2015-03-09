@@ -104,10 +104,12 @@ def init_single_succession(debug = False, trace = False, individus = None, succe
 
     decede_count = 0
     individus_id = set()
-    for individu in individus:
+    individu_index_by_id = {}
+    for individu_index, individu in enumerate(individus):
         individu_id = individu.get('id')
         assert isinstance(individu_id, basestring) and individu_id not in individus_id
         individus_id.add(individu_id)
+        individu_index_by_id[individu_id] = individu_index
         role_representant = individu.get('role_representant')
         assert role_representant in ROLE_REPRESENTANT._nums, u"Individu {} a un rôle invalide: {}".format(
             individu, role_representant).encode('utf-8')
@@ -128,6 +130,7 @@ def init_single_succession(debug = False, trace = False, individus = None, succe
         id_represente = individu.get('id_represente')
         assert id_represente in individus_id, u"La personne représentée par l'individu {} n'existe pas".format(
             individu).encode('utf-8')
+        individu['index_represente'] = individu_index_by_id[id_represente]
 
     period = periods.period('year', year)
     simulation = simulations.Simulation(period = period, tax_benefit_system = tax_benefit_system,
