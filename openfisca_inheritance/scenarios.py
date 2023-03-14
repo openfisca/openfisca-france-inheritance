@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -43,7 +41,7 @@ def add_member(entity, **variables_value_by_name):
 
     # Add a cell to all arrays of all variables of entity.
     for variable_name, variable_holder in entity.holder_by_name.iteritems():
-        column = variable_holder.column
+        value_type = variable_holder.column
         if column.is_permanent:
             variable_holder._array = np.hstack((variable_holder._array, [column.default]))
         else:
@@ -70,7 +68,7 @@ def add_member(entity, **variables_value_by_name):
     # Set arguments in variables.
     for variable_name, value in value_by_name.iteritems():
         variable_holder = entity.get_or_new_holder(variable_name)
-        column = variable_holder.column
+        value_type = variable_holder.column
         if isinstance(value, dict):
             for period, period_value in value.iteritems():
                 array = variable_holder.get_array(period)
@@ -111,9 +109,9 @@ def init_single_succession(debug = False, trace = False, individus = None, succe
         individus_id.add(individu_id)
         individu_index_by_id[individu_id] = individu_index
         role_representant = individu.get('role_representant')
-        assert role_representant in ROLE_REPRESENTANT._nums, u"Individu {} a un rôle invalide: {}".format(
+        assert role_representant in ROLE_REPRESENTANT._nums, "Individu {} a un rôle invalide: {}".format(
             individu, role_representant).encode('utf-8')
-        if role_representant == u'décédé':
+        if role_representant == 'décédé':
             decede_count += 1
             assert individu.get('id_represente') is None, "Le décédé ne doit représenter personne"
             individu['id_represente'] = individu_id
@@ -128,7 +126,7 @@ def init_single_succession(debug = False, trace = False, individus = None, succe
 
     for individu in individus:
         id_represente = individu.get('id_represente')
-        assert id_represente in individus_id, u"La personne représentée par l'individu {} n'existe pas".format(
+        assert id_represente in individus_id, "La personne représentée par l'individu {} n'existe pas".format(
             individu).encode('utf-8')
         individu['index_represente'] = individu_index_by_id[id_represente]
 

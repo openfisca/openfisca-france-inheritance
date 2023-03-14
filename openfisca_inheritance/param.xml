@@ -206,7 +206,7 @@
 		<BAREME code="bareme" description="Barème non parent">
 		</BAREME>
 	</NODE>
---> 
+-->
  </NODE>
   <NODE code="csg" description="Contribution sociale généralisée (CSG)">
     <NODE code="act" description="Revenus d'activité">

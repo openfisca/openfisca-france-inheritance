@@ -1,50 +1,21 @@
-# -*- coding: utf-8 -*-
-
-
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 import os
 
-from openfisca_core import taxbenefitsystems
+from openfisca_core.taxbenefitsystems import TaxBenefitSystem
 
-from . import input_variables, output_variables  # noqa
-from . import entities, scenarios
+from openfisca_france import entities
+from openfisca_france.model.prelevements_obligatoires.prelevements_sociaux.cotisations_sociales import preprocessing
+from openfisca_france.conf.cache_blacklist import cache_blacklist as conf_cache_blacklist
+from openfisca_france.situation_examples import couple
 
-project_dir = os.path.dirname(os.path.abspath(__file__))
+
+COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def init_country():
-    class TaxBenefitSystem(taxbenefitsystems.XmlBasedTaxBenefitSystem):
-        """French Inheritance system"""
-        entity_class_by_key_plural = {
-            entity_class.key_plural: entity_class
-            for entity_class in entities.entity_class_by_symbol.itervalues()
-            }
-        legislation_xml_file_path = os.path.join(project_dir, 'param.xml')
-        # Scenario = scenarios.Scenario
+class CountryTaxBenefitSystem(TaxBenefitSystem):
+    """French inheritance tax benefit system."""
 
-        def init_single_succession(self, debug = False, trace = False, individus = None, succession = None, year = None):
-            return scenarios.init_single_succession(debug = debug, trace = trace, individus = individus, succession = succession,
-                tax_benefit_system = self, year = year)
-
-    return TaxBenefitSystem
+    def __init__(self):
+        super(CountryTaxBenefitSystem, self).__init__(self, entities.entities)
+        parameters = os.path.join(COUNTRY_DIR, 'parameters')
+        self.load_parameters(parameters)
+        self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'variables'))

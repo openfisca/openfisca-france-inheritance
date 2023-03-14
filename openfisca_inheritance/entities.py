@@ -1,26 +1,4 @@
-# -*- coding: utf-8 -*-
 
-
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 import collections
@@ -33,7 +11,7 @@ class Individus(entities.AbstractEntity):
     is_persons_entity = True
     key_plural = 'individus'
     key_singular = 'individu'
-    label = u'Personne'
+    label = 'Personne'
     name_key = 'nom_individu'
     symbol = 'ind'
 
@@ -43,7 +21,7 @@ class Successions(entities.AbstractEntity):
     index_for_person_variable_name = 'idsucc'
     key_plural = 'successions'
     key_singular = 'succession'
-    label = u'Déclaration de succession'
+    label = 'Déclaration de succession'
     name_key = 'nom_succession'
     role_for_person_variable_name = 'quisucc'
     symbol = 'succ'
@@ -68,7 +46,7 @@ class Successions(entities.AbstractEntity):
 #     index_for_person_variable_name = 'iddon'
 #     key_plural = 'donations'
 #     key_singular = 'donation'
-#     label = u'Donation'
+#     label = 'Donation'
 # #    max_cardinality_by_role_key = {
 # #        'epoux_survivant': 1,
 # #        'enfants': 9,
@@ -79,10 +57,10 @@ class Successions(entities.AbstractEntity):
 #     role_for_person_variable_name = 'quidon'
 # #    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']
 # #    label_by_role_key = {
-# #        'epoux survivant': u'Epoux survivant',
-# #        'enfants': u'Enfants',
-# #        'collateraux': u'Collatéraux',
-# #        'legataires': u'Légataires',
+# #        'epoux survivant': 'Epoux survivant',
+# #        'enfants': 'Enfants',
+# #        'collateraux': 'Collatéraux',
+# #        'legataires': 'Légataires',
 # #        }
 #     symbol = 'don'
 #
