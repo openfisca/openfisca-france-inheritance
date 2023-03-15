@@ -1,86 +1,80 @@
+from openfisca_core.entities import build_entity
 
 
-
-import collections
-
-from openfisca_core import entities
-
-
-class Individus(entities.AbstractEntity):
-    column_by_name = collections.OrderedDict()
-    is_persons_entity = True
-    key_plural = 'individus'
-    key_singular = 'individu'
-    label = 'Personne'
-    name_key = 'nom_individu'
-    symbol = 'ind'
-
-
-class Successions(entities.AbstractEntity):
-    column_by_name = collections.OrderedDict()
-    index_for_person_variable_name = 'idsucc'
-    key_plural = 'successions'
-    key_singular = 'succession'
-    label = 'Déclaration de succession'
-    name_key = 'nom_succession'
-    role_for_person_variable_name = 'quisucc'
-    symbol = 'succ'
-
-    def iter_member_persons_role_and_id(self, member):
-        decede_id = member['decede']
-        assert decede_id is not None
-        yield 0, decede_id
-
-        epoux_survivant_id = member.get('epoux_survivant')
-        if epoux_survivant_id is not None:
-            yield 1, epoux_survivant_id
-
-        enfants_id = member.get('enfants')
-        if enfants_id is not None:
-            for enfant_role, enfant_id in enumerate(enfants_id, 100):
-                yield enfant_role, enfant_id
-
-
-# class Donations(entities.AbstractEntity):
-#     column_by_name = collections.OrderedDict()
-#     index_for_person_variable_name = 'iddon'
-#     key_plural = 'donations'
-#     key_singular = 'donation'
-#     label = 'Donation'
-# #    max_cardinality_by_role_key = {
-# #        'epoux_survivant': 1,
-# #        'enfants': 9,
-# #        'collateraux': 9,
-# #        'legataires': 9,
-# #        }
-#     name_key = 'nom_donation'
-#     role_for_person_variable_name = 'quidon'
-# #    roles_key = ['epoux_survivant', 'enfants', 'collateraux', 'legataires']
-# #    label_by_role_key = {
-# #        'epoux survivant': 'Epoux survivant',
-# #        'enfants': 'Enfants',
-# #        'collateraux': 'Collatéraux',
-# #        'legataires': 'Légataires',
-# #        }
-#     symbol = 'don'
-#
-#     def iter_member_persons_role_and_id(self, member):
-#         donateur_id = member['donateur']
-#         assert donateur_id is not None
-#         yield 0, donateur_id
-#
-# #        epoux_donataire_id = member.get('epoux donataire')
-# #        if epoux_donataire_id is not None:
-# #            yield 1, epoux_donataire_id
-#
-#         enfants_donataires_id = member.get('enfants donataires')
-#         if enfants_donataires_id is not None:
-#             for enfant_role, enfant_id in enumerate(enfants_donataires_id, 100):
-#                 yield enfant_role, enfant_id
-
-
-entity_class_by_symbol = dict(
-    ind = Individus,
-    succ = Successions,
-    # don = Donations,
+Individu = build_entity(
+    key = "individu",
+    plural = "individus",
+    label = 'Une personne/un individu',
+    is_person = True,
     )
+
+
+Succession = build_entity(
+    key = "succession",
+    plural = "successions",
+    label = 'Les individus impliqués dans une succession.',
+    roles = [
+        {
+            'key': 'decede',
+            'plural': 'decedes',
+            'label': 'Décédé',
+            'max': 1,
+            'doc': 'La personne décédé.'
+            },
+        {
+            'key': 'epoux_survivant',
+            'plural': 'epoux_survivants',
+            'label': 'Époux survivant',
+            'doc': "L'époux de la personne décédé."
+            },
+        {
+            'key': 'enfant_survivant',
+            'plural': 'enfants_survivants',
+            'label': 'Enfant survivant',
+            'doc': "Les enfants vivants au décès de leur parent décédé."
+            },
+        ]
+    )
+
+
+Donation = build_entity(
+    key = "donation",
+    plural = "donations",
+    label = 'Les individus impliqués dans une donation.',
+    roles = [
+        {
+            'key': 'decede',
+            'plural': 'decedes',
+            'label': 'Décédé',
+            'max': 1,
+            'doc': 'La personne décédé.'
+            },
+        {
+            'key': 'epoux_survivant',
+            'plural': 'epoux_survivants',
+            'label': 'Époux survivant',
+            'doc': "L'époux de la personne décédé."
+            },
+        {
+            'key': 'enfant_survivant',
+            'plural': 'enfants_survivants',
+            'label': 'Enfant survivant',
+            'doc': "Les enfants vivants au décès de leur parent décédé."
+            },
+        {
+            'key': 'collateral',
+            'plural': 'collateraux',
+            'label': 'Collatéral',
+            'doc': "Les collatéraux du décédé."
+            },
+        {
+            'key': 'legatatire',
+            'plural': 'legatatires',
+            'label': 'Légataire',
+            'doc': "Les légattaires du décédé."
+            },
+        ]
+    )
+
+
+entities = [Individu, Succession, Donation]

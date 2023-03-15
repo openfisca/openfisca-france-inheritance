@@ -24,143 +24,104 @@ QUISUCC = Enum([
     ])
 
 
-#reference_input_variable(
+#class actif_de_communaute(Variable):
 #    value_type = float,
 #    entity = Successions,
 #    label = "Actif de communauté",
-#    name = 'actif_de_communaute',
-#    )
-
-#reference_input_variable(
+#
+#class passif_de_communaute(Variable):
 #    value_type = float,
 #    entity = Successions,
 #    label = "Passif de communauté",
-#    name = 'passif_de_communaute',
-#    )
-
-reference_input_variable(
+#
+class actif_de_communaute(Variable):
     value_type = float,
     entity = Successions,
     label = "Actif de Communauté",
-    name = 'actif_de_communaute',
-    )
 
-reference_input_variable(
+class actif_propre(Variable):
     value_type = float,
     entity = Successions,
     label = "Actif propre",
-    name = 'actif_propre',
-    )
 
-reference_input_variable(
+class assurance_vie(Variable):
     value_type = float,
     entity = Successions,
     label = "Assurance Vie",
-    name = 'assurance_vie',
-    )
 
-reference_input_variable(
+class date_deces(Variable):
     value_type = DateCol(default = date(1, 1, 1)),
     entity = Individus,
     label = "Date du décès",
-    name = 'date_deces',
-    )
 
-# reference_input_variable(
+# class date(Variable):
 #     value_type = IntCol,
 #     entity = Donations,
 #     label = "Année de la donation",
-#     name = 'date',
-#     )
-
-# reference_input_variable(
+#
+# class don(Variable):
 #     value_type = float,
 #     entity = Donations,
 #     label = "Don",
-#     name = 'don',
-#     )
-
-reference_input_variable(
+#
+class id(Variable):
     value_type = StrCol,
     entity = Individus,
     label = "Identifiant de l'individu",
-    name = 'id',
-    )
 
-reference_input_variable(
+class id_represente(Variable):
     value_type = StrCol,
     entity = Individus,
     label = "Identifiant de l'individu représenté par cet individu",
-    name = 'id_represente',
-    )
 
-reference_input_variable(
+class iddon(Variable):
     value_type = IntCol,
     entity = Individus,
     label = "Donation auquel appartient l'individu",
-    name = 'iddon',
-    )
 
-reference_input_variable(
+class idsucc(Variable):
     value_type = IntCol,
     entity = Individus,
     label = "Succession auquel appartient l'individu",
-    name = 'idsucc',
-    )
 
-reference_input_variable(
+class index_represente(Variable):
     value_type = IntCol,
     entity = Individus,
     label = "Index de l'individu représenté par cet individu",
-    name = 'index_represente',
-    )
 
-reference_input_variable(
+class part_epoux(Variable):
     value_type = float,
     entity = Successions,
     label = "Part epoux",
-    name = 'part_epoux',
-    )
 
-reference_input_variable(
+class passif_de_communaute(Variable):
     value_type = float,
     entity = Successions,
     label = "Passif de Communauté",
-    name = 'passif_de_communaute',
-    )
 
-reference_input_variable(
+class passif_propre(Variable):
     value_type = float,
     entity = Successions,
     label = "Passif propre",
-    name = 'passif_propre',
-    )
 
-reference_input_variable(
+class quisucc(Variable):
     value_type = EnumCol(QUISUCC),
     entity = Individus,
     label = "Role de l'individu dans la succession",
-    name = 'quisucc',
-    )
 
-# reference_input_variable(
+# class quidon(Variable):
 #     value_type = EnumCol(QUIDON),
 #     entity = Individus,
 #     label = "Role de l'individu dans la donation",
-#     name = 'quidon',
-#     )
-
-reference_input_variable(
+#
+class role_representant(Variable):
     value_type = EnumCol(ROLE_REPRESENTANT),
     entity = Individus,
     label = "Rôle de l'individu par rapport au représenté",
-    name = 'role_representant',
-    )
 
 
-#reference_input_variable(
+#class id(Variable):
 #    value_type = StrCol,
 #    entity = Individus,
 #    label = "Identifiant de l'individu",
-#    name = 'id',
-#    )
+#
