@@ -1,0 +1,24 @@
+description: Taux de la première tranche
+metadata:
+  reference:
+    1998-10-13:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=9931D8F62053266CCE3574E3ABCC4124.tpdjo03v_2?cidTexte=JORFTEXT000000209044&idArticle=LEGIARTI000006320309&dateTexte=20011228&categorieLien=id#LEGIARTI000006320309
+      title: Loi - art. 37 JORF 31 décembre 1998
+    2002-01-10:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=9931D8F62053266CCE3574E3ABCC4124.tpdjo03v_2?cidTexte=JORFTEXT000000219672&idArticle=LEGIARTI000006716519&dateTexte=20031230&categorieLien=id#LEGIARTI000006716519
+      title: Ordonnance n°2000-916 du 19 septembre 2000 - art. 6 (V)
+    2007-08-22:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=9931D8F62053266CCE3574E3ABCC4124.tpdjo03v_2?cidTexte=JORFTEXT000000278649&idArticle=LEGIARTI000006267448&dateTexte=20091231&categorieLien=id#LEGIARTI000006267448
+      title: Loi n°2007-1223 du 21 août 2007 - art. 8 (V)
+    2011-07-31:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=9931D8F62053266CCE3574E3ABCC4124.tpdjo03v_2?cidTexte=JORFTEXT000024413775&idArticle=LEGIARTI000024415809&dateTexte=20121212&categorieLien=id#LEGIARTI000024415809
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 11 (V)
+values:
+  1998-10-13:
+    value: 20
+  2002-01-10:
+    value: 20
+  2007-08-22:
+    value: 20
+  2011-07-31:
+    value: 20

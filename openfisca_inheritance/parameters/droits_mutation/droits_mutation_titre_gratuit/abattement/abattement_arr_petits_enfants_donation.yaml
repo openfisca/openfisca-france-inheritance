@@ -1,0 +1,18 @@
+description: Abattement arrières-petits-enfants (donation uniquement)
+values:
+  2006-01-01:
+    value: 5000
+  2007-01-01:
+    value: 5000
+  2007-08-22:
+    value: 5000
+  2008-01-01:
+    value: 5065
+  2009-01-01:
+    value: 5212
+  2010-01-01:
+    value: 5232
+  2011-01-01:
+    value: 5310
+  2012-08-17:
+    value: 5310

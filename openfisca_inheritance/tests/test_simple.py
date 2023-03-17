@@ -1,20 +1,33 @@
+from openfisca_inheritance import CountryTaxBenefitSystem as TaxBenefitSystem
 
 
 
-import openfisca_inheritance
+test_case = {
+    'individus': {
+        'papa': {},
+        'maman': {},
+        'riri': {},
+        'fifi': {},
+        'loulou': {},
+        },
+    'successions': {
+        'suc0': {
+            'decede': 'papa',
+            'epoux_survivant': 'maman',
+            'enfants_survivants': [
+                'riri', 'fifi', 'loulou',
+                ],
+            'actif_propre': 1000000,
+            'part_epoux': 0.3,
+            },
+        },
+    "period": 2014
+    }
 
 
-def test_celib():
-    TaxBenefitSystem = openfisca_inheritance.init_country()
-    tax_benefit_system = TaxBenefitSystem()
-    scenario = tax_benefit_system.new_scenario()
-    scenario.init_simple_succession(
-        decede = dict(
-            actif_propre = 250000,
-            ),
-        enfants = [
-            {},
-            ],
-        year = 2014,
-        )
-    scenario.new_simulation(debug = True)
+
+tax_benefit_system = TaxBenefitSystem()
+scenario = tax_benefit_system.new_scenario()
+scenario.init_from_dict(test_case)
+simulation = scenario.new_simulation(debug = True)
+simulation.calculate("actif_imposable", period = 2014)

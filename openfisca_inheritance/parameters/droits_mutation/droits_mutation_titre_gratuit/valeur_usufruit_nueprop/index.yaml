@@ -1,0 +1,5 @@
+description: Valeurs de la nue-propriété et de l'usufruit en fonction de l'âge de l'usufruitier
+metadata:
+  order:
+  - valeur_usufruit
+  - valeur_nue_propriete

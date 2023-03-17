@@ -1,0 +1,16 @@
+description: Taux de réduction sans condition d'âge
+metadata:
+  reference:
+    1980-01-19:
+      title: Loi n°80-30 du 18 janvier 1980 - art. 20
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000705191&idArticle=LEGIARTI000006273411&dateTexte=19821231&categorieLien=id#LEGIARTI000006273411
+    1981-07-09:
+      title: Loi 81-734 1981-08-03 Finances rectificative pour 1981
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000705483&dateTexte=19821231&categorieLien=id#JORFTEXT000000705483
+values:
+  1979-07-01:
+    value: 25
+  1980-01-19:
+    value: 20
+  1981-07-09:
+    value: null

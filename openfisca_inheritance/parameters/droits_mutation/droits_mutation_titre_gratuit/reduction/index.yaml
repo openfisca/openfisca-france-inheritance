@@ -1,0 +1,7 @@
+description: Réductions DMTG
+metadata:
+  order:
+  - taux_tous_types
+  - taux_donation_partage
+  - taux_donation_nue_propriete
+  - taux_donation_pleine_propriete

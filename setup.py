@@ -22,7 +22,6 @@ doc_lines = __doc__.split('\n')
 setup(
     name = 'OpenFisca-Inheritance',
     version = '0.4dev',
-
     author = 'OpenFisca Team',
     author_email = 'contact@openfisca.fr',
     classifiers = [classifier for classifier in classifiers.split('\n') if classifier],
@@ -33,9 +32,7 @@ setup(
     url = 'https://github.com/openfisca/openfisca-inheritance',
 
     install_requires = [
-        'Biryani1[datetimeconv] >= 0.9dev',
-        'numpy',
-        'OpenFisca-Core >= 0.4dev',
+        'OpenFisca-Core >=35.8.0,<36.0',
         ],
     packages = find_packages(),
     zip_safe = False,

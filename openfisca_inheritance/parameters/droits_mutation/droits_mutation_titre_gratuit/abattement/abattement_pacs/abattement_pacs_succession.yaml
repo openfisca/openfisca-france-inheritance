@@ -1,0 +1,8 @@
+description: Abattement pacs (succession)
+values:
+  1999-11-16:
+    value: 300000
+  2000-01-01:
+    value: 375000
+  2002-12-31:
+    value: 57000

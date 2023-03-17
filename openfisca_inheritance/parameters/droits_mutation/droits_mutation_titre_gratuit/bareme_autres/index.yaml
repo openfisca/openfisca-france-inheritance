@@ -1,0 +1,15 @@
+description: Seuils et taux d'imposition au titre des droits de mutation à titre gratuit,
+  autres individus (à l'exclusion de ligne directe, conjoint, pacs)
+metadata:
+  order:
+  - seuils_adelphite
+  - taux_marginal_adelphite
+  - taux_marginal_parents_degre4
+  - taux_marginal_non_parents
+  reference:
+    1981-08-04:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=6130E0110AE7F05D3EA27488FE702E39.tpdjo02v_3?cidTexte=JORFTEXT000000705483&idArticle=LEGIARTI000006273642&dateTexte=19831229&categorieLien=id#LEGIARTI000006273642
+      title: Loi n°81-734 du 3 août 1981 - art. 4 (P) JORF 4 AOUT 1981
+    1983-12-30:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=6130E0110AE7F05D3EA27488FE702E39.tpdjo02v_3?cidTexte=JORFTEXT000000319977&idArticle=LEGIARTI000006317335&dateTexte=20011231&categorieLien=id#LEGIARTI000006317335
+      title: Loi n°83-1179 du 29 décembre 1983 - art. 19 (V) JORF 30 décembre 1983

@@ -1,0 +1,25 @@
+description: Taux de réduction moins de 65 ans
+metadata:
+  reference:
+    1986-12-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000317305&idArticle=LEGIARTI000006274795&dateTexte=19960511&categorieLien=id#LEGIARTI000006274795
+      title: Loi n°86-1317 du 30 décembre 1986 - art. 27 JORF 31 décembre 1986
+    1996-04-01:
+      href: null
+      title: LOI n° 96-314 du 12 avril 1996 - art.17
+    1998-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000569621&idArticle=LEGIARTI000006319967&dateTexte=19990330&categorieLien=id#LEGIARTI000006319967
+      title: Loi - art. 17 JORF 31 décembre 1997
+    1998-09-01:
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000209044&dateTexte=20000330&categorieLien=id#JORFTEXT000000209044
+      title: Loi 98-1266 1998-12-30 art. 36 I Finances pour 1999 JORF 31 décembre
+        1998
+values:
+  1986-12-01:
+    value: 25
+  1996-04-01:
+    value: 35
+  1998-01-01:
+    value: 35
+  1998-09-01:
+    value: null

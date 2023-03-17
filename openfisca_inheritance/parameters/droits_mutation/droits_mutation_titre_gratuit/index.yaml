@@ -1,0 +1,15 @@
+description: Droits de mutation à titre gratuit
+metadata:
+  order:
+  - bareme_ligne_directe
+  - bareme_conjoint
+  - bareme_pacs
+  - bareme_autres
+  - abattement
+  - abattement_don_numeraire
+  - delais
+  - reduction
+  - valeur_usufruit_nueprop
+  - seuil_declaratif
+  - assurance_vie
+  label_en: Inheritance and gift tax

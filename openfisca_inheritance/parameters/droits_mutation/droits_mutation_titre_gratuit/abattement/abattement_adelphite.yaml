@@ -1,0 +1,18 @@
+description: Abattement frères et soeurs
+values:
+  2006-01-01:
+    value: 5000
+  2007-01-01:
+    value: 5000
+  2007-08-22:
+    value: 15000
+  2008-01-01:
+    value: 15195
+  2009-01-01:
+    value: 15636
+  2010-01-01:
+    value: 15697
+  2011-01-01:
+    value: 15932
+  2012-08-17:
+    value: 15932

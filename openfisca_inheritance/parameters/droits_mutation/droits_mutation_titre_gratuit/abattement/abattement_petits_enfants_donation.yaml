@@ -1,0 +1,30 @@
+description: Abattement petits-enfants (donation uniquement)
+values:
+  1996-04-01:
+    value: 100000
+  1999-01-01:
+    value: 100000
+  2000-01-01:
+    value: 100000
+  2002-01-01:
+    value: 15000
+  2003-01-01:
+    value: 30000
+  2005-01-01:
+    value: 30000
+  2006-01-01:
+    value: 30000
+  2007-01-01:
+    value: 30000
+  2007-08-22:
+    value: 30000
+  2008-01-01:
+    value: 30390
+  2009-01-01:
+    value: 31272
+  2010-01-01:
+    value: 31395
+  2011-01-01:
+    value: 31865
+  2012-08-17:
+    value: 31865

@@ -1,0 +1,24 @@
+description: Délai de rappel des donnations antérierues, en années
+metadata:
+  reference:
+    1992-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=0F821C564A541A682F66697CD53CADF1.tpdjo03v_2?cidTexte=JORFTEXT000000356342&idArticle=LEGIARTI000006318147&dateTexte=19970410&categorieLien=id#LEGIARTI000006318147
+      title: Loi n° 91-1322 du 30 décembre 1991 de Finances pour 1992 art. 15
+    2006-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=4226AA5A556C9B674D3A0666B7EF07C1.tpdjo03v_2?cidTexte=JORFTEXT000000634802&idArticle=LEGIARTI000006322413&dateTexte=20070821&categorieLien=id#LEGIARTI000006322413
+      title: Loi n°2005-1719 du 30 décembre 2005 - art. 8 JORF 31 décembre 2005
+    2011-07-31:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=785C5BD040C659ADDF7DB2BD64D52910.tpdjo03v_2?cidTexte=JORFTEXT000024413775&idArticle=LEGIARTI000024415803&dateTexte=20120816&categorieLien=id#LEGIARTI000024415803
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 7 (V)
+    2012-08-17:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=785C5BD040C659ADDF7DB2BD64D52910.tpdjo03v_2?cidTexte=JORFTEXT000026288927&idArticle=LEGIARTI000026289965&dateTexte=20121211&categorieLien=id#LEGIARTI000026289965
+      title: LOI n°2012-958 du 16 août 2012 - art. 5 (V)
+values:
+  1992-01-01:
+    value: 10
+  2006-01-01:
+    value: 6
+  2011-07-31:
+    value: 10
+  2012-08-17:
+    value: 15

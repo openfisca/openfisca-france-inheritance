@@ -1,16 +1,16 @@
 import itertools
 from numpy import empty, maximum as max_
 
-
 from openfisca_core.model_api import *
-from openfisca_inheritance.entities import Individus, Successions  # Donations
-from openfisca_inheritance.variables.input_variables import DECEDE, ENFANT, EPOUX, PARENT
+from openfisca_inheritance.entities import Individu, Succession  # Donations
+# from openfisca_inheritance.variables.input_variables import DECEDE, ENFANT, EPOUX, PARENT
 
 
 class actif_imposable(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Actif imposable"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -20,16 +20,22 @@ class actif_imposable(Variable):
         actif_propre = succession('actif_propre', period)
         passif_propre = succession('passif_propre', period)
         assurance_vie = succession('assurance_vie', period)
-        return (1 - part_epoux) * (
-            (actif_de_communaute - passif_de_communaute) / 2 +
-            actif_propre - passif_propre - assurance_vie
+        return (
+            (1 - part_epoux)
+            * (
+                (actif_de_communaute - passif_de_communaute) / 2
+                + actif_propre
+                - passif_propre
+                - assurance_vie
+                )
             )
 
 
 class actif_transmis(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Actif transmis"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period.start.offset('first-of', 'year').period('year')
@@ -40,14 +46,17 @@ class actif_transmis(Variable):
         passif_propre = succession('passif_propre', period)
 
         return (
-            (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre
+            (actif_de_communaute - passif_de_communaute) / 2
+            + actif_propre
+            - passif_propre
             )
 
 
 class degre_parente_civil(Variable):
-    value_type = IntCol
-    entity = Individus
+    value_type = int
+    entity = Individu
     label = "Degré de parenté, en droit civil, avec le décédé"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         index_represente = succession('index_represente', period)
@@ -77,9 +86,10 @@ class degre_parente_civil(Variable):
 
 
 # # class degre_parente_fiscal(Variable):
-#     value_type = IntCol
-#     entity = Individus
+#     value_type = int
+#     entity = Individu
 #     label = "Degré de parenté, en droit fiscal, avec le décédé"
+#     definition_period = ETERNITY
 #
 #     def formula(succession, period, parameters):
 #
@@ -102,8 +112,9 @@ class degre_parente_civil(Variable):
 
 class droits_sur_succ(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Droits sur succession"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -114,8 +125,9 @@ class droits_sur_succ(Variable):
 
 class is_enfant(Variable):
     value_type = float
-    entity = Individus
+    entity = Individu
     label = "Est un enfant"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -125,8 +137,9 @@ class is_enfant(Variable):
 
 class is_enfant_donataire(Variable):
     value_type = float
-    entity = Individus
+    entity = Individu
     label = "Est un enfant donataire"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -136,8 +149,9 @@ class is_enfant_donataire(Variable):
 
 class nombre_enfants(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Nombre d'enfants"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -147,7 +161,7 @@ class nombre_enfants(Variable):
 
 # # class part_taxable(Variable):
 #    value_type = float
-#    entity = Successions
+#    entity = Succession
 #    label = "Droits de succession"
 #
 #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
@@ -173,8 +187,9 @@ class nombre_enfants(Variable):
 
 class part_recue(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Part reçue"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -185,21 +200,23 @@ class part_recue(Variable):
 
 class part_taxable(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Nombre d'enfants"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
-        abattement_par_part = simulation.legislation_at(period).succession.ligne_directe.abattement
+        abattement_par_part = parameters(period).succession.ligne_directe.abattement
         return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
 
 
 class taux_sur_part_recue(Variable):
     value_type = float
-    entity = Individus
+    entity = Individu
     label = "Taux d'imposition sur la part recue"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -211,14 +228,15 @@ class taux_sur_part_recue(Variable):
 
 class droits(Variable):
     value_type = float
-    entity = Individus
+    entity = Individu
     label = "Droits sur parts"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
         part_taxable_holder = succession('part_taxable', period)
         is_enfant = succession('is_enfant', period)
-        bareme = simulation.legislation_at(period).succession.ligne_directe.bareme
+        bareme = parameters(period).succession.ligne_directe.bareme
         part_taxable = self.cast_from_entity_to_roles(part_taxable_holder, entity = "succession") * is_enfant
         droits = bareme.calc(part_taxable)
         # print bareme
@@ -227,8 +245,9 @@ class droits(Variable):
 
 class taux_sur_succ(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Taux d'imposition sur la succession"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         period = period.start.offset('first-of', 'year').period('year')
@@ -240,15 +259,15 @@ class taux_sur_succ(Variable):
 
 class taux_sur_transmis(Variable):
     value_type = float
-    entity = Successions
+    entity = Succession
     label = "Taux d'imposition sur la succession"
+    definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         # droits = succession('droits', period)
         droits_sur_succ = succession('droits_sur_succ', period)
         actif_transmis = succession('actif_transmis', period)
         # assurance_vie = succession('assurance_vie', period)
-        period = period.start.offset('first-of', 'year').period('year')
 
         taux_sur_transmis = droits_sur_succ / actif_transmis
         return taux_sur_transmis

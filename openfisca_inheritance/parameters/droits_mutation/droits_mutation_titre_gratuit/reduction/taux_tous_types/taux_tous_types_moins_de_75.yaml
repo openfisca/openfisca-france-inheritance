@@ -1,0 +1,48 @@
+description: Taux de réduction pour les 65-74 ans
+metadata:
+  reference:
+    1996-04-01:
+      href: null
+      title: LOI n° 96-314 du 12 avril 1996 - art.17
+    1998-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000569621&idArticle=LEGIARTI000006319967&dateTexte=19990330&categorieLien=id#LEGIARTI000006319967
+      title: Loi - art. 17 JORF 31 décembre 1997
+    1998-09-01:
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000209044&dateTexte=20000330&categorieLien=id#JORFTEXT000000209044
+      title: Loi 98-1266 1998-12-30 art. 36 I Finances pour 1999 JORF 31 décembre
+        1998
+    1998-11-25:
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000209044&dateTexte=20000330&categorieLien=id#JORFTEXT000000209044
+      title: Loi 98-1266 1998-12-30 art. 36 I Finances pour 1999 JORF 31 décembre
+        1998
+    1999-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000209044&dateTexte=20000330&categorieLien=id#JORFTEXT000000209044
+      title: Loi 98-1266 1998-12-30 art. 36 I Finances pour 1999 JORF 31 décembre
+        1998
+    2000-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000762233&idArticle=LEGIARTI000006320537&dateTexte=20031230&categorieLien=id#LEGIARTI000006320537
+      title: Loi - art. 10 JORF 31 décembre 1999
+    2001-06-30:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000762233&idArticle=LEGIARTI000006320537&dateTexte=20031230&categorieLien=id#LEGIARTI000006320537
+      title: Loi - art. 10 JORF 31 décembre 1999
+    2004-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexte.do;jsessionid=E97723A547689AD7B7F43A8763BCE279.tpdjo03v_2?cidTexte=JORFTEXT000000612133&dateTexte=20051230&categorieLien=id#JORFTEXT000000612133
+      title: Loi 2003-1311 2003-12-30 art. 19 2° Finances pour 2004 JORF 31 décembre
+        2003
+values:
+  1996-04-01:
+    value: 15
+  1998-01-01:
+    value: 15
+  1998-09-01:
+    value: 30
+  1998-11-25:
+    value: 30
+  1999-01-01:
+    value: 30
+  2000-01-01:
+    value: 30
+  2001-06-30:
+    value: 30
+  2004-01-01:
+    value: null

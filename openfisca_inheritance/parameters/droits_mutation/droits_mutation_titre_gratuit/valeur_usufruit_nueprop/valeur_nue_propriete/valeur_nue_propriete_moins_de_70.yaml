@@ -1,0 +1,15 @@
+description: Moins de 70 ans révolus
+metadata:
+  reference:
+    0001-01-01:
+      title: art.762 du CGI ; modifié par Loi - art. 28 JORF 31 décembre 2003 ; modifié
+        par Loi 2003-1311 2003-12-30 art. 19 1° Finances pour 2004 JORF 31 décembre
+        2003
+    2004-01-01:
+      href: null
+      title: art.669 du CGI
+values:
+  0001-01-01:
+    value: 80
+  2004-01-01:
+    value: null

@@ -1,0 +1,20 @@
+description: Taux marginal de la première tranche
+metadata:
+  reference:
+    1999-11-16:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=C404ECA4B1F5DDCD703223D1E4B6DB4B.tpdjo02v_3?cidTexte=JORFTEXT000000761717&idArticle=LEGIARTI000006284613&dateTexte=20011231&categorieLien=id#LEGIARTI000006284613
+      title: Loi n°99-944 du 15 novembre 1999 - art. 5 JORF 16 novembre 1999
+    2000-01-01:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=C404ECA4B1F5DDCD703223D1E4B6DB4B.tpdjo02v_3?cidTexte=JORFTEXT000000761717&idArticle=LEGIARTI000006284613&dateTexte=20011231&categorieLien=id#LEGIARTI000006284613
+      title: Loi n°99-944 du 15 novembre 1999 - art. 5 JORF 16 novembre 1999
+    2002-03-31:
+      href: http://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=6130E0110AE7F05D3EA27488FE702E39.tpdjo02v_3?cidTexte=JORFTEXT000000219672&idArticle=LEGIARTI000006716519&dateTexte=20070821&categorieLien=id#LEGIARTI000006716519
+      title: Ordonnance n°2000-916 du 19 septembre 2000 - art. 6 (V) JORF 22 septembre
+        2000
+values:
+  1999-11-16:
+    value: 40
+  2000-01-01:
+    value: 40
+  2002-03-31:
+    value: 40

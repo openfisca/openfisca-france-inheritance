@@ -16,15 +16,14 @@ Succession = build_entity(
     roles = [
         {
             'key': 'decede',
-            'plural': 'decedes',
             'label': 'Décédé',
             'max': 1,
             'doc': 'La personne décédé.'
             },
         {
             'key': 'epoux_survivant',
-            'plural': 'epoux_survivants',
             'label': 'Époux survivant',
+            'max': 1,
             'doc': "L'époux de la personne décédé."
             },
         {
@@ -44,15 +43,14 @@ Donation = build_entity(
     roles = [
         {
             'key': 'decede',
-            'plural': 'decedes',
             'label': 'Décédé',
             'max': 1,
             'doc': 'La personne décédé.'
             },
         {
             'key': 'epoux_survivant',
-            'plural': 'epoux_survivants',
             'label': 'Époux survivant',
+            'max': 1,
             'doc': "L'époux de la personne décédé."
             },
         {

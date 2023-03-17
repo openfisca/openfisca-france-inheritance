@@ -1,0 +1,38 @@
+description: Abattement conjoint pour les successions
+values:
+  1979-07-01:
+    value: 175000
+  1981-07-09:
+    value: 250000
+  1984-01-01:
+    value: 275000
+  1992-01-01:
+    value: 330000
+  1996-04-01:
+    value: 330000
+  1999-01-01:
+    value: 400000
+  2000-01-01:
+    value: 500000
+  2002-01-01:
+    value: 76000
+  2003-01-01:
+    value: 76000
+  2005-01-01:
+    value: 76000
+  2006-01-01:
+    value: 76000
+  2007-01-01:
+    value: 76000
+  # 2007-08-22:
+  #   value: inf
+  # 2008-01-01:
+  #   value: inf
+  # 2009-01-01:
+  #   value: inf
+  # 2010-01-01:
+  #   value: inf
+  # 2011-01-01:
+  #   value: inf
+  # 2012-08-17:
+  #   value: inf

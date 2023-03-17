@@ -1,0 +1,5 @@
+description: Seuil déclaratif de l'actif brut de succession
+metadata:
+  order:
+  - seuil_declaratif_ligne_directe
+  - seuil_declaratif_autres

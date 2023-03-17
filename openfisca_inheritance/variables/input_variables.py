@@ -1,127 +1,141 @@
-from datetime import date
 from openfisca_core.model_api import *
-from openfisca_core.columns import DateCol, EnumCol, float, IntCol, StrCol
-from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import reference_input_variable
 
-from .entities import Individus, Successions  # Donations
+from openfisca_inheritance.entities import Individu, Succession  # Donations
 
 
-ROLE_REPRESENTANT = Enum([
-    'décédé',  # 0 cas spécial
-    'enfant',  # 1
-    'époux',  # 2
-    'parent',  # 3
-    ])
-DECEDE = ROLE_REPRESENTANT[u'décédé']
-ENFANT = ROLE_REPRESENTANT[u'enfant']
-EPOUX = ROLE_REPRESENTANT[u'époux']
-PARENT = ROLE_REPRESENTANT[u'parent']
 
-QUISUCC = Enum([
-    'decede',
-    'succedant',
-    ])
 
+class TypesRoleRepresentant(Enum):
+    __order__ = 'decede enfant epoux parent'  # Needed to preserve the enum order in Python 2
+    decede = "Personne décédée"
+    enfant = "Enfatn"
+    epoux = "Époux"
+    parent = "Parent"
+
+class TypesQUISUCC(Enum):
+    __order__ = 'decede succedant'  # Needed to preserve the enum order in Python 2
+    decede = "Personne décédée"
+    succedant = "Succédant"
 
 #class actif_de_communaute(Variable):
-#    value_type = float,
-#    entity = Successions,
-#    label = "Actif de communauté",
+#    value_type = float
+#    entity = Succession
+#    label = "Actif de communauté"
 #
 #class passif_de_communaute(Variable):
-#    value_type = float,
-#    entity = Successions,
-#    label = "Passif de communauté",
+#    value_type = float
+#    entity = Succession
+#    label = "Passif de communauté"
 #
 class actif_de_communaute(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Actif de Communauté",
+    value_type = float
+    entity = Succession
+    label = "Actif de Communauté"
+    definition_period = ETERNITY
 
 class actif_propre(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Actif propre",
+    value_type = float
+    entity = Succession
+    label = "Actif propre"
+    definition_period = ETERNITY
 
 class assurance_vie(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Assurance Vie",
+    value_type = float
+    entity = Succession
+    label = "Assurance Vie"
+    definition_period = ETERNITY
 
 class date_deces(Variable):
-    value_type = DateCol(default = date(1, 1, 1)),
-    entity = Individus,
-    label = "Date du décès",
+    value_type = date
+    entity = Individu
+    label = "Date du décès"
+    definition_period = ETERNITY
 
 # class date(Variable):
-#     value_type = IntCol,
-#     entity = Donations,
-#     label = "Année de la donation",
+#     value_type = int
+#     entity = Donations
+#     label = "Année de la donation"
+#     definition_period = ETERNITY
 #
 # class don(Variable):
-#     value_type = float,
-#     entity = Donations,
-#     label = "Don",
-#
+#     value_type = float
+#     entity = Donations
+#     label = "Don"
+#     definition_period = ETERNITY
+
 class id(Variable):
-    value_type = StrCol,
-    entity = Individus,
-    label = "Identifiant de l'individu",
+    value_type = str
+    entity = Individu
+    label = "Identifiant de l'individu"
+    definition_period = ETERNITY
 
 class id_represente(Variable):
-    value_type = StrCol,
-    entity = Individus,
-    label = "Identifiant de l'individu représenté par cet individu",
+    value_type = str
+    entity = Individu
+    label = "Identifiant de l'individu représenté par cet individu"
+    definition_period = ETERNITY
 
 class iddon(Variable):
-    value_type = IntCol,
-    entity = Individus,
-    label = "Donation auquel appartient l'individu",
+    value_type = int
+    entity = Individu
+    label = "Donation auquel appartient l'individu"
+    definition_period = ETERNITY
 
 class idsucc(Variable):
-    value_type = IntCol,
-    entity = Individus,
-    label = "Succession auquel appartient l'individu",
+    value_type = int
+    entity = Individu
+    label = "Succession auquel appartient l'individu"
+    definition_period = ETERNITY
 
 class index_represente(Variable):
-    value_type = IntCol,
-    entity = Individus,
-    label = "Index de l'individu représenté par cet individu",
+    value_type = int
+    entity = Individu
+    label = "Index de l'individu représenté par cet individu"
+    definition_period = ETERNITY
 
 class part_epoux(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Part epoux",
+    value_type = float
+    entity = Succession
+    label = "Part epoux"
+    definition_period = ETERNITY
 
 class passif_de_communaute(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Passif de Communauté",
+    value_type = float
+    entity = Succession
+    label = "Passif de Communauté"
+    definition_period = ETERNITY
 
 class passif_propre(Variable):
-    value_type = float,
-    entity = Successions,
-    label = "Passif propre",
+    value_type = float
+    entity = Succession
+    label = "Passif propre"
+    definition_period = ETERNITY
 
 class quisucc(Variable):
-    value_type = EnumCol(QUISUCC),
-    entity = Individus,
-    label = "Role de l'individu dans la succession",
+    value_type = Enum
+    possible_values = TypesQUISUCC
+    default_value = TypesQUISUCC.decede
+    entity = Individu
+    label = "Role de l'individu dans la succession"
+    definition_period = ETERNITY
 
 # class quidon(Variable):
-#     value_type = EnumCol(QUIDON),
-#     entity = Individus,
-#     label = "Role de l'individu dans la donation",
+#     value_type = Enum
+#     possible_values = TypesQUIDON
+#     default_value = TypesQUIDON.donateur
+#     entity = Individu
+#     label = "Role de l'individu dans la donation"
 #
 class role_representant(Variable):
-    value_type = EnumCol(ROLE_REPRESENTANT),
-    entity = Individus,
-    label = "Rôle de l'individu par rapport au représenté",
-
+    value_type = Enum
+    possible_values = TypesRoleRepresentant
+    default_value = TypesRoleRepresentant.decede
+    entity = Individu
+    label = "Rôle de l'individu par rapport au représenté"
+    definition_period = ETERNITY
 
 #class id(Variable):
-#    value_type = StrCol,
-#    entity = Individus,
-#    label = "Identifiant de l'individu",
-#
+#    value_type = str
+#    entity = Individu
+#    label = "Identifiant de l'individu"
+#    definition_period = ETERNITY

@@ -1,0 +1,12 @@
+description: Abattements au titre des droits de mutation à titre gratuit
+metadata:
+  order:
+  - abattement_conjoint
+  - abattement_pacs
+  - abattement_enfants
+  - abattement_heritiers_succession
+  - abattement_petits_enfants_donation
+  - abattement_adelphite
+  - abattement_neveuxnieces
+  - abattement_arr_petits_enfants_donation
+  - abattement_autre_succession
