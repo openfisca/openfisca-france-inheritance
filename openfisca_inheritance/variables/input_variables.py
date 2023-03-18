@@ -12,7 +12,7 @@ class TypesRoleRepresentant(Enum):
     epoux = "Époux"
     parent = "Parent"
 
-class TypesQUISUCC(Enum):
+class TypesRoleSuccession(Enum):
     __order__ = 'decede succedant'  # Needed to preserve the enum order in Python 2
     decede = "Personne décédée"
     succedant = "Succédant"
@@ -111,10 +111,10 @@ class passif_propre(Variable):
     label = "Passif propre"
     definition_period = ETERNITY
 
-class quisucc(Variable):
+class role_succession(Variable):
     value_type = Enum
-    possible_values = TypesQUISUCC
-    default_value = TypesQUISUCC.decede
+    possible_values = TypesRoleSuccession
+    default_value = TypesRoleSuccession.succedant
     entity = Individu
     label = "Role de l'individu dans la succession"
     definition_period = ETERNITY

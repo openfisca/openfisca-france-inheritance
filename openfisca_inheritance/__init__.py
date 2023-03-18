@@ -9,6 +9,10 @@ from openfisca_inheritance.entities import entities
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
+def build_baremes(parameters)
+
+
+
 class CountryTaxBenefitSystem(TaxBenefitSystem):
     """French inheritance tax benefit system."""
 
@@ -17,3 +21,6 @@ class CountryTaxBenefitSystem(TaxBenefitSystem):
         parameters = os.path.join(COUNTRY_DIR, 'parameters')
         self.load_parameters(parameters)
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'variables'))
+
+
+        build_baremes(self.parameters)

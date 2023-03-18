@@ -124,15 +124,14 @@ class droits_sur_succ(Variable):
 
 
 class is_enfant(Variable):
-    value_type = float
+    value_type = bool
     entity = Individu
     label = "Est un enfant"
     definition_period = ETERNITY
 
-    def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        quisucc = succession('quisucc', period)
-        return quisucc >= 100
+    def formula(individu, period, parameters):
+        role_succession = individu('role_succession', period)
+        return role_succession == "succedant"
 
 
 class is_enfant_donataire(Variable):
@@ -154,9 +153,7 @@ class nombre_enfants(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        is_enfant_holder = succession('is_enfant', period)
-        return self.sum_by_entity(is_enfant_holder)
+        return succession.sum(succession.members('is_enfant', period))
 
 
 # # class part_taxable(Variable):
@@ -232,12 +229,12 @@ class droits(Variable):
     label = "Droits sur parts"
     definition_period = ETERNITY
 
-    def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        part_taxable_holder = succession('part_taxable', period)
-        is_enfant = succession('is_enfant', period)
-        bareme = parameters(period).succession.ligne_directe.bareme
-        part_taxable = self.cast_from_entity_to_roles(part_taxable_holder, entity = "succession") * is_enfant
+    def formula(individu, period, parameters):
+        part_taxable = individu('part_taxable', period)
+        is_enfant = individu('is_enfant', period)
+        dmtg = parameters(period).droits_mutation.droits_mutation_titre_gratuit
+        bareme = dmtg.succession.bareme_ligne_directe
+        part_taxable = self.cast_from_entity_to_roles(part_taxable, entity = "succession") * is_enfant
         droits = bareme.calc(part_taxable)
         # print bareme
         return droits
