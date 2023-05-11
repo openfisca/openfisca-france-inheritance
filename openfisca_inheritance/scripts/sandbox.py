@@ -52,7 +52,7 @@ print 'nombre_enfants', simulation.calculate("nombre_enfants")
 print 'part_taxable', simulation.calculate("part_taxable")
 print 'droits', simulation.calculate("droits")
 #print 'taux_sur_part_recue', simulation.calculate("taux_sur_part_recue")
-#print 'droits_sur_succ', simulation.calculate("droits_sur_succ")
+#print 'droits_sur_succession', simulation.calculate("droits_sur_succession")
 #print 'taux_sur_transmis', simulation.calculate("taux_sur_transmis")
 
 #scenario_donation = tax_benefit_system.new_scenario()

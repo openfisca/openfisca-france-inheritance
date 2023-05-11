@@ -13,7 +13,6 @@ class actif_imposable(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
         part_epoux = succession('part_epoux', period)
         actif_de_communaute = succession('actif_de_communaute', period)
         passif_de_communaute = succession('passif_de_communaute', period)
@@ -38,7 +37,6 @@ class actif_transmis(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period.start.offset('first-of', 'year').period('year')
         # part_epoux = succession('part_epoux', period)
         actif_de_communaute = succession('actif_de_communaute', period)
         passif_de_communaute = succession('passif_de_communaute', period)
@@ -104,23 +102,20 @@ class degre_parente_civil(Variable):
 # #    def function(self, actif_de_communaute, passif_de_communaute, actif_propre, passif_propre, assurance_vie):
 # #        return (actif_de_communaute - passif_de_communaute) / 2 + actif_propre - passif_propre - assurance_vie
 #     def formula(succession, period, parameters):
-#         period = period.start.offset('first-of', 'year').period('year')
+#
 #         don = succession('don', period)
 #         nombre_enfants_donataires = succession('nombre_enfants_donataires', period)
 #         return don / nombre_enfants_donataires
 
 
-class droits_sur_succ(Variable):
+class droits_sur_succession(Variable):
     value_type = float
     entity = Succession
     label = "Droits sur succession"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        droits = succession('droits', period)
-        droits_sur_succ = self.sum_by_entity(droits)
-        return droits_sur_succ
+        return succession.sum(succession.members('droits', period))
 
 
 class is_enfant(Variable):
@@ -141,7 +136,6 @@ class is_enfant_donataire(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
         quidon = succession('quidon', period)
         return quidon >= 100
 
@@ -167,9 +161,6 @@ class nombre_enfants(Variable):
 #        part_taxable = np.max(actif_imposable / nombre_enfants - 100000, 0)
 #        return part_taxable
 #
-#    def get_output_period(self, period):
-#        return period.start.offset('first-of', 'year').period('year')
-
 
 # # class nombre_enfants_donataires(Variable):
 #     value_type = float
@@ -177,7 +168,7 @@ class nombre_enfants(Variable):
 #     label = "Nombre d'enfants donataires"
 #
 #     def formula(succession, period, parameters):
-#         period = period.start.offset('first-of', 'year').period('year')
+#
 #         is_enfant_donataire_holder = succession('is_enfant_donataire', period)
 #         return self.sum_by_entity(is_enfant_donataire_holder)
 
@@ -189,7 +180,6 @@ class part_recue(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
         return actif_imposable / nombre_enfants
@@ -198,11 +188,10 @@ class part_recue(Variable):
 class part_taxable(Variable):
     value_type = float
     entity = Succession
-    label = "Nombre d'enfants"
+    label = "Part taxable"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
         abattement_par_part = parameters(period).succession.ligne_directe.abattement
@@ -215,11 +204,10 @@ class taux_sur_part_recue(Variable):
     label = "Taux d'imposition sur la part recue"
     definition_period = ETERNITY
 
-    def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        droits = succession('droits', period)
-        part_recue_holder = succession('part_recue', period)
-        taux_sur_part_recue = droits / self.cast_from_entity_to_roles(part_recue_holder)
+    def formula(indvidu, period, parameters):
+        droits = indvidu('droits', period)
+        part_recue = indvidu('part_recue', period)
+        taux_sur_part_recue = droits / Individu.succession("part_recue", period)
         return taux_sur_part_recue
 
 
@@ -230,28 +218,26 @@ class droits(Variable):
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
-        part_taxable = individu('part_taxable', period)
+        part_taxable = individu.succession('part_taxable', period)
         is_enfant = individu('is_enfant', period)
         dmtg = parameters(period).droits_mutation.droits_mutation_titre_gratuit
         bareme = dmtg.succession.bareme_ligne_directe
-        part_taxable = self.cast_from_entity_to_roles(part_taxable, entity = "succession") * is_enfant
         droits = bareme.calc(part_taxable)
         # print bareme
         return droits
 
 
-class taux_sur_succ(Variable):
+class taux_sur_succession(Variable):
     value_type = float
     entity = Succession
     label = "Taux d'imposition sur la succession"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        period = period.start.offset('first-of', 'year').period('year')
-        droits_sur_succ = succession('droits_sur_succ', period)
+        droits_sur_succession = succession('droits_sur_succession', period)
         actif_imposable = succession('actif_imposable', period)
-        taux_sur_succ = droits_sur_succ / actif_imposable
-        return taux_sur_succ
+        taux_sur_succession = droits_sur_succession / actif_imposable
+        return taux_sur_succession
 
 
 class taux_sur_transmis(Variable):
@@ -261,10 +247,9 @@ class taux_sur_transmis(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        # droits = succession('droits', period)
-        droits_sur_succ = succession('droits_sur_succ', period)
+        droits_sur_succession = succession('droits_sur_succession', period)
         actif_transmis = succession('actif_transmis', period)
         # assurance_vie = succession('assurance_vie', period)
 
-        taux_sur_transmis = droits_sur_succ / actif_transmis
+        taux_sur_transmis = droits_sur_succession / actif_transmis
         return taux_sur_transmis

@@ -9,7 +9,7 @@ from openfisca_inheritance.entities import entities
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def build_baremes(parameters)
+# def build_baremes(parameters)
 
 
 
@@ -23,4 +23,4 @@ class CountryTaxBenefitSystem(TaxBenefitSystem):
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'variables'))
 
 
-        build_baremes(self.parameters)
+        # build_baremes(self.parameters)
