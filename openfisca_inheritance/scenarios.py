@@ -4,7 +4,7 @@ import numpy as np
 
 from openfisca_core import periods, simulations
 
-from openfisca_inheritance.input_variables import ROLE_REPRESENTANT
+from openfisca_inheritance.individu import ROLE_REPRESENTANT
 
 log = logging.getLogger(__name__)
 N_ = lambda message: message
