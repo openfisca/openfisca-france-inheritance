@@ -3,30 +3,19 @@ from openfisca_core.model_api import *
 from openfisca_inheritance.entities import Individu, Succession  # Donations
 
 
-
-
 class TypesRoleRepresentant(Enum):
     __order__ = 'decede enfant epoux parent'  # Needed to preserve the enum order in Python 2
     decede = "Personne décédée"
-    enfant = "Enfatn"
+    enfant = "Enfant"
     epoux = "Époux"
     parent = "Parent"
+
 
 class TypesRoleSuccession(Enum):
     __order__ = 'decede succedant'  # Needed to preserve the enum order in Python 2
     decede = "Personne décédée"
     succedant = "Succédant"
 
-#class actif_de_communaute(Variable):
-#    value_type = float
-#    entity = Succession
-#    label = "Actif de communauté"
-#
-#class passif_de_communaute(Variable):
-#    value_type = float
-#    entity = Succession
-#    label = "Passif de communauté"
-#
 class actif_de_communaute(Variable):
     value_type = float
     entity = Succession
@@ -126,6 +115,7 @@ class role_succession(Variable):
 #     entity = Individu
 #     label = "Role de l'individu dans la donation"
 #
+
 class role_representant(Variable):
     value_type = Enum
     possible_values = TypesRoleRepresentant

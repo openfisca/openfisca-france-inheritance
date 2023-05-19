@@ -3,6 +3,7 @@ from numpy import empty, maximum as max_
 
 from openfisca_core.model_api import *
 from openfisca_inheritance.entities import Individu, Succession  # Donations
+from openfisca_inheritance.variables.input_variables import TypesRoleRepresentant, TypesRoleSuccession
 # from openfisca_inheritance.variables.input_variables import DECEDE, ENFANT, EPOUX, PARENT
 
 
@@ -126,7 +127,8 @@ class is_enfant(Variable):
 
     def formula(individu, period, parameters):
         role_succession = individu('role_succession', period)
-        return role_succession == "succedant"
+        role_representant = individu('role_representant', period)
+        return (role_succession == TypesRoleSuccession.succedant) * (role_representant == TypesRoleRepresentant.enfant)
 
 
 class is_enfant_donataire(Variable):
