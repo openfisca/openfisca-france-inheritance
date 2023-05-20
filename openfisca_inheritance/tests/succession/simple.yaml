@@ -1,0 +1,30 @@
+- name: Succession homme marié avec 3 enfants
+  description: test
+  period: 2014
+  input:
+    individus:
+      papa:
+        date_deces: 2014-01-01
+      maman:
+        role_succession: succedant
+      riri:
+        role_succession: succedant
+        role_representant: enfant
+      fifi:
+        role_succession: succedant
+        role_representant: enfant
+      loulou:
+        role_succession: succedant
+        role_representant: enfant
+    successions:
+      succession_0:
+        decede: papa
+        epoux_survivant: maman
+        enfants_survivants: ["riri", "fifi", "loulou"]
+        actif_propre: 1000000
+        part_epoux: 0.3
+  output:
+    actif_imposable: 700_000
+    role_succession: ["succedant", "succedant", "succedant", "succedant", "succedant"]
+    is_enfant: [False, False, True, True, True]
+    nombre_enfants: 3
