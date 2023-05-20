@@ -1,6 +1,6 @@
 from openfisca_core.model_api import *
 
-from openfisca_inheritance.entities import Individu
+from openfisca_inheritance.entities import Donation, Individu, Succession
 
 
 class TypesRoleRepresentant(Enum):
@@ -9,12 +9,6 @@ class TypesRoleRepresentant(Enum):
     enfant = "Enfant"
     epoux = "Époux"
     parent = "Parent"
-
-
-class TypesRoleSuccession(Enum):
-    __order__ = 'decede succedant'  # Needed to preserve the enum order in Python 2
-    decede = "Personne décédée"
-    succedant = "Succédant"
 
 
 class date_deces(Variable):
@@ -124,9 +118,7 @@ class is_enfant(Variable):
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
-        role_succession = individu('role_succession', period)
-        role_representant = individu('role_representant', period)
-        return (role_succession == TypesRoleSuccession.succedant) * (role_representant == TypesRoleRepresentant.enfant)
+        return individu.has_role(Succession.ENFANT_SURVIVANT)
 
 
 class is_enfant_donataire(Variable):
@@ -136,17 +128,7 @@ class is_enfant_donataire(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        quidon = succession('quidon', period)
-        return quidon >= 100
-
-
-class role_succession(Variable):
-    value_type = Enum
-    possible_values = TypesRoleSuccession
-    default_value = TypesRoleSuccession.succedant
-    entity = Individu
-    label = "Role de l'individu dans la succession"
-    definition_period = ETERNITY
+        return individu.has_role(Donation.ENFANT_SURVIVANT)
 
 # class quidon(Variable):
 #     value_type = Enum

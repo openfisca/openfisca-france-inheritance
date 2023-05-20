@@ -6,16 +6,13 @@
       papa:
         date_deces: 2014-01-01
       maman:
-        role_succession: succedant
+        date_deces: 9999-01-01
       riri:
-        role_succession: succedant
-        role_representant: enfant
+        date_deces: 9999-01-01
       fifi:
-        role_succession: succedant
-        role_representant: enfant
+        date_deces: 9999-01-01
       loulou:
-        role_succession: succedant
-        role_representant: enfant
+        date_deces: 9999-01-01
     successions:
       succession_0:
         decede: papa
@@ -25,6 +22,5 @@
         part_epoux: 0.3
   output:
     actif_imposable: 700_000
-    role_succession: ["succedant", "succedant", "succedant", "succedant", "succedant"]
     is_enfant: [False, False, True, True, True]
     nombre_enfants: 3
