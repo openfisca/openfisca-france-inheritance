@@ -18,7 +18,7 @@
         decede: papa
         epoux_survivant: maman
         enfants_survivants: ["riri", "fifi", "loulou"]
-        actif_propre: 1000000
+        actif_propre: 1_000_000
         part_epoux: 0.3
   output:
     actif_imposable: 700_000

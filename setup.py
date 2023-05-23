@@ -32,7 +32,7 @@ setup(
     url = 'https://github.com/openfisca/openfisca-inheritance',
 
     install_requires = [
-        'OpenFisca-Core >=35.8.0,<36.0',
+        'OpenFisca-Core @ git+https://github.com/openfisca/openfisca-core.git@version_leap',
         ],
     packages = find_packages(),
     zip_safe = False,
