@@ -15,8 +15,8 @@
       # date_deces: 9999-01-01
       #frere:
       #  date_deces: 9999-01-01
-    successions:
-      succession_0:
+    donation:
+      donation_0:
         decede: papa, maman
         collateral: frere
         #epoux_survivant: maman
