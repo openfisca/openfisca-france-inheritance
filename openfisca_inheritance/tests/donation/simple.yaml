@@ -18,10 +18,11 @@
     successions:
       succession_0:
         decede: papa, maman
+        collateral: frere
         #epoux_survivant: maman
         #enfants_survivants: ["riri", "fifi", "loulou"]
         actif_propre: 150_000
-        part_adelphite: 0.45
+        part_collateral: 0.45
   output:
     actif_imposable: 57887.60
     #is_enfant: [False, False, True, True, True]
