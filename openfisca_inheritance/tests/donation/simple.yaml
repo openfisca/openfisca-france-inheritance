@@ -3,27 +3,16 @@
   period: 2014
   input:
     individus:
-      papa:
+      celibataire:
         date_deces: 2014-01-01
-      maman:
-        date_deces: 2014-01-01
-      frere :
+      frere:
         date_deces: 9999-01-01
-      #riri:
-      # date_deces: 9999-01-01
-      #fifi:
-      # date_deces: 9999-01-01
-      #frere:
-      #  date_deces: 9999-01-01
-    donation:
-      donation_0:
-        decede: papa, maman
-        collateral: frere
-        #epoux_survivant: maman
-        #enfants_survivants: ["riri", "fifi", "loulou"]
-        actif_propre: 150_000
-        part_collateral: 0.45
+    successions:
+      succession_0:
+        decede: celibataire
+        collateraux: [frere]
+        part_taxable: 150_000
+        part_collateral: 0.35
+        abattement_par_part: 15932
   output:
     actif_imposable: 57887.60
-    #is_enfant: [False, False, True, True, True]
-    #nombre_enfants: 3

@@ -4,11 +4,12 @@ from openfisca_inheritance.entities import Donation, Individu, Succession
 
 
 class TypesRoleRepresentant(Enum):
-    __order__ = 'decede enfant epoux parent'  # Needed to preserve the enum order in Python 2
+    __order__ = 'decede enfant epoux parent adelphite'  # Needed to preserve the enum order in Python 2
     decede = "Personne décédée"
     enfant = "Enfant"
     epoux = "Époux"
     parent = "Parent"
+    adelphite = "Frères et Soeurs"
 
 
 class date_deces(Variable):

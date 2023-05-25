@@ -20,7 +20,9 @@
         enfants_survivants: ["riri", "fifi", "loulou"]
         actif_propre: 1_000_000
         part_epoux: 0.3
+
   output:
     actif_imposable: 700_000
     is_enfant: [False, False, True, True, True]
     nombre_enfants: 3
+    actif_transmis: 1_000_000
