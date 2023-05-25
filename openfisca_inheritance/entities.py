@@ -32,6 +32,12 @@ Succession = build_entity(
             'label': 'Enfant survivant',
             'doc': "Les enfants vivants au décès de leur parent décédé."
             },
+        {
+            'key': 'collateral',
+            'plural': 'collateraux',
+            'label': 'Collatéral',
+            'doc': "Les collatéraux du décédé."
+            }
         ]
     )
 
