@@ -1,0 +1,5 @@
+description: Taux entre parents au-delà du 4è degré et entre personnes non-parentes
+metadata:
+  order:
+  - taux_marginal_non_parents_donation
+  - taux_marginal_non_parents_succession

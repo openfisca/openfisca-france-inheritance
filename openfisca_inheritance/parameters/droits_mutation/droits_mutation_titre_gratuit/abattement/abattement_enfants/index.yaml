@@ -1,0 +1,10 @@
+description: Abattements sur la part de chacun des enfants
+metadata:
+  documentation_start: true
+  short_label: Enfants
+  order:
+  - abattement_enfants_donation
+  - abattement_enfants_succession
+documentation: |-
+  On se réfère à l'article 779.I, les dispositions sont communes aux successions et aux donations, l'abattement pour les enfants régit depuis 1979.
+  Article 779.I: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000026292566/2013-01-01

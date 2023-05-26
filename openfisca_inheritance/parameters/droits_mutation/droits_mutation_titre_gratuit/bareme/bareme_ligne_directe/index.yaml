@@ -1,0 +1,14 @@
+description: Barème applicable aux descendants en ligne directe
+metadata:
+  documentation_start: true
+  short_label: Descendants en ligne directe
+  order:
+  - seuils_tranche_ligne_directe
+  - taux_marginal_ligne_directe
+documentation: |-
+  Les barèmes applicables aux donations en ligne directe sont ceux des successions en ligne directe.
+  Les droits de succession (qui sont aussi ceux de donation en ligne directe) sont calculés en appliquant des taux marginaux par tranche à la part nette taxable reçue par chaque bénéficiaire, diminuée le cas échéant d’un abattement. On retrouve ces taux à l’article 777 du Code général des impôts.
+  Tableau I - Article 777: https://www.legifrance.gouv.fr/codes/id/LEGIARTI000030061736/2023-04-21/?isSuggest=true, création de l'article, 1979/07/01
+  La loi n°81-734 du 3 août 1981 - art. 4 (P) JORF 4 AOUT 1981, n'est pas incluse au niveau des valeurs car elle n'apporte pas de changement.
+  La loi n°2008-1425 du 27 décembre 2008 - art. 82 (Version 2 de 2008) n'apport pas de changement au niveau des valeurs des barèmes.
+  Le Décret n°2011-645 du 9 juin 2011 - art. 1 (Version 1 de 2011) apporte des changement au 2009/01/01 au niveau des seuils et la loi n°2011-900 du 29 juillet 2011 - art. 6 - art. 82 (Version 2 de 2011) apporte au 2012/01/01 des modifications au niveau des taux.

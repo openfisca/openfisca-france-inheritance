@@ -1,0 +1,5 @@
+description: Seuils inférieurs des tranches
+metadata:
+  order:
+  - seuils_conjoint_donation
+  - seuils_conjoint_succession

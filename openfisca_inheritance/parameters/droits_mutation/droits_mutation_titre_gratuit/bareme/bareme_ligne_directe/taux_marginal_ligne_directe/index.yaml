@@ -1,0 +1,6 @@
+description: Taux marginaux de chaque tranche tranches
+metadata:
+  order:
+  - taux_marginal_ligne_directe_donation
+  - taux_marginal_ligne_directe_succession
+documentation: Les taux du barème applicable aux successions (et aux donations en ligne directe) ont été portés par la loi de finances rectificative pour 2011 du 29 juillet 2011 de 35 à 40 % pour l’avant-dernière tranche et de 40 à 45 % pour la dernière tranche.

@@ -1,0 +1,5 @@
+description: Seuils inférieurs des tranches pour les frères et soeurs vivants ou représentés
+metadata:
+  order:
+  - seuils_adelphite_donation
+  - seuils_adelphite_succession

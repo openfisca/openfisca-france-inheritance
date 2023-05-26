@@ -1,0 +1,6 @@
+description: Taux marginaux d'imposition des assurances vie (en %)
+metadata:
+  documentation_start: true
+  order:
+  - taux_imposition_assurance_vie_t1
+  - taux_imposition_assurance_vie_t2

@@ -1,0 +1,8 @@
+description: Avant les 70ans du souscripteur
+metadata:
+  documentation_start: true
+  order:
+  - abattement_assurance_vie
+  - seuil_imposition_assurance_vie
+  - taux_imposition_assurance_vie
+documentation: Les primes versées avant le 13/10/1998, avant l'age de 70 ans du souscripteur et quelque soit l'année de souscription du contrat ne subissent pas de taxation. On se réfère à l'article 990.I du CGI pour les primes versées après le 13/10/1998.

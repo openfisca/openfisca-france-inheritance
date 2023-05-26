@@ -1,0 +1,5 @@
+description: Seuils inférieurs des tranches
+metadata:
+  order:
+  - seuils_tranche_ligne_directe_donation
+  - seuils_tranche_ligne_directe_succession

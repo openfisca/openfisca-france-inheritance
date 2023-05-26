@@ -1,0 +1,113 @@
+description: Abattement sur les assurances vie (succession)
+values:
+  1999-01-01:
+    value: 1000000
+  2002-01-01:
+    value: 152500
+  2004-01-01:
+    value: 152500
+  2006-01-01:
+    value: 152500
+  2007-08-22:
+    value: 152500
+  2010-01-01:
+    value: 152500
+  2010-04-30:
+    value: 152500
+  2011-07-31:
+    value: 152500
+  2014-01-01:
+    value: 152500
+  2014-12-30:
+    value: 152500
+  2015-08-08:
+    value: 152500
+  2016-01-01:
+    value: 152500
+  2018-01-01:
+    value: 152500
+  2020-01-01:
+    value: 152500
+  2022-01-01:
+    value: 152500
+  2023-03-10:
+    value: 152500
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: currency
+  reference:
+    1999-01-01:
+      title: Loi - art. 37 JORF 31 décembre 1998
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000209044
+    2002-01-01:
+    - title: Ordonnance n°2000-916 du 19 septembre 2000 - art. 6 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000219672
+    - title: Loi - art. 51 (V) JORF 29 décembre 2001
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000581002
+    2004-01-01:
+      title: Loi - art. 83 (V) JORF 31 décembre 2003
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000612133
+    2006-01-01:
+      title: Loi n°2005-1720 du 30 décembre 2005 - art. 60 () JORF 31 décembre 2005
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000813882
+    2007-08-22:
+      title: Loi n°2007-1223 du 21 août 2007 - art. 8 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000278649
+    2010-01-01:
+      title: LOI n°2009-1674 du 30 décembre 2009 - art. 72
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000021559075
+    2010-04-30:
+      title: Ordonnance n°2010-420 du 27 avril 2010 - art. 33
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000022165701
+    2011-07-31:
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 11 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024413775
+    2014-01-01:
+      title: LOI n° 2013-1279 du 29 décembre 2013 - art. 9 (M)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028400921
+    2014-12-30:
+      title: LOI n°2014-1655 du 29 décembre 2014 - art. 61
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000029990432
+    2015-08-08:
+      title: LOI n°2015-990 du 6 août 2015 - art. 145
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000030978561
+    2016-01-01:
+    - title: LOI n°2014-617 du 13 juin 2014 - art. 6
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000029095362
+    - title: LOI n°2014-1655 du 29 décembre 2014 - art. 61 et art. 89
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000029990432
+    - title: LOI n°2015-990 du 6 août 2015 - art. 145
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000030978561
+    2018-01-01:
+    - title: LOI n°2017-1837 du 30 décembre 2017 - art. 31 (V) et art.35
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000036339197
+    - title: LOI n° 2013-1279 du 29 décembre 2013 - art. 9 (M)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028400921
+    2020-01-01:
+    - title: Ordonnance n°2019-766 du 24 juillet 2019 - art. 3
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038811832
+    - title: LOI n° 2013-1279 du 29 décembre 2013 - art. 9 (M)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028400921
+    2022-01-01:
+      title: LOI n°2021-1900 du 30 décembre 2021 - art. 35 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044637640
+    2023-03-10:
+      title: LOI n°2023-171 du 9 mars 2023 - art. 3
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000047281777
+  official_journal_date:
+    1999-01-01: "1998-12-31"
+    2002-01-01: "2001-12-29"
+    2004-01-01: "2003-12-31"
+    2006-01-01: "2005-12-31"
+    2007-08-22: "2007-08-22"
+    2010-01-01: "2009-12-31"
+    2010-04-30: "2010-04-30"
+    2011-07-31: "2011-07-31"
+    2014-01-01: "2013-12-30"
+    2014-12-30: "2014-12-30"
+    2015-08-08: "2015-08-07"
+    2016-01-01: "2015-08-07"
+    2018-01-01: "2017-12-31"
+    2020-01-01: "2019-07-25"
+    2022-01-01: "2021-12-31"
+    2023-03-10: "2023-03-10"

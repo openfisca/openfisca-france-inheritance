@@ -1,0 +1,11 @@
+description: Successions
+metadata:
+  documentation_start: true
+  order:
+  - taux_marginal_ligne_directe_succession_t1
+  - taux_marginal_ligne_directe_succession_t2
+  - taux_marginal_ligne_directe_succession_t3
+  - taux_marginal_ligne_directe_succession_t4
+  - taux_marginal_ligne_directe_succession_t5
+  - taux_marginal_ligne_directe_succession_t6
+  - taux_marginal_ligne_directe_succession_t7
