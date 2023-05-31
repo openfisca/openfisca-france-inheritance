@@ -70,6 +70,16 @@ class assurance_vie(Variable):
     definition_period = ETERNITY
 
 
+class conjoint_survivant(Variable):
+    value_type = bool
+    entity = Succession
+    label = "Présence d'un conjoint survivant"
+    definition_period = ETERNITY
+
+    def formula(succession, period, parameters):
+        return succession.nb_persons(Succession.EPOUX_SURVIVANT)
+
+
 class droits_sur_succession(Variable):
     value_type = float
     entity = Succession
@@ -130,8 +140,34 @@ class part_taxable(Variable):
     def formula(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
-        abattement_par_part = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
-        return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
+
+        abattement = parameters(period).abattement
+        abattement_conjoint_survivant = abattement.abattement_conjoint.abattement_conjoint_succession
+        abattement_par_part_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
+        abattement_adelphite= parameters(period).abattement.abattement_adelphite.abattement_adelphite_succession
+
+        conjoint_survivant = succession('conjoint_survivant', period)
+        enfants = nombre_enfants > 0
+        adelphite = succession('adelphite', period)
+
+        part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
+        part_taxable_enfant = max_(actif_imposable / nombre_enfants - abattement_par_part_enfant, 0)
+        part_taxable_adelphite = max_(actif_imposable - abattement_adelphite, 0)
+
+        part_taxable = select(
+            [
+                conjoint_survivant,
+                enfants,
+                adelphite
+                ],
+            [
+                part_taxable_conjoint_survivant,
+                part_taxable_enfant,
+                part_taxable_adelphite
+                ]
+            )
+
+        return part_taxable
 
 
 class passif_de_communaute(Variable):

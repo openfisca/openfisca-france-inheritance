@@ -1,0 +1,21 @@
+- name: Madame Dumas - célibataire sans enfant. Parents décédés.1 frère.
+  description: test
+  period: 2014
+  input:
+    individus:
+      celibataire:
+        date_deces: 2014-01-01
+      frere:
+        date_deces: 9999-01-01
+    successions:
+      succession_0:
+        decede: celibataire
+        collateraux: frere
+        actif_propre: 150_000
+  output:
+    part_taxable: 134068
+
+
+
+  #notes:
+  #   cf exemple 2- https://www.gestion-patrimoine.finance/gestion-privee/actualite/comment-calculer-le-montant-des-droits-de-succession/
