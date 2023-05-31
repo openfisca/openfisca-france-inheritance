@@ -14,8 +14,8 @@
         decede: papa
         enfants_survivants: ["fifi", "loulou"]
         actif_propre: 300_000
-        part_taxable: 0.2
   output:
-    part_taxable: 8194.15
     is_enfant: [False, True, True]
     nombre_enfants: 2
+    part_taxable: 50_000
+    droits: 8_194.35

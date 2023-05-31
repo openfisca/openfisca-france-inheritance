@@ -130,7 +130,7 @@ class part_taxable(Variable):
     def formula(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
-        abattement_par_part = parameters(period).succession.ligne_directe.abattement
+        abattement_par_part = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
         return max_(actif_imposable / nombre_enfants - abattement_par_part, 0)
 
 

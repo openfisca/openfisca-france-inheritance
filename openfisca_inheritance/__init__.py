@@ -18,7 +18,7 @@ class CountryTaxBenefitSystem(TaxBenefitSystem):
 
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities)
-        parameters = os.path.join(COUNTRY_DIR, 'parameters')
+        parameters = os.path.join(COUNTRY_DIR, 'parameters', 'droits_mutation_titre_gratuit')
         self.load_parameters(parameters)
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'variables'))
 
