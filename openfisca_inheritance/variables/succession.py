@@ -99,6 +99,14 @@ class nombre_enfants(Variable):
     def formula(succession, period, parameters):
         return succession.sum(succession.members('is_enfant', period))
 
+class nombre_adelphite(Variable):
+    value_type = float
+    entity = Succession
+    label = "Nombre de frères et soeurs"
+    definition_period = ETERNITY
+
+    def formula(succession, period, parameters):
+        return succession.sum(succession.members('is_adelphite', period))
 
 class part_epoux(Variable):
     value_type = float
@@ -139,35 +147,36 @@ class part_taxable(Variable):
 
     def formula(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
-        nombre_enfants = succession('nombre_enfants', period)
+        #nombre_enfants = succession('nombre_enfants', period)
+        nombre_adelphite = succession('nombre_adelphite', period)
 
         abattement = parameters(period).abattement
         abattement_conjoint_survivant = abattement.abattement_conjoint.abattement_conjoint_succession
-        abattement_par_part_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
-        abattement_adelphite= parameters(period).abattement.abattement_adelphite.abattement_adelphite_succession
+        #abattement_part_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
+        abattement_adelphite= parameters(period).abattement.abattement_adelphite
 
         conjoint_survivant = succession('conjoint_survivant', period)
-        enfants = nombre_enfants > 0
-        adelphite = succession('adelphite', period)
+        #enfants = nombre_enfants > 0
+        adelphite = nombre_adelphite > 0
 
         part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
-        part_taxable_enfant = max_(actif_imposable / nombre_enfants - abattement_par_part_enfant, 0)
+        #part_taxable_enfant = max_(actif_imposable / enfants - abattement_part_enfant, 0)
         part_taxable_adelphite = max_(actif_imposable - abattement_adelphite, 0)
 
-        part_taxable = select(
+        return select(
             [
-                conjoint_survivant,
-                enfants,
-                adelphite
+                conjoint_survivant>0,
+                #enfants>0,
+                adelphite>0
                 ],
             [
                 part_taxable_conjoint_survivant,
-                part_taxable_enfant,
+                #part_taxable_enfant,
                 part_taxable_adelphite
-                ]
+                ],
             )
 
-        return part_taxable
+
 
 
 class passif_de_communaute(Variable):

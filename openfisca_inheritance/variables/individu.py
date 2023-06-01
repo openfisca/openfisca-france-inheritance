@@ -131,6 +131,14 @@ class is_enfant_donataire(Variable):
     def formula(succession, period, parameters):
         return individu.has_role(Donation.ENFANT_SURVIVANT)
 
+class is_adelphite(Variable):
+    value_type = bool
+    entity = Individu
+    label = "Est un enfant"
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Succession.COLLATERAL)
 # class quidon(Variable):
 #     value_type = Enum
 #     possible_values = TypesQUIDON
