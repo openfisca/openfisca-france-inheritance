@@ -160,7 +160,7 @@ class part_taxable(Variable):
         adelphite = nombre_adelphite > 0
 
         part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
-        #part_taxable_enfant = max_(actif_imposable / enfants - abattement_part_enfant, 0)
+        #part_taxable_enfant = max_(actif_imposable / nombre_enfants - abattement_part_enfant, 0)
         part_taxable_adelphite = max_(actif_imposable - abattement_adelphite, 0)
 
         return select(
