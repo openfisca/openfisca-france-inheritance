@@ -4,7 +4,7 @@
   input:
     individus:
       papa:
-        date_deces: 2014-01-01
+        date_deces: 2022-01-01
       maman:
         date_deces: 9999-01-01
     successions:

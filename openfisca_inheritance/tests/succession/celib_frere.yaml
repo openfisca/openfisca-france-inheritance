@@ -14,9 +14,8 @@
         actif_propre: 150_000
   output:
     part_taxable: 134068
-    is_adelphite: [True]
+    is_adelphite: [False,True]
     nombre_adelphite: 1
-    nombre_enfant: 0
 
 
   #notes:
