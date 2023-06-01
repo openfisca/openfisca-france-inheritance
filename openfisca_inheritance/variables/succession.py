@@ -152,7 +152,7 @@ class part_taxable(Variable):
 
         abattement = parameters(period).abattement
         abattement_conjoint_survivant = abattement.abattement_conjoint.abattement_conjoint_succession
-        abattement_part_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
+        abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
         abattement_adelphite= parameters(period).abattement.abattement_adelphite
 
         conjoint_survivant = succession('conjoint_survivant', period)
@@ -160,33 +160,18 @@ class part_taxable(Variable):
         adelphite = nombre_adelphite > 0
 
         part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
-        part_taxable_enfant = max_(actif_imposable / nombre_enfants - abattement_part_enfant, 0)
-        part_taxable_enfant_0 = max_(actif_imposable - abattement_part_enfant, 0)
+        part_taxable_enfant = max_(actif_imposable / (nombre_enfants + 1 * (nombre_enfants == 0)) - abattement_enfant, 0)
         part_taxable_adelphite = max_(actif_imposable - abattement_adelphite, 0)
 
-        if nombre_enfants > 0:
-            return select(
+        return select(
             [
-                conjoint_survivant>0,
-                enfants>0,
-                adelphite>0
+                conjoint_survivant > 0,
+                enfants > 0,
+                adelphite > 0
                 ],
             [
                 part_taxable_conjoint_survivant,
                 part_taxable_enfant,
-                part_taxable_adelphite
-                ],
-            )
-        else:
-            return select(
-            [
-                conjoint_survivant>0,
-                enfants>0,
-                adelphite>0
-                ],
-            [
-                part_taxable_conjoint_survivant,
-                part_taxable_enfant_0,
                 part_taxable_adelphite
                 ],
             )
