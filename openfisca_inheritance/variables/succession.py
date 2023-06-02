@@ -148,31 +148,31 @@ class part_taxable(Variable):
     def formula(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
-        nombre_adelphite = succession('nombre_adelphite', period)
+        nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
 
         abattement = parameters(period).abattement
         abattement_conjoint_survivant = abattement.abattement_conjoint.abattement_conjoint_succession
         abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
-        abattement_adelphite= parameters(period).abattement.abattement_adelphite
+        abattement_freres_soeurs= parameters(period).abattement.abattement_adelphite
 
         conjoint_survivant = succession('conjoint_survivant', period)
         enfants = nombre_enfants > 0
-        adelphite = nombre_adelphite > 0
+        freres_soeurs = nombre_freres_soeurs > 0
 
         part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
         part_taxable_enfant = max_(actif_imposable / (nombre_enfants + 1 * (nombre_enfants == 0)) - abattement_enfant, 0)
-        part_taxable_adelphite = max_(actif_imposable - abattement_adelphite, 0)
+        part_taxable_freres_soeurs = max_(actif_imposable - abattement_freres_soeurs, 0)
 
         return select(
             [
                 conjoint_survivant > 0,
                 enfants > 0,
-                adelphite > 0
+                freres_soeurs > 0
                 ],
             [
                 part_taxable_conjoint_survivant,
                 part_taxable_enfant,
-                part_taxable_adelphite
+                part_taxable_freres_soeurs
                 ],
             )
 
