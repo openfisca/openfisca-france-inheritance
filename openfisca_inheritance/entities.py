@@ -33,10 +33,10 @@ Succession = build_entity(
             'doc': "Les enfants vivants au décès de leur parent décédé."
             },
         {
-            'key': 'collateral',
-            'plural': 'collateraux',
-            'label': 'Collatéral',
-            'doc': "Les collatéraux du décédé."
+            'key': 'frere_soeur,
+            'plural': 'freres_soeurs',
+            'label': 'Frères et Soeurs',
+            'doc': "Les frères et soeurs vivants du décédé."
             }
         ]
     )
@@ -66,10 +66,10 @@ Donation = build_entity(
             'doc': "Les enfants vivants au décès de leur parent décédé."
             },
         {
-            'key': 'collateral',
-            'plural': 'collateraux',
-            'label': 'Collatéral',
-            'doc': "Les collatéraux du décédé."
+            'key': 'frere_soeur,
+            'plural': 'freres_soeurs',
+            'label': 'Frères et Soeurs',
+            'doc': "Les frères et soeurs vivants du décédé."
             },
         {
             'key': 'legatatire',
