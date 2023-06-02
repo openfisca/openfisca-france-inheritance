@@ -1,10 +1,10 @@
-description: Barème applicable au conjoint
+description: Barème applicable au époux
 metadata:
   documentation_start: true
-  short_label: Conjoint
+  short_label: Époux
   order:
-  - seuils_conjoint
-  - taux_marginal_conjoint
+  - seuils_epoux
+  - taux_marginal_epoux
 documentation: |-
   Depuis le 22 août 2007, le conjoint survivant et le partenaire lié par un pacte civil de solidarité (PACS) sont exonérés de droits de succession (CGI art. 796-0 bis).
   Le conjoint survivant bénéficiait jusqu’à cette date de seuils d’imposition plus avantageux que ceux de la succession en ligne directe, comme cela est toujours le cas pour les donations entre vifs.

@@ -2,7 +2,7 @@ description: Seuils et taux d'imposition au titre des droits de mutation à titr
 metadata:
   documentation_start: true
   order:
-  - bareme_conjoint
+  - bareme_epoux
   - bareme_pacs
   - bareme_ligne_directe
   - bareme_autres

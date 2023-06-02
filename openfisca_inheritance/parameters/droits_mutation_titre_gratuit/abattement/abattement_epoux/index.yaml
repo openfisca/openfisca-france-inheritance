@@ -3,8 +3,8 @@ metadata:
   documentation_start: true
   short_label: Conjoint
   order:
-  - abattement_conjoint_donation
-  - abattement_conjoint_succession
+  - abattement_epoux_donation
+  - abattement_epoux_succession
 documentation: |-
   On se réfère à l'article 779.I du CGI, les dispositions sont communes aux successions et aux donations, l'abattement pour les PACS régit de 1979 à 2007.
   Article 779.I: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000026292566/2013-01-01
