@@ -27,16 +27,40 @@ Succession = build_entity(
             'doc': "L'époux de la personne décédé."
             },
         {
+            'key': 'pacse',
+            'label': 'Partenaires liés par un PACS',
+            'max': 1,
+            'doc': "Le partenaire,lié par un PACS, de la personne décédé."
+            },
+        {
             'key': 'enfant_survivant',
-            'plural': 'enfants_survivants',
-            'label': 'Enfant survivant',
+            'label': 'Enfants survivants',
             'doc': "Les enfants vivants au décès de leur parent décédé."
             },
         {
-            'key': 'frere_soeur,
-            'plural': 'freres_soeurs',
+            'key': 'frere_soeur',
             'label': 'Frères et Soeurs',
             'doc': "Les frères et soeurs vivants du décédé."
+            }
+        {
+            'key': 'parent',
+            'label': 'Parents',
+            'doc': "Les parents vivants du décédé."
+            }
+        {
+            'key': 'grand-parent',
+            'label': 'Grands-Parents',
+            'doc': "Les grands-parents vivants du décédé."
+            }
+        {
+            'key': 'arrière_grand_parent',
+            'label': 'Arrières-Grands-Parents',
+            'doc': "Les arrières-grands-parents vivants du décédé."
+            }
+        {
+            'key': 'neveu_niece',
+            'label': 'Neveux et Nièces',
+            'doc': "Les neveux et nièces vivants du décédé."
             }
         ]
     )
@@ -60,22 +84,50 @@ Donation = build_entity(
             'doc': "L'époux de la personne décédé."
             },
         {
+            'key': 'pacse',
+            'label': 'Partenaires liés par un PACS',
+            'max': 1,
+            'doc': "Le partenaire,lié par un PACS, de la personne décédé."
+            },
+        {
             'key': 'enfant_survivant',
-            'plural': 'enfants_survivants',
-            'label': 'Enfant survivant',
+            'label': 'Enfants survivants',
             'doc': "Les enfants vivants au décès de leur parent décédé."
             },
         {
-            'key': 'frere_soeur,
-            'plural': 'freres_soeurs',
+            'key': 'frere_soeur',
             'label': 'Frères et Soeurs',
             'doc': "Les frères et soeurs vivants du décédé."
+            }
+        {
+            'key': 'parent',
+            'label': 'Parents',
+            'doc': "Les parents vivants du décédé."
+            }
+        {
+            'key': 'grand-parent',
+            'label': 'Grands-Parents',
+            'doc': "Les grands-parents vivants du décédé."
+            }
+        {
+            'key': 'arrière_grand_parent',
+            'label': 'Arrières-Grands-Parents',
+            'doc': "Les arrières-grands-parents vivants du décédé."
+            }
+        {
+            'key': 'neveu_niece',
+            'label': 'Neveux et Nièces',
+            'doc': "Les neveux et nièces vivants du décédé."
+            }
+        {
+            'key': 'petit_enfant_survivant',
+            'label': 'Petits-Enfants survivants',
+            'doc': "Les petits-enfants vivants au décès de leur parent décédé."
             },
         {
-            'key': 'legatatire',
-            'plural': 'legatatires',
-            'label': 'Légataire',
-            'doc': "Les légattaires du décédé."
+            'key': 'arriere_petit_enfant_survivant',
+            'label': 'Arrières-Petits-Enfants survivants',
+            'doc': "Les arrières-petits-enfants vivants au décès de leur parent décédé."
             },
         ]
     )
