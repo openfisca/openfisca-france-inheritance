@@ -99,14 +99,14 @@ class nombre_enfants(Variable):
     def formula(succession, period, parameters):
         return succession.sum(succession.members('is_enfant', period))
 
-class nombre_adelphite(Variable):
+class nombre_freres_soeurs(Variable):
     value_type = float
     entity = Succession
     label = "Nombre de frères et soeurs"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        return succession.sum(succession.members('is_adelphite', period))
+        return succession.sum(succession.members('is_freres_soeurs', period))
 
 class part_epoux(Variable):
     value_type = float
