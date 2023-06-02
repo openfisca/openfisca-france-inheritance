@@ -7,7 +7,7 @@ metadata:
   - abattement_enfants
   - abattement_heritiers_succession
   - abattement_petits_enfants_donation
-  - abattement_adelphite
+  - abattement_freres_soeurs
   - abattement_neveuxnieces
   - abattement_arr_petits_enfants_donation
   - abattement_autre_succession
