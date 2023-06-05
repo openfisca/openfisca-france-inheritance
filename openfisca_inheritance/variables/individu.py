@@ -139,6 +139,16 @@ class is_freres_soeurs(Variable):
 
     def formula(individu, period, parameters):
         return individu.has_role(Succession.FRERE_SOEUR)
+
+class is_autre(Variable):
+    value_type = bool
+    entity = Individu
+    label = "Est une personnes en dehors du cercle familiale (un tiers)"
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Succession.AUTRE)
+
 # class quidon(Variable):
 #     value_type = Enum
 #     possible_values = TypesQUIDON

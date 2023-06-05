@@ -1,0 +1,18 @@
+- name: patrimoine de 400 000 à un tiers en dehors du cercle familliale
+  description: article le monde exemple
+  period: 2014
+  input:
+    individus:
+      fifi:
+        date_deces: 2014-01-01
+      riri:
+        date_deces: 9999-01-01
+    successions:
+      succession_0:
+        decede: fifi
+        autre_survivant: riri
+        actif_propre: 400_000
+  output:
+    part_taxable: 240_000
+    is_autre: [False,True]
+    nombre_autre: 1

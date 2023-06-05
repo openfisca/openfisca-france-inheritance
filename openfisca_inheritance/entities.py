@@ -62,6 +62,11 @@ Succession = build_entity(
             'label': 'Neveux et Nièces',
             'doc': "Les neveux et nièces vivants du décédé."
             },
+        {
+            'key': 'autre_survivant',
+            'label': 'Tiers',
+            'doc': "Légation du patrimoine à un tiers hors du cercle familiale."
+            },
         ]
     )
 

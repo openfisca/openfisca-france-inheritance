@@ -18,4 +18,4 @@
     is_enfant: [False, True, True]
     nombre_enfants: 2
     part_taxable: 50_000
-    # droits: 8_194.35
+    droits_sur_succession: 8_194.35
