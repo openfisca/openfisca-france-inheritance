@@ -10,7 +10,7 @@
     successions:
       succession_0:
         decede: celibataire
-        collateraux: frere
+        freres_soeurs: frere
         actif_propre: 150_000
   output:
     part_taxable: 134068
