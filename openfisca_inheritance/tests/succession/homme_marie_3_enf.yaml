@@ -37,7 +37,7 @@
       succession_0:
         decede: papa
         epoux_survivant: maman
-        enfants_survivants: ["riri", "fifi", "loulou"]
+        enfant_survivant: ["riri", "fifi", "loulou"]
         actif_propre: 1_000_000
         part_epoux: 0.3
   output:

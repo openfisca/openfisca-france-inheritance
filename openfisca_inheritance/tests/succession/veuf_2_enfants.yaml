@@ -12,7 +12,7 @@
     successions:
       succession_0:
         decede: papa
-        enfants_survivants: ["fifi", "loulou"]
+        enfant_survivant: ["fifi", "loulou"]
         actif_propre: 300_000
   output:
     is_enfant: [False, True, True]
