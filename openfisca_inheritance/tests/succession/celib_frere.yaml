@@ -15,4 +15,4 @@
   output:
     part_taxable: 134068
     is_frere_soeur: [False,True]
-    nombre_frere_soeur: 1
+    nombre_freres_soeurs: 1

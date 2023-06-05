@@ -14,7 +14,7 @@
         actif_propre: 1_000_000
 
   output:
-    conjoint_survivant: 1
+    epoux_survivant: 1
     actif_imposable: 1_000_000
     part_taxable: 924_000
 

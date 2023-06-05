@@ -138,7 +138,7 @@ class is_freres_soeurs(Variable):
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
-        return individu.has_role(Succession.COLLATERAL)
+        return individu.has_role(Succession.FRERE_SOEUR)
 # class quidon(Variable):
 #     value_type = Enum
 #     possible_values = TypesQUIDON

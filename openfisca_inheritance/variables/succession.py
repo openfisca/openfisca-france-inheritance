@@ -70,10 +70,10 @@ class assurance_vie(Variable):
     definition_period = ETERNITY
 
 
-class conjoint_survivant(Variable):
+class epoux_survivant(Variable):
     value_type = bool
     entity = Succession
-    label = "Présence d'un conjoint survivant"
+    label = "Présence d'un époux survivant"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
@@ -151,26 +151,26 @@ class part_taxable(Variable):
         nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
 
         abattement = parameters(period).abattement
-        abattement_conjoint_survivant = abattement.abattement_conjoint.abattement_conjoint_succession
+        abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_succession
         abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
         abattement_freres_soeurs= parameters(period).abattement.abattement_adelphite
 
-        conjoint_survivant = succession('conjoint_survivant', period)
+        epoux_survivant = succession('epoux_survivant', period)
         enfants = nombre_enfants > 0
         freres_soeurs = nombre_freres_soeurs > 0
 
-        part_taxable_conjoint_survivant = max_(actif_imposable - abattement_conjoint_survivant, 0)
+        part_taxable_epoux_survivant = max_(actif_imposable - abattement_epoux_survivant, 0)
         part_taxable_enfant = max_(actif_imposable / (nombre_enfants + 1 * (nombre_enfants == 0)) - abattement_enfant, 0)
         part_taxable_freres_soeurs = max_(actif_imposable - abattement_freres_soeurs, 0)
 
         return select(
             [
-                conjoint_survivant > 0,
+                epoux_survivant > 0,
                 enfants > 0,
                 freres_soeurs > 0
                 ],
             [
-                part_taxable_conjoint_survivant,
+                part_taxable_epoux_survivant,
                 part_taxable_enfant,
                 part_taxable_freres_soeurs
                 ],
