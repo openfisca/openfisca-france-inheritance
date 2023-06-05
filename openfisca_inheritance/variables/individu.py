@@ -147,7 +147,7 @@ class is_autre(Variable):
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
-        return individu.has_role(Succession.AUTRE)
+        return individu.has_role(Succession.AUTRE_SURVIVANT)
 
 # class quidon(Variable):
 #     value_type = Enum
