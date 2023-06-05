@@ -153,7 +153,7 @@ class part_taxable(Variable):
         abattement = parameters(period).abattement
         abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_succession
         abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
-        abattement_freres_soeurs= parameters(period).abattement.abattement_adelphite
+        abattement_freres_soeurs= parameters(period).abattement.abattement_freres_soeurs
 
         epoux_survivant = succession('epoux_survivant', period)
         enfants = nombre_enfants > 0
