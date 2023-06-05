@@ -14,5 +14,5 @@
         actif_propre: 150_000
   output:
     part_taxable: 134068
-    is_frere_soeur: [False,True]
+    is_freres_soeurs: [False,True]
     nombre_freres_soeurs: 1
