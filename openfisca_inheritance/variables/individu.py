@@ -121,6 +121,14 @@ class is_enfant(Variable):
     def formula(individu, period, parameters):
         return individu.has_role(Succession.ENFANT_SURVIVANT)
 
+class is_enfant(Variable):
+    value_type = bool
+    entity = Individu
+    label = "Est un enfant"
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.ENFANT_SURVIVANT)
 
 class is_enfant_donataire(Variable):
     value_type = float
@@ -139,6 +147,15 @@ class is_freres_soeurs(Variable):
 
     def formula(individu, period, parameters):
         return individu.has_role(Succession.FRERE_SOEUR)
+
+class is_freres_soeurs(Variable):
+    value_type = bool
+    entity = Individu
+    label = "Est un enfant"
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.FRERE_SOEUR)
 
 class is_autre(Variable):
     value_type = bool

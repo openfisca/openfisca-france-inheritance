@@ -1,0 +1,47 @@
+- name: Succession homme marié sans enfants
+  description: test
+  period: 2022
+  input:
+    individus:
+      papa:
+        date_deces: 2022-01-01
+      maman:
+        date_deces: 9999-01-01
+    donations:
+      donation_0:
+        decede: papa
+        epoux_survivant: maman
+        actif_propre: 1_000_000
+
+  output:
+    epoux_survivant: 1
+    actif_imposable: 1_000_000
+    part_taxable: 924_000
+
+- name: Succession homme marié avec 3 enfants
+  description: exemple 1 de https://www.gestion-patrimoine.finance/gestion-privee/actualite/comment-calculer-le-montant-des-droits-de-succession/
+  period: 2014
+  input:
+    individus:
+      papa:
+        date_deces: 2014-01-01
+      maman:
+        date_deces: 9999-01-01
+      riri:
+        date_deces: 9999-01-01
+      fifi:
+        date_deces: 9999-01-01
+      loulou:
+        date_deces: 9999-01-01
+    donations:
+      donation_0:
+        decede: papa
+        epoux_survivant: maman
+        enfant_survivant: ["riri", "fifi", "loulou"]
+        actif_propre: 1_000_000
+        part_epoux: 0.3
+  output:
+    actif_imposable: 700_000
+    is_enfant: [False, False, True, True, True]
+    nombre_enfants: 3
+    actif_transmis: 1_000_000
