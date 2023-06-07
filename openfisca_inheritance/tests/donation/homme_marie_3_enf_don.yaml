@@ -4,16 +4,17 @@
   input:
     individus:
       papa:
-        date_deces: 2022-01-01
+        date_donation: 2022-01-01
       maman:
-        date_deces: 9999-01-01
+        date_donation: 9999-01-01
     donations:
       donation_0:
-        decede: papa
-        epoux_survivant_don: maman
+        donateur: papa
+        epoux_donataire: maman
         actif_propre_don: 1_000_000
   output:
-    epoux_survivant_don: 1
+    epoux_donataire: 1
+    actif_imposable_don: 1_000_000
     part_taxable_don: 919_276
 
 - name: Donation homme marié avec 3 enfants
@@ -22,23 +23,23 @@
   input:
     individus:
       papa:
-        date_deces: 2014-01-01
+        date_donation: 2014-01-01
       maman:
-        date_deces: 9999-01-01
+        date_donation: 9999-01-01
       riri:
-        date_deces: 9999-01-01
+        date_donation: 9999-01-01
       fifi:
-        date_deces: 9999-01-01
+        date_donation: 9999-01-01
       loulou:
-        date_deces: 9999-01-01
+        date_donation: 9999-01-01
     donations:
       donation_0:
-        decede: papa
-        epoux_survivant_don: maman
-        enfant_survivant: ["riri", "fifi", "loulou"]
+        donateur: papa
+        epoux_donataire: maman
+        enfant_donataire: ["riri", "fifi", "loulou"]
         actif_propre_don: 1_000_000
         part_epoux_don: 0.3
   output:
     actif_imposable_don: 700_000
-    is_enfant: [False, False, True, True, True]
-    nombre_enfants_don: 3
+    is_enfant_donataire: [False, False, True, True, True]
+    nombre_enfants_donataires: 3

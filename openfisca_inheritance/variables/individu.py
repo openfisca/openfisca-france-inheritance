@@ -6,6 +6,7 @@ from openfisca_inheritance.entities import Donation, Individu, Succession
 class TypesRoleRepresentant(Enum):
     __order__ = 'decede enfant epoux parent freres_soeurs'  # Needed to preserve the enum order in Python 2
     decede = "Personne décédée"
+    #donateur = "Personne donatrice"
     enfant = "Enfant"
     epoux = "Époux"
     parent = "Parent"
@@ -18,6 +19,11 @@ class date_deces(Variable):
     label = "Date du décès"
     definition_period = ETERNITY
 
+class date_donation(Variable):
+    value_type = date
+    entity = Individu
+    label = "Date de la donation"
+    definition_period = ETERNITY
 
 class degre_parente_civil(Variable):
     value_type = int
@@ -121,25 +127,16 @@ class is_enfant(Variable):
     def formula(individu, period, parameters):
         return individu.has_role(Succession.ENFANT_SURVIVANT)
 
-class is_enfant(Variable):
-    value_type = bool
-    entity = Individu
-    label = "Est un enfant"
-    definition_period = ETERNITY
-
-    def formula(individu, period, parameters):
-        return individu.has_role(Donation.ENFANT_SURVIVANT)
-
 class is_enfant_donataire(Variable):
     value_type = float
     entity = Individu
     label = "Est un enfant donataire"
     definition_period = ETERNITY
 
-    def formula(succession, period, parameters):
-        return individu.has_role(Donation.ENFANT_SURVIVANT)
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.ENFANT_DONATAIRE)
 
-class is_freres_soeurs(Variable):
+class is_frere_soeur(Variable):
     value_type = bool
     entity = Individu
     label = "Est un enfant"
@@ -148,14 +145,14 @@ class is_freres_soeurs(Variable):
     def formula(individu, period, parameters):
         return individu.has_role(Succession.FRERE_SOEUR)
 
-class is_freres_soeurs(Variable):
+class is_frere_soeur_donataire(Variable):
     value_type = bool
     entity = Individu
     label = "Est un enfant"
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
-        return individu.has_role(Donation.FRERE_SOEUR)
+        return individu.has_role(Donation.FRERE_SOEUR_DONATAIRE)
 
 class is_autre(Variable):
     value_type = bool

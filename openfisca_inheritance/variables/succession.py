@@ -111,7 +111,7 @@ class nombre_freres_soeurs(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        return succession.sum(succession.members('is_freres_soeurs', period))
+        return succession.sum(succession.members('is_frere_soeur', period))
 
 class nombre_autre(Variable):
     value_type = float

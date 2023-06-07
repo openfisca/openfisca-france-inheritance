@@ -79,37 +79,37 @@ class assurance_vie_don(Variable):
     label = "Assurance Vie"
     definition_period = ETERNITY
 
-class epoux_survivant_don(Variable):
+class epoux_donataire(Variable):
     value_type = bool
     entity = Donation
-    label = "Présence d'un époux survivant"
+    label = "Présence d'un époux donataire"
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
-        return donation.nb_persons(donation.EPOUX_SURVIVANT_DON)
+        return donation.nb_persons(Donation.EPOUX_DONATAIRE)
 
-class nombre_enfants_don(Variable):
+class nombre_enfants_donataires(Variable):
     value_type = float
     entity = Donation
-    label = "Nombre d'enfants"
+    label = "Nombre d'enfants donataires"
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
-        return donation.sum(donation.members('is_enfant', period))
+        return donation.sum(donation.members('is_enfant_donataire', period))
 
-class nombre_freres_soeurs_don(Variable):
+class nombre_freres_soeurs_donataires(Variable):
     value_type = float
     entity = Donation
-    label = "Nombre de frères et soeurs"
+    label = "Nombre de frères et soeurs donataires"
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
-        return donation.sum(donation.members('is_freres_soeurs', period))
+        return donation.sum(donation.members('is_frere_soeur_donataire', period))
 
 class part_epoux_don(Variable):
     value_type = float
     entity = Donation
-    label = "Part epoux"
+    label = "Part epoux donataire"
     definition_period = ETERNITY
 
 class part_taxable_don(Variable):
@@ -120,32 +120,32 @@ class part_taxable_don(Variable):
 
     def formula(donation, period, parameters):
         actif_imposable_don = donation('actif_imposable_don', period)
-        nombre_enfants_don = donation('nombre_enfants_don', period)
-        nombre_freres_soeurs_don = donation('nombre_freres_soeurs_don', period)
+        nombre_enfants_donataires = donation('nombre_enfants_donataires', period)
+        nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
 
         abattement = parameters(period).abattement
-        abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_donation
-        abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_donation
-        abattement_freres_soeurs = parameters(period).abattement.abattement_freres_soeurs
+        abattement_epoux_donataire = abattement.abattement_epoux.abattement_epoux_donation
+        abattement_enfants_donataires = parameters(period).abattement.abattement_enfants.abattement_enfants_donation
+        abattement_freres_soeurs_donataires = parameters(period).abattement.abattement_freres_soeurs
 
-        epoux_survivant_don = donation('epoux_survivant_don', period)
-        enfants = nombre_enfants_don > 0
-        freres_soeurs = nombre_freres_soeurs_don > 0
+        epoux_donataire = donation('epoux_donataire', period)
+        enfants_donataires = nombre_enfants_donataires > 0
+        freres_soeurs_donataires = nombre_freres_soeurs_donataires > 0
 
-        part_taxable_epoux_survivant_don = max_(actif_imposable_don - abattement_epoux_survivant, 0)
-        part_taxable_enfant_don = max_(actif_imposable_don / (nombre_enfants_don + 1 * (nombre_enfants_don == 0)) - abattement_enfant, 0)
-        part_taxable_freres_soeurs_don = max_(actif_imposable_don - abattement_freres_soeurs, 0)
+        part_taxable_epoux_donataire = max_(actif_imposable_don - abattement_epoux_donataire, 0)
+        part_taxable_enfants_donataires = max_(actif_imposable_don / (nombre_enfants_donataires + 1 * (nombre_enfants_donataires == 0)) - abattement_enfants_donataires, 0)
+        part_taxable_freres_soeurs_donataires = max_(actif_imposable_don - abattement_freres_soeurs_donataires, 0)
 
         return select(
             [
-                epoux_survivant_don> 0,
-                enfants > 0,
-                freres_soeurs > 0,
+                epoux_donataire> 0,
+                enfants_donataires > 0,
+                freres_soeurs_donataires > 0,
                 ],
             [
-                part_taxable_epoux_survivant_don,
-                part_taxable_enfant_don,
-                part_taxable_freres_soeurs_don,
+                part_taxable_epoux_donataire,
+                part_taxable_enfants_donataires,
+                part_taxable_freres_soeurs_donataires,
                 ],
         )
 
