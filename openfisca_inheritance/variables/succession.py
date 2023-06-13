@@ -158,6 +158,42 @@ class part_taxable(Variable):
     label = "Part taxable"
     definition_period = ETERNITY
 
+    def formula_2008(succession, period, parameters):
+        actif_imposable = succession('actif_imposable', period)
+        nombre_enfants = succession('nombre_enfants', period)
+        nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
+        nombre_autre = succession('nombre_autre',period)
+
+        abattement = parameters(period).abattement
+        abattement_enfant = abattement.abattement_enfants.abattement_enfants_succession
+        abattement_freres_soeurs = abattement.abattement_freres_soeurs
+        abattement_autre = abattement.abattement_autre_succession
+
+        epoux_survivant = succession('epoux_survivant', period)
+        enfants = nombre_enfants > 0
+        freres_soeurs = nombre_freres_soeurs > 0
+        autre = nombre_autre > 0
+
+        part_taxable_epoux_survivant = 0
+        part_taxable_enfant = max_(actif_imposable / (nombre_enfants + 1 * (nombre_enfants == 0)) - abattement_enfant, 0)
+        part_taxable_freres_soeurs = max_(actif_imposable - abattement_freres_soeurs, 0)
+        part_taxable_autre = max_(actif_imposable - abattement_autre, 0)
+
+        return select(
+            [
+                epoux_survivant > 0,
+                enfants > 0,
+                freres_soeurs > 0,
+                autre > 0,
+                ],
+            [
+                part_taxable_epoux_survivant,
+                part_taxable_enfant,
+                part_taxable_freres_soeurs,
+                part_taxable_autre,
+                ],
+            )
+
     def formula(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
@@ -166,9 +202,9 @@ class part_taxable(Variable):
 
         abattement = parameters(period).abattement
         abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_succession
-        abattement_enfant = parameters(period).abattement.abattement_enfants.abattement_enfants_succession
-        abattement_freres_soeurs = parameters(period).abattement.abattement_freres_soeurs
-        abattement_autre = parameters(period).abattement.abattement_autre_succession
+        abattement_enfant = abattement.abattement_enfants.abattement_enfants_succession
+        abattement_freres_soeurs = abattement.abattement_freres_soeurs
+        abattement_autre = abattement.abattement_autre_succession
 
         epoux_survivant = succession('epoux_survivant', period)
         enfants = nombre_enfants > 0
@@ -194,9 +230,6 @@ class part_taxable(Variable):
                 part_taxable_autre,
                 ],
             )
-
-
-
 
 
 class passif_de_communaute(Variable):
