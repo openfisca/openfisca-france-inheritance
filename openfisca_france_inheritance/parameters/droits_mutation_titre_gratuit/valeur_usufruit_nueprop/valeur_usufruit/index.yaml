@@ -1,0 +1,20 @@
+description: Valeur de l'usufruit en fonction de l'âge de l'usufruitier
+metadata:
+  documentation_start: true
+  order:
+  - valeur_usufruit_moins_de_20
+  - valeur_usufruit_moins_de_21
+  - valeur_usufruit_moins_de_30
+  - valeur_usufruit_moins_de_31
+  - valeur_usufruit_moins_de_40
+  - valeur_usufruit_moins_de_41
+  - valeur_usufruit_moins_de_50
+  - valeur_usufruit_moins_de_51
+  - valeur_usufruit_moins_de_60
+  - valeur_usufruit_moins_de_61
+  - valeur_usufruit_moins_de_70
+  - valeur_usufruit_moins_de_71
+  - valeur_usufruit_plus_de_70
+  - valeur_usufruit_moins_de_81
+  - valeur_usufruit_moins_de_91
+  - valeur_usufruit_plus_de_91

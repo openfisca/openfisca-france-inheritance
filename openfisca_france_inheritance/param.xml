@@ -1,0 +1,208 @@
+<NODE code="root" deb="2006-01-01" fin="2014-12-31">
+  <NODE code="succession" description="Droits de succession">
+    <NODE code="assurance_vie_contrat_post_1991_primes_apres_70_ans" description="Fiscalité sur primes versees après 70 ans sur contrat post-91">
+	  <CODE code="abattement" description="Abattement sur assurance vie">
+	    <VALUE deb="2002-01-01" fin="2014-12-31" valeur="30500" />
+		<VALUE deb="1991-11-20" fin="2001-12-31" valeur="200000" />
+	  </CODE>
+	</NODE>
+	<NODE code="assurance_vie_contrat_post_1991_primes_versees_apres_1998" description="Fiscalité sur transmission primes après 1998(avant 70 ans)sur contrat post-91">
+	  <CODE code="abattement_par_part" description="Abattement sur assurance vie">
+	    <VALUE deb="2002-01-01" fin="2014-12-31" valeur="152500" />
+		<VALUE deb="1998-10-13" fin="2001-12-31" valeur="1000000" />
+	  </CODE>
+	  <BAREME code="bareme_par_part" description="Barème de la part transmise en assurance vie">
+        <TRANCHE code="tranche0">
+          <SEUIL>
+			<VALUE deb="1998-10-13" fin="2014-12-31" valeur="0" />
+          </SEUIL>
+          <TAUX>
+			<VALUE deb="1998-10-13" fin="2014-12-31" valeur="0.2" />
+		  </TAUX>
+        </TRANCHE>
+		<TRANCHE code="tranche1">
+          <SEUIL>
+			<VALUE deb="2014-07-01" fin="2014-12-31" valeur="700000" />
+			<VALUE deb="2011-07-31" fin="2014-06-30" valeur="902838" />
+          </SEUIL>
+          <TAUX>
+			<VALUE deb="2014-07-01" fin="2014-12-31" valeur="0.3125" />
+			<VALUE deb="2011-07-31" fin="2014-06-30" valeur="0.25" />
+		  </TAUX>
+        </TRANCHE>
+	  </BAREME>
+	</NODE>
+	<NODE code="ligne_directe" description="Successions en ligne directe">
+      <CODE code="abattement" description="Abattement en ligne directe" format="integer" type="monetary">
+        <VALUE deb="2012-08-17" fin="2014-12-31" valeur="100000" />
+		<VALUE deb="2011-01-01" fin="2012-08-16" valeur="159325" />
+		<VALUE deb="2010-01-01" fin="2010-12-31" valeur="156974" />
+		<VALUE deb="2009-01-01" fin="2009-12-31" valeur="156359" />
+		<VALUE deb="2008-01-01" fin="2008-12-31" valeur="151950" />
+		<VALUE deb="2007-08-22" fin="2007-12-31" valeur="150000" />
+		<VALUE deb="2007-01-01" fin="2007-08-21" valeur="50000" />
+		<VALUE deb="2006-01-01" fin="2006-12-31" valeur="50000" />
+		<VALUE deb="2005-01-01" fin="2005-12-31" valeur="50000" />
+		<VALUE deb="2003-01-01" fin="2004-12-31" valeur="46000" />
+		<VALUE deb="2002-01-01" fin="2002-12-31" valeur="46000" />
+		<VALUE deb="2000-01-01" fin="2001-12-31" valeur="300000" />
+		<VALUE deb="1999-01-01" fin="1999-12-31" valeur="300000" />
+		<VALUE deb="1996-04-01" fin="1998-12-31" valeur="300000" />
+		<VALUE deb="1992-01-01" fin="1996-03-31" valeur="300000" />
+		<VALUE deb="1984-01-01" fin="1991-12-31" valeur="275000" />
+		<VALUE deb="1981-07-09" fin="1983-12-31" valeur="250000" />
+		<VALUE deb="1979-07-01" fin="1981-07-08" valeur="175000" />
+      </CODE>
+      <BAREME code="bareme" description="Barème de la part en ligne directe">
+        <TRANCHE code="tranche0">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="0" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="0" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="0" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="0" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="0" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="0" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="0" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="0" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="0" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="0" />
+			<VALUE deb="1981-07-09" fin="1983-12-31" valeur="0" />
+			<VALUE deb="1979-07-01" fin="1981-07-08" valeur="0" />
+          </SEUIL>
+          <TAUX>
+            <VALUE deb="1979-07-01" fin="2014-12-31" valeur="0.05" />
+		  </TAUX>
+        </TRANCHE>
+        <TRANCHE code="tranche1">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="8072" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="8072" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="8072" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="7593" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="7922" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="7922" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="7699" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="7600" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="7600" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="50000" />
+			<VALUE deb="1981-07-09" fin="1983-12-31" valeur="50000" />
+			<VALUE deb="1979-07-01" fin="1981-07-08" valeur="50000" />
+          </SEUIL>
+          <TAUX>
+            <VALUE deb="1979-07-01" fin="2014-12-31" valeur="0.1" />
+		  </TAUX>
+         </TRANCHE>
+        <TRANCHE code="tranche2">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="12109" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="12109" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="12109" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="11930" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="11883" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="11883" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="11548" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="11400" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="11400" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="75000" />
+			<VALUE deb="1981-07-09" fin="1983-12-31" valeur="75000" />
+			<VALUE deb="1979-07-01" fin="1981-07-08" valeur="75000" />
+          </SEUIL>
+          <TAUX>
+            <VALUE deb="1979-07-01" fin="2014-12-31" valeur=".15" />
+          </TAUX>
+        </TRANCHE>
+        <TRANCHE code="tranche3">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="15932" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="15932" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="15932" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="15697" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="15636" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="15636" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="15195" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="15000" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="15000" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="100000" />
+			<VALUE deb="1981-07-09" fin="1983-12-31" valeur="100000" />
+			<VALUE deb="1979-07-01" fin="1981-07-08" valeur="100000" />
+		  </SEUIL>
+          <TAUX>
+            <VALUE deb="1979-07-01" fin="2014-12-31" valeur=".2" />
+          </TAUX>
+        </TRANCHE>
+        <TRANCHE code="tranche4">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="552324" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="552324" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="552324" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="544173" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="542043" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="542036" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="526760" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="520000" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="520000" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="3400000" />
+		  </SEUIL>
+          <TAUX>
+            <VALUE deb="1984-01-01" fin="2014-12-31" valeur=".3" />
+          </TAUX>
+        </TRANCHE>
+        <TRANCHE code="tranche5">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="902838" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="902838" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="902838" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="889514" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="886032" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="886020" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="861050" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="850000" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="850000" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="5600000" />
+		  </SEUIL>
+          <TAUX>
+			<VALUE deb="2013-01-01" fin="2014-12-31" valeur="0.4" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="0.4" />
+			<VALUE deb="1984-01-01" fin="2011-07-30" valeur="0.35" />
+          </TAUX>
+        </TRANCHE>
+        <TRANCHE code="tranche6">
+          <SEUIL>
+            <VALUE deb="2013-01-01" fin="2014-12-31" valeur="1805677" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="1805677" />
+			<VALUE deb="2011-06-12" fin="2011-07-30" valeur="1805677" />
+			<VALUE deb="2010-05-01" fin="2011-06-11" valeur="1779029" />
+			<VALUE deb="2009-04-10" fin="2009-04-30" valeur="1772064" />
+			<VALUE deb="2008-12-29" fin="2009-04-09" valeur="1772041" />
+			<VALUE deb="2008-04-03" fin="2009-12-28" valeur="1722100" />
+			<VALUE deb="2007-08-22" fin="2008-04-02" valeur="1700000" />
+			<VALUE deb="2002-03-31" fin="2007-08-21" valeur="1700000" />
+			<VALUE deb="1984-01-01" fin="2002-03-30" valeur="11200000" />
+		  </SEUIL>
+          <TAUX>
+			<VALUE deb="2013-01-01" fin="2014-12-31" valeur="0.45" />
+			<VALUE deb="2011-07-31" fin="2012-12-31" valeur="0.45" />
+			<VALUE deb="1984-01-01" fin="2011-07-30" valeur="0.4" />
+		  </TAUX>
+        </TRANCHE>
+      </BAREME>
+    </NODE>
+<!--	<NODE code="frere_soeur_vif_rep" description="Transmission freres soeurs vifs ou representes">
+		<CODE code="abattement" description="Abattement freres soeurs vifs ou representes" format="integer" type="monetary">
+        <VALUE deb="2013-01-01" fin="2014-12-31" valeur="100000" />
+		</CODE>
+		<BAREME code="bareme" description="Barème de la part à freres ou soeurs">
+		</BAREME>
+	</NODE>
+	<NODE code="parent_ua_4" description="Transmission parent jusque 4eme degre">
+		<CODE code="abattement" description="Abattement parent jusque 4eme degre" format="integer" type="monetary">
+		</CODE>
+		<BAREME code="bareme" description="Barème de la part à parent jusque 4eme degre">
+		</BAREME>
+	</NODE>
+	<NODE code="non_parent" description="Transmission non parent">
+		<CODE code="abattement" description="Abattement non parent" format="integer" type="monetary">
+		</CODE>
+		<BAREME code="bareme" description="Barème non parent">
+		</BAREME>
+	</NODE>

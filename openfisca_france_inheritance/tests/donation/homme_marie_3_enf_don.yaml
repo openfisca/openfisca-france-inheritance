@@ -1,0 +1,45 @@
+- name: Donation homme marié sans enfants
+  description: test
+  period: 2022
+  input:
+    individus:
+      papa:
+        date_donation: 2022-01-01
+      maman:
+        date_donation: 9999-01-01
+    donations:
+      donation_0:
+        donateur: papa
+        epoux_donataire: maman
+        actif_propre_don: 1_000_000
+  output:
+    epoux_donataire: 1
+    actif_imposable_don: 1_000_000
+    part_taxable_don: 919_276
+
+- name: Donation homme marié avec 3 enfants
+  description: exemple 1 de https://www.gestion-patrimoine.finance/gestion-privee/actualite/comment-calculer-le-montant-des-droits-de-succession/
+  period: 2014
+  input:
+    individus:
+      papa:
+        date_donation: 2014-01-01
+      maman:
+        date_donation: 9999-01-01
+      riri:
+        date_donation: 9999-01-01
+      fifi:
+        date_donation: 9999-01-01
+      loulou:
+        date_donation: 9999-01-01
+    donations:
+      donation_0:
+        donateur: papa
+        epoux_donataire: maman
+        enfant_donataire: ["riri", "fifi", "loulou"]
+        actif_propre_don: 1_000_000
+        part_epoux_don: 0.3
+  output:
+    actif_imposable_don: 700_000
+    is_enfant_donataire: [False, False, True, True, True]
+    nombre_enfants_donataires: 3

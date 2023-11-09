@@ -1,0 +1,12 @@
+description: Barème applicable aux Individus Pacsés
+metadata:
+  documentation_start: true
+  short_label: Individus Pacsés
+  order:
+  - seuils_tranche_pacs
+  - taux_marginal_pacs
+documentation: |-
+  Depuis le 22 août 2007, le conjoint survivant et le partenaire lié par un pacte civil de solidarité (PACS) sont exonérés de droits de succession (CGI art. 796-0 bis).
+  La loi n°2007-1223 du 21 août 2007 - art. 8 (V) JORF 22 août 2007 est aplliquée à compter de la date de publication de la présente loi.
+  Les barèmes applicables aux donnations sont plus aventageux aux seuils de tranches d'imposition plus bas pour les conjoints et partenaires liés par un PACS.
+  Article 777 bis : https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006197326/#LEGISCTA000006197326

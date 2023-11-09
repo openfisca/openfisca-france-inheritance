@@ -1,0 +1,6 @@
+description: Seuils d'imposition des assurances vie
+metadata:
+  documentation_start: true
+  order:
+  - seuil_imposition_assurance_vie_t1
+  - seuil_imposition_assurance_vie_t2

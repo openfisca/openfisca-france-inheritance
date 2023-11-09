@@ -1,0 +1,20 @@
+description: Valeur de la nue propriété en fonction de l'âge de l'usufruitier
+metadata:
+  documentation_start: true
+  order:
+  - valeur_nue_propriete_moins_de_20
+  - valeur_nue_propriete_moins_de_21
+  - valeur_nue_propriete_moins_de_30
+  - valeur_nue_propriete_moins_de_31
+  - valeur_nue_propriete_moins_de_40
+  - valeur_nue_propriete_moins_de_41
+  - valeur_nue_propriete_moins_de_50
+  - valeur_nue_propriete_moins_de_51
+  - valeur_nue_propriete_moins_de_60
+  - valeur_nue_propriete_moins_de_61
+  - valeur_nue_propriete_moins_de_70
+  - valeur_nue_propriete_moins_de_71
+  - valeur_nue_propriete_plus_de_70
+  - valeur_nue_propriete_moins_de_81
+  - valeur_nue_propriete_moins_de_91
+  - valeur_nue_propriete_plus_de_91

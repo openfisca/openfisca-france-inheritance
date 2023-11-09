@@ -1,0 +1,5 @@
+description: Seuils inférieurs des tranches pour les individus pacsés
+metadata:
+  order:
+  - seuils_tranche_pacs_t1
+  - seuils_tranche_pacs_t2

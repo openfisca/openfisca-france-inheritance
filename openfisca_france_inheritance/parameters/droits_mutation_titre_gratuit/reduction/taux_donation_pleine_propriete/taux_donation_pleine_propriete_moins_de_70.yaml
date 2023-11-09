@@ -1,0 +1,13 @@
+description: Taux de réduction moins de 70 ans
+values:
+  2011-07-31:
+    value: 0.5
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: /1
+  reference:
+    2011-08-30:
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 8
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024413775
+  official_journal_date:
+    2011-08-30: "2011-08-30"

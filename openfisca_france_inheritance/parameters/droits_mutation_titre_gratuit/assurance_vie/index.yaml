@@ -1,0 +1,16 @@
+description: Parametres d'imposition des assurances-vie
+metadata:
+  documentation_start: true
+  order:
+  - souscription_avant_91
+  - souscription_apres_91
+documentation: |-
+  3 règles régissent la fiscalité de l’assurance vie :
+   - La Loi TEPA de 2007 prévoit  que les conjoints et partenaires pacsés sont exonérés de toute fiscalité liée à l’assurance vie.
+   - L’article 757B du Code général des impôts (CGI), prévoit que les primes versées après les 70 ans de l’assuré sur un contrat d’assurance vie, souscrit à partir du 20/11/1991, sont soumises aux droits de mutation par décès pour leur fraction excédant 30 500 €.
+   - L'article 990I du Code général des impôts (CGI) prévoit quant à lui, que lorsque les sommes n'entrent pas dans le champ d'application de l'article 757B, les capitaux décès relatifs aux primes versées à compter du 13 octobre 1998 sont soumis, après un abattement de 152 500 € par bénéficiaire tous contrats confondus, à un prélèvement de : 20 %  pour les capitaux décès compris entre 152 500 € et 852 500 € et à 31,25 %  pour ceux supérieurs à ce montant.
+
+  Les dates d'application des lois diffèrent selon les versions, la date peut correspondre à la date de publication de l'article (cf 04/2010, 08/2007), d'entrée en vigueur de la loi / décret / ordonnance (cf 07/2011, 12/2014, 08/2015) ou indiqué directement dans l'article
+
+  Pour les contrats souscrits avant le 20/11/1991, pas de taxation.
+  On se réfère à l'article 990.I du CGI pour les contrats souscrits avant le 20/11/1991 et pour les contrats souscrit après cette date on se réfère à l'article 758B du CGI.

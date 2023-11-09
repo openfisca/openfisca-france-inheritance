@@ -1,0 +1,5 @@
+description: Spécifique pour les donations en usufruit ou pleine propriété
+metadata:
+  documentation_start: true
+  order:
+  - taux_donation_pleine_propriete_moins_de_70

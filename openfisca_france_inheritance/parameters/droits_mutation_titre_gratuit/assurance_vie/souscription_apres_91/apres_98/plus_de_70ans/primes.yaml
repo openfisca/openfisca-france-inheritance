@@ -1,0 +1,46 @@
+description: Droits de succession dus sur la fraction des primes excédant
+values:
+  1980-01-19:
+    value: 100000
+  1992-01-01:
+    value: 200000
+  2002-01-01:
+    value: 30500
+  2016-01-01:
+    value: 30500
+  2020-01-01:
+    value: 30500
+  2023-03-10:
+    value: 30500
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: currency
+  reference:
+    1980-01-19:
+      title: Loi - art 68 JORF 19 janvier 1980
+      href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000006273420/1980-01-19#LEGIARTI000006273420
+    1992-01-01:
+      title: Loi - art. 26 (V) JORF 31 décembre 1991
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000355987/
+    2002-01-01:
+    - title: Ordonnance n°2000-916 du 19 septembre 2000 - art. 6 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000219672
+    - title: Loi - art. 51 (V) JORF 29 décembre 2001
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000581002
+    2016-01-01:
+      title: LOI n°2014-1655 du 29 décembre 2014 - art. 89
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000029991906
+    2020-01-01:
+      title: Ordonnance n°2019-766 du 24 juillet 2019 - art. 3
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038811832
+    2023-03-10:
+      title: LOI n°2023-171 du 9 mars 2023 - art. 3
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000047281777
+  official_journal_date:
+    1980-01-19: "1980-01-19"
+    1992-01-01: "1991-12-31"
+    2002-01-01: "2001-12-29"
+    2016-01-01: "2014-12-30"
+    2020-01-01: "2019-07-25"
+    2023-03-10: "2023-03-10"
+documentation: Création de la loi au 19 janvier 1980.

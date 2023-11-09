@@ -1,0 +1,5 @@
+description: Taux entre parents jusqu'au 4è degré inclusivement
+metadata:
+  order:
+  - taux_marginal_parents_degre4_donation
+  - taux_marginal_parents_degre4_succession

@@ -1,0 +1,19 @@
+description: Taux de réduction 70-79 ans
+values:
+  2004-01-01:
+    value: null
+  2006-01-01:
+    value: 0.1
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: /1
+  reference:
+    2004-01-01:
+      title: Loi 2003-1311 2003-12-30 art. 19 2° Finances pour 2004 JORF 31 décembre 2003
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000612133/
+    2006-01-01:
+      title: Loi n°2005-1719 du 30 décembre 2005 - art. 9 () JORF 31 décembre 2005
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000634802
+  official_journal_date:
+    2004-01-01: "2003-12-30"
+    2006-01-01: "2005-12-31"

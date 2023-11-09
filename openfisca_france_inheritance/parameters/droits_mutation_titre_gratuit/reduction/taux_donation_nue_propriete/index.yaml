@@ -1,0 +1,10 @@
+description: Taux de réduction spécifique pour les donations en nue propriété
+metadata:
+  documentation_start: true
+  short_label: Spécifique pour les donations en nue propriété
+  order:
+  - taux_donation_nue_propriete_moins_de_65
+  - taux_donation_nue_propriete_moins_de_70
+  - taux_donation_nue_propriete_moins_de_75
+  - taux_donation_nue_propriete_moins_de_80
+documentation: Le Taux de réduction spécifique pour les donations en nue propriété concerne les années 2004 et 2006. On a cependant entre les deux années des seuils différents par rapport à l'âge du donateur (2004:65ans et 75ans / 2006:70ans et 80ans).

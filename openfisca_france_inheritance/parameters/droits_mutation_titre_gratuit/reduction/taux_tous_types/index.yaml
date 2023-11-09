@@ -1,0 +1,13 @@
+description: Taux de réduction pour tous types de donations
+metadata:
+  documentation_start: true
+  short_label: Pour tous types de donations
+  order:
+  - taux_tous_types_moins_de_65
+  - taux_tous_types_moins_de_70
+  - taux_tous_types_moins_de_75
+  - taux_tous_types_moins_de_80
+  - taux_tous_types_sans_condition
+documentation: |-
+  Le taux de réduction pour tous types de donations avec condition d'âge du donateur concerne : "les donations autres", non spécifié auparavant dans l'article.
+  Le taux de réduction pour tous types de donations sans condition d'âge : "les donations consenties par actes passés à partir de JJ/MM/AAAA"

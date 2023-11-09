@@ -1,0 +1,59 @@
+description: Délai de rappel des donnations antérieures
+values:
+  1992-01-01:
+    value: 10
+  1997-01-01:
+    value: 10
+  2006-01-01:
+    value: 6
+  2007-01-01:
+    value: 6
+  2011-07-31:
+    value: 10
+  2012-08-17:
+    value: 15
+  2017-01-01:
+    value: 15
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: year
+  reference:
+    1979-01-01:
+      title: Création - Article 786
+      href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006305422/1979-07-01
+    1992-01-01:
+      title: Loi - art. 15 () JORF 31 décembre 1991
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000356342
+    1997-01-01:
+      title: Loi 96-1181 1996-12-30 Finances pour 1997, JORF 31 décembre 1996
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000380034/
+    2006-01-01:
+      title: Loi n°2005-1719 du 30 décembre 2005 - art. 8 et art. 10 JORF 31 décembre 2005
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000634802
+    2007-01-01:
+      title: Loi n°2007-1223 du 21 août 2007 - art. 8 (V) JORF 22 août 2007
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000278649
+    2011-07-30:
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 7 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024413775
+    2012-08-17:
+    - title: LOI n°2011-900 du 29 juillet 2011 - art. 7 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024413775
+    - title: LOI n°2012-958 du 16 août 2012 - art. 5 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000026288927
+    2017-01-01:
+      title: LOI n°2016-1917 du 29 décembre 2016 - art. 32 (V)
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000033734169
+  official_journal_date:
+    1992-01-01: "1991-12-31"
+    1997-01-01: "1996-12-30"
+    2006-01-01: "2005-12-31"
+    2011-07-30: "2011-07-30"
+    2012-08-17: "2012-08-17"
+    2017-01-01: "2016-12-30"
+documentation: |-
+  On se réfère à l'article 784 (paragraphe 2) du code général des impôts, https://www.legifrance.gouv.fr/codes/id/LEGIARTI000033809289/2017-01-01/
+  Aucun délais n'est prévu pour l'année 1979, date de création.
+
+  La valeur en année est écrit en toute lettre dans les différentes versions de l'article 784 du CGI.
+  De 2007 à 2012, la loi s'applique à compter de la date de publication de la présente loi.

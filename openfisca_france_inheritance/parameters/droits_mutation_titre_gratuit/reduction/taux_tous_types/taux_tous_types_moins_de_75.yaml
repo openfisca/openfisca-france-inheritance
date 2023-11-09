@@ -1,0 +1,39 @@
+description: Taux de réduction pour les 65-74 ans
+metadata:
+  last_value_still_valid_on: "2023-04-01"
+  unit: /1
+  reference:
+    1996-04-01:
+      title: Loi n°96-314 du 12 avril 1996 - art. 15 (V) et art.16 JORF 13 avril 1996
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000193354
+    1998-01-01:
+      title: Loi - art. 17 () JORF 31 décembre 1997
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000569621
+    1999-01-01:
+      title: Loi 98-1266 1998-12-30 art. 36 I Finances pour 1999 JORF 31 décembre 1998
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000209044/
+    2000-01-01:
+      title: Loi - art. 10 () JORF 31 décembre 1999
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000762233
+    2004-01-01:
+      title: Loi 2003-1311 2003-12-30 art. 19 2° Finances pour 2004 JORF 31 décembre 2003
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000612133/
+  official_journal_date:
+    1996-04-01: "1996-04-13"
+    1998-01-01: "1997-12-31"
+    1999-01-01: "1998-12-31"
+    2000-01-01: "1999-12-31"
+    2004-01-01: "2003-12-30"
+documentation: Les dispositions de la loi n°96-314 du 12 avril 1996 - art. 15 (V) et art.16 JORF 13 avril 1996 s'appliquent aux donations consenties par actes passés à compter du 1er avril 1996.
+alues:
+  values:
+    1996-04-01:
+      value: 0.15
+    1998-01-01:
+      value: 0.15
+    1999-01-01:
+      value: 0.3
+    2000-01-01:
+      value: 0.3
+    2004-01-01:
+      value: 0.3

@@ -1,0 +1,7 @@
+description: Souscription à un contrat avant 1991
+metadata:
+  documentation_start: true
+  order:
+  - abattement_assurance_vie
+  - seuil_imposition_assurance_vie
+  - taux_imposition_assurance_vie

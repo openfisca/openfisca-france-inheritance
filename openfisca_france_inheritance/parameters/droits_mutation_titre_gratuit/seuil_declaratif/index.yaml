@@ -1,0 +1,7 @@
+description: Seuil déclaratif de l'actif brut de succession
+metadata:
+  documentation_start: true
+  order:
+  - seuil_declaratif_ligne_directe
+  - seuil_declaratif_autres
+documentation: On se réfère à l'article 800 du code général des impôts, https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041471327/2020-01-01/

@@ -1,0 +1,6 @@
+description: Taux marginaux de chaque tranche pour les individus pacsés
+metadata:
+  order:
+  - taux_marginal_pacs_t1
+  - taux_marginal_pacs_t2
+documentation: Les successions entre partenaires de PACS, régies de 2000 à 2007 par l’article 777 bis du Code général des impôts, étaient soumises à un taux de 40% pour la fraction de la part nette taxable n’excédant pas 15 000€ et à un taux de 50% pour le surplus.

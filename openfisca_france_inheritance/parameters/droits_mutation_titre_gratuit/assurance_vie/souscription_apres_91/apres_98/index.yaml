@@ -1,0 +1,7 @@
+description: Primes versées après 1998
+metadata:
+  documentation_start: true
+  order:
+  - moins_de_70ans
+  - plus_de_70ans
+documentation: On se réfère à l'article 757B du code général des impots seulement dans le cas où le souscripteur ait plus de 70ans. Si le souscripteur a moins de 70ans, il est exonéré.

@@ -1,0 +1,11 @@
+description: Abattement global héritiers directs et conjoint (succession uniquement)
+values:
+  2005-01-01:
+    value: 50000
+  2006-01-01:
+    value: 50000
+  2007-01-01:
+    value: 50000
+metadata:
+  short_label: Abattement global, héritiers directs et conjoint (succession uniquement)
+  unit: currency

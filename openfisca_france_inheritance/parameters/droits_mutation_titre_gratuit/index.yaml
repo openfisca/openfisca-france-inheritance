@@ -1,0 +1,11 @@
+description: Droits de mutation à titre gratuit
+metadata:
+  order:
+  - bareme
+  - abattement
+  - abattement_don_numeraire
+  - delai_donations_anterieures
+  - reduction
+  - valeur_usufruit_nueprop
+  - seuil_declaratif
+  - assurance_vie

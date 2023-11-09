@@ -1,0 +1,9 @@
+description: Taux de réductions spécifique pour les donations-partages
+metadata:
+  documentation_start: true
+  short_label: Spécifique pour les donations-partages
+  order:
+  - taux_donation_partage_moins_de_65
+  - taux_donation_partage_moins_de_75
+  - taux_donation_partage_sans_condition
+documentation: Le Taux de réduction spécifique pour les donations-partages concerne les années allant de 1979 à 1999. Des contraintes au niveau de l'âge du donateur existe à partie de 1987.
