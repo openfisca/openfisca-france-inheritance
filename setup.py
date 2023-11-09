@@ -1,18 +1,18 @@
 #! /usr/bin/env python
 
-"""French Inheritance legislation specific model for OpenFisca -- a versatile microsimulation free software"""
+'''French Inheritance legislation specific model for OpenFisca -- a versatile microsimulation free software'''
 
 
 from setuptools import setup, find_packages
 
 
-classifiers = """\
+classifiers = '''\
 Development Status :: 2 - Pre-Alpha
 License :: OSI Approved :: GNU Affero General Public License v3
 Operating System :: POSIX
 Programming Language :: Python
 Topic :: Scientific/Engineering :: Information Analysis
-"""
+'''
 
 doc_lines = __doc__.split('\n')
 
@@ -29,7 +29,7 @@ setup(
     long_description = '\n'.join(doc_lines[2:]),
     url = 'https://github.com/openfisca/openfisca-france-inheritance',
     extras_require = {
-       'dev': [
+        'dev': [
             'autopep8 >=2.0.2, <3.0',
             'flake8 >=6.0.0, <7.0.0',
             'flake8-print >=5.0.0, <6.0.0',

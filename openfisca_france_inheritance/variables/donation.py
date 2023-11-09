@@ -1,5 +1,3 @@
-import itertools
-
 from openfisca_core.model_api import *
 
 from openfisca_france_inheritance.entities import Donation
@@ -38,16 +36,19 @@ from openfisca_france_inheritance.entities import Donation
 #
 #         is_enfant_donataire_holder = donation('is_enfant_donataire', period)
 #         return self.sum_by_entity(is_enfant_donataire_holder)
+
+
 class actif_de_communaute_don(Variable):
     value_type = float
     entity = Donation
-    label = "Actif de Communauté"
+    label = 'Actif de Communauté'
     definition_period = ETERNITY
+
 
 class actif_imposable_don(Variable):
     value_type = float
     entity = Donation
-    label = "Actif imposable"
+    label = 'Actif imposable'
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
@@ -67,17 +68,20 @@ class actif_imposable_don(Variable):
                 )
             )
 
+
 class actif_propre_don(Variable):
     value_type = float
     entity = Donation
-    label = "Actif propre"
+    label = 'Actif propre'
     definition_period = ETERNITY
+
 
 class assurance_vie_don(Variable):
     value_type = float
     entity = Donation
-    label = "Assurance Vie"
+    label = 'Assurance Vie'
     definition_period = ETERNITY
+
 
 class epoux_donataire(Variable):
     value_type = bool
@@ -88,6 +92,7 @@ class epoux_donataire(Variable):
     def formula(donation, period, parameters):
         return donation.nb_persons(Donation.EPOUX_DONATAIRE)
 
+
 class nombre_enfants_donataires(Variable):
     value_type = float
     entity = Donation
@@ -97,25 +102,28 @@ class nombre_enfants_donataires(Variable):
     def formula(donation, period, parameters):
         return donation.sum(donation.members('is_enfant_donataire', period))
 
+
 class nombre_freres_soeurs_donataires(Variable):
     value_type = float
     entity = Donation
-    label = "Nombre de frères et soeurs donataires"
+    label = 'Nombre de frères et soeurs donataires'
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
         return donation.sum(donation.members('is_frere_soeur_donataire', period))
 
+
 class part_epoux_don(Variable):
     value_type = float
     entity = Donation
-    label = "Part epoux donataire"
+    label = 'Part époux donataire'
     definition_period = ETERNITY
+
 
 class part_taxable_don(Variable):
     value_type = float
     entity = Donation
-    label = "Part taxable"
+    label = 'Part taxable'
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
@@ -138,7 +146,7 @@ class part_taxable_don(Variable):
 
         return select(
             [
-                epoux_donataire> 0,
+                epoux_donataire > 0,
                 enfants_donataires > 0,
                 freres_soeurs_donataires > 0,
                 ],
@@ -147,16 +155,18 @@ class part_taxable_don(Variable):
                 part_taxable_enfants_donataires,
                 part_taxable_freres_soeurs_donataires,
                 ],
-        )
+            )
+
 
 class passif_de_communaute_don(Variable):
     value_type = float
     entity = Donation
-    label = "Passif de Communauté"
+    label = 'Passif de communauté'
     definition_period = ETERNITY
+
 
 class passif_propre_don(Variable):
     value_type = float
     entity = Donation
-    label = "Passif propre"
+    label = 'Passif propre'
     definition_period = ETERNITY

@@ -1,5 +1,3 @@
-import itertools
-
 from openfisca_core.model_api import *
 
 from openfisca_france_inheritance.entities import Succession
@@ -8,14 +6,14 @@ from openfisca_france_inheritance.entities import Succession
 class actif_de_communaute(Variable):
     value_type = float
     entity = Succession
-    label = "Actif de Communauté"
+    label = 'Actif de Communauté'
     definition_period = ETERNITY
 
 
 class actif_imposable(Variable):
     value_type = float
     entity = Succession
-    label = "Actif imposable"
+    label = 'Actif imposable'
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
@@ -39,14 +37,14 @@ class actif_imposable(Variable):
 class actif_propre(Variable):
     value_type = float
     entity = Succession
-    label = "Actif propre"
+    label = 'Actif propre'
     definition_period = ETERNITY
 
 
 class actif_transmis(Variable):
     value_type = float
     entity = Succession
-    label = "Actif transmis"
+    label = 'Actif transmis'
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
@@ -66,7 +64,7 @@ class actif_transmis(Variable):
 class assurance_vie(Variable):
     value_type = float
     entity = Succession
-    label = "Assurance Vie"
+    label = 'Assurance vie'
     definition_period = ETERNITY
 
 
@@ -83,15 +81,12 @@ class epoux_survivant(Variable):
 class droits_sur_succession(Variable):
     value_type = float
     entity = Succession
-    label = "Droits sur succession"
+    label = 'Droits sur succession'
     definition_period = ETERNITY
 
-
     def formula(succession, period, parameters):
-
         bareme = parameters(period).bareme
         succession = bareme.bareme_ligne_directe
-
         return succession.sum(succession.members('droits', period))
 
 
@@ -104,27 +99,31 @@ class nombre_enfants(Variable):
     def formula(succession, period, parameters):
         return succession.sum(succession.members('is_enfant', period))
 
+
 class nombre_freres_soeurs(Variable):
     value_type = float
     entity = Succession
-    label = "Nombre de frères et soeurs"
+    label = 'Nombre de frères et soeurs'
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         return succession.sum(succession.members('is_frere_soeur', period))
 
+
 class nombre_autre(Variable):
     value_type = float
     entity = Succession
-    label = "Nombre de tiers (personnes autre)"
+    label = 'Nombre de tiers (personnes autres)'
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
         return succession.sum(succession.members('is_autre', period))
+
+
 class part_epoux(Variable):
     value_type = float
     entity = Succession
-    label = "Part epoux"
+    label = 'Part epoux'
     definition_period = ETERNITY
 
 
@@ -143,7 +142,7 @@ class part_epoux(Variable):
 class part_recue(Variable):
     value_type = float
     entity = Succession
-    label = "Part reçue"
+    label = 'Part reçue'
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
@@ -155,14 +154,14 @@ class part_recue(Variable):
 class part_taxable(Variable):
     value_type = float
     entity = Succession
-    label = "Part taxable"
+    label = 'Part taxable'
     definition_period = ETERNITY
 
     def formula_2008(succession, period, parameters):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
         nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
-        nombre_autre = succession('nombre_autre',period)
+        nombre_autre = succession('nombre_autre', period)
 
         abattement = parameters(period).abattement
         abattement_enfant = abattement.abattement_enfants.abattement_enfants_succession
@@ -198,7 +197,7 @@ class part_taxable(Variable):
         actif_imposable = succession('actif_imposable', period)
         nombre_enfants = succession('nombre_enfants', period)
         nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
-        nombre_autre = succession('nombre_autre',period)
+        nombre_autre = succession('nombre_autre', period)
 
         abattement = parameters(period).abattement
         abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_succession
@@ -235,14 +234,14 @@ class part_taxable(Variable):
 class passif_de_communaute(Variable):
     value_type = float
     entity = Succession
-    label = "Passif de Communauté"
+    label = 'Passif de communauté'
     definition_period = ETERNITY
 
 
 class passif_propre(Variable):
     value_type = float
     entity = Succession
-    label = "Passif propre"
+    label = 'Passif propre'
     definition_period = ETERNITY
 
 
