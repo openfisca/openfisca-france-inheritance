@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-'''French Inheritance legislation specific model for OpenFisca -- a versatile microsimulation free software'''
+'''French inheritance legislation specific model for OpenFisca'''
 
 
 from setuptools import setup, find_packages
