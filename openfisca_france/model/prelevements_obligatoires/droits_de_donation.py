@@ -22,4 +22,3 @@ class droits_mutation(Variable):
         don = individu('don', period)
         taux = parameters(period).taxation_capital.donation.taux_sans_parente
         return don * taux
-    
