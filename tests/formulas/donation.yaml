@@ -1,0 +1,9 @@
+- name: Droits de mutation à titre gratuit pour personnes non parentés
+  input:
+    don:
+      2014: [10000, 1000]
+      2025: [10000, 1000]
+  output:
+    droits_mutation:
+      2014: [0, 0]
+      2025: [6000, 600]
