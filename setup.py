@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 '''French inheritance legislation specific model for OpenFisca'''
 
 
