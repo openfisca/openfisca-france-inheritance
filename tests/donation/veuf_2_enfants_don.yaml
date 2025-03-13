@@ -1,0 +1,21 @@
+- name: Monsieur Dupont, Veuf et deux enfants
+  description: test
+  period: 2014
+  input:
+    individus:
+      papa:
+        date_donation: 2014-01-01
+      fifi:
+        date_donation: 9999-01-01
+      loulou:
+        date_donation: 9999-01-01
+    donations:
+      donation_0:
+        donateur: papa
+        enfant_donataire: ["fifi", "loulou"]
+        actif_propre_don: 300_000
+  output:
+    is_enfant_donataire: [False, True, True]
+    nombre_enfants_donataires: 2
+    part_taxable_don: 50_000
+    #droits_sur_donation: 8_194.35
