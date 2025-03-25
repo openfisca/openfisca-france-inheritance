@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### 0.5.1 [#2](https://github.com/openfisca/openfisca-france-inheritance/pull/2)
+
+* Changement mineur
+* Périodes concernées : toutes.
+* Zones impactées : -
+* Détails :
+  - Documente l'installation en mode développement
+  - Ajoute les fichiers de contribution CHANGELOG.md et CONTRIBUTING.md
 
 ## 0.5.0 [#1](https://github.com/openfisca/openfisca-france-inheritance/pull/1)
 
