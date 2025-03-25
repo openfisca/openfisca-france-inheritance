@@ -24,6 +24,12 @@ Avant de passer à la suite, la commande suivante exécutée dans un terminal sh
 python --version
 ```
 
+Si vous souhaitez contribuer au code source, nous vous conseillons de l'installer en local sur votre ordinateur avec : 
+
+```sh
+git clone git@github.com:openfisca/openfisca-france-inheritance.git
+```
+
 ### Installer avec Pew pour la contribution (mode développement)
 
 Si vous souhaitez suivre les mêmes recommendantions que pour le dépôt `openfisca-france`, vous pouvez vous appuyer sur l'outil `pew` pour la gestion des environnements virtuels. Suivre alors la [section dédiée du README openfisca-france](https://github.com/openfisca/openfisca-france/blob/master/README.md#installez-un-environnement-virtuel-avec-pew).
