@@ -7,11 +7,10 @@ on:
 
 env:
   DEFAULT_PYTHON_VERSION: '3.11.11'
-  DEFAULT_OS: ubuntu-24.04
 
 jobs:
   build:
-    runs-on: ${{ env.DEFAULT_OS }}
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
