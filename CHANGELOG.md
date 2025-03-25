@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### [#3](https://github.com/openfisca/openfisca-france-inheritance/pull/3)
+### 0.5.2 [#3](https://github.com/openfisca/openfisca-france-inheritance/pull/3)
 
 * Amélioration technique.
 * Périodes concernées : non applicable
