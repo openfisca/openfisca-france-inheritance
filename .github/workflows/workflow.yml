@@ -6,8 +6,8 @@ on:
     types: [opened, reopened]
 
 env:
-  - DEFAULT_PYTHON_VERSION: '3.11.11'
-  - DEFAULT_OS: ubuntu-24.04
+  DEFAULT_PYTHON_VERSION: '3.11.11'
+  DEFAULT_OS: ubuntu-24.04
 
 jobs:
   build:
