@@ -27,7 +27,7 @@ class droit_exoneration_familial(Variable):
     value_type = bool
     default_value = True
     entity = Individu
-    label = 'Droit à l\'exonération familial, True si le donateur a moins de 80 ans et le donataire plus de 18 ans'
+    label = 'Droit à l exonération familial, True si le donateur a moins de 80 ans et le donataire plus de 18 ans'
     definition_period = YEAR
 
 
@@ -51,12 +51,13 @@ class droits_mutation(Variable):
     def formula_2015_01_01(individu, period, parameters):
         don = individu('don', period)
         lien_parente = individu('lien_parente', period)
-        droit_exoneration_familial = individu('droit_exoneration_familial', period)
+        droit_exoneration_familial = individu(
+            'droit_exoneration_familial', period)
         param = parameters(period).taxation_capital.donation
 
         def calc_droits(abattement, taux, bareme):
             exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
-            base_imposable = max_(don - exoneration_familial - abattement , 0)
+            base_imposable = max_(don - exoneration_familial - abattement, 0)
             if bareme:
                 return bareme.calc(base_imposable)
             return taux * base_imposable
@@ -78,11 +79,16 @@ class droits_mutation(Variable):
                 calc_droits(0, param.taux_parent_4eme_degre, None),
                 calc_droits(param.abattement_neveu, param.taux_neveu, None),
                 calc_droits(param.abattement_fratrie, 0, param.bareme_fratrie),
-                calc_droits(param.abattement_ascendant, 0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_arriere_petit_enfant, 0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_petit_enfant, 0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_enfant, 0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_epoux_pacs, 0, param.bareme_epoux_pacs),
+                calc_droits(param.abattement_ascendant, 0,
+                            param.bareme_ligne_directe),
+                calc_droits(param.abattement_arriere_petit_enfant,
+                            0, param.bareme_ligne_directe),
+                calc_droits(param.abattement_petit_enfant,
+                            0, param.bareme_ligne_directe),
+                calc_droits(param.abattement_enfant, 0,
+                            param.bareme_ligne_directe),
+                calc_droits(param.abattement_epoux_pacs,
+                            0, param.bareme_epoux_pacs),
                 ]
             )
         return montant_droits_donation
