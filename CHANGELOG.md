@@ -1,5 +1,16 @@
 # CHANGELOG
 
+### 0.5.2 [#3](https://github.com/openfisca/openfisca-france-inheritance/pull/3)
+
+* Amélioration technique.
+* Périodes concernées : non applicable
+* Zones impactées : non applicable
+* Détails :
+  - Reporte le contenu de `COPYING` dans `LICENSE` mettant en cohérence la licence à AGPL v3
+  - Initialise une configuration d'intégration continue pour GitHub Actions dans `.github/workflows/workflow.yml`
+    * Définit un job de `build` et un job de `test-yaml`
+  - Ajoute des modèles d'issue et de demande de tirage GitHub
+
 ### 0.5.1 [#2](https://github.com/openfisca/openfisca-france-inheritance/pull/2)
 
 * Changement mineur

@@ -1,0 +1,67 @@
+name: OpenFisca-France-Inheritance
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened]
+
+env:
+  DEFAULT_PYTHON_VERSION: '3.11.11'
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+      - name: Cache build
+        id: restore-build
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.pythonLocation }}
+          key: build-${{ env.DEFAULT_OS }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-${{ github.sha }}
+          # in case of a cache miss (systematically unless the same commit is built repeatedly), 
+          # the keys below will be used to restore dependencies from previous builds,
+          # and the cache will be stored at the end of the job, making up-to-date dependencies 
+          # available for all jobs of the workflow;
+          # see more at https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#example-using-the-cache-action
+          restore-keys: |
+            build-${{ env.DEFAULT_OS }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}
+            build-${{ env.DEFAULT_OS }}-${{ env.pythonLocation }}
+      - name: Build package
+        # rebuild for updates or for missing cache
+        # the build will be sent to cache in "Post cache build"
+        run: make build
+      - name: Cache release
+        id: restore-release
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: release-${{ env.DEFAULT_OS }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-${{ github.sha }}
+
+  test-yaml:
+    runs-on: ubuntu-24.04
+    needs: [ build ]
+    strategy:
+      fail-fast: false
+    continue-on-error: true # for now, allow the tests to fail :-O
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
+      - name: Cache build
+        id: restore-build
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.pythonLocation }}
+          key: build-${{ env.DEFAULT_OS }}-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-${{ github.sha }}
+      - name: Run YAML tests
+        run: |
+          openfisca test --country-package openfisca_france_inheritance tests
