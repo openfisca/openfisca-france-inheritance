@@ -1,4 +1,4 @@
-description: Taux de tarification de droits de mutation entre parents jusqu'au 4e degré inclusivement
+description: Taux de tarification de droits de mutation entre parents jusqu'au 4e degré inclusivement et oncle/tante
 values:
   2015-01-01:
     value: 0.55
