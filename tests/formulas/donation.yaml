@@ -6,7 +6,7 @@
     lien_parente:
       2025: ['aucun', 'aucun']
     droit_exoneration_familial:
-      2025: [False, False]
+      2025: [false, false]
   output:
     droits_mutation:
       2025: [6000, 600]
@@ -19,7 +19,7 @@
     lien_parente:
       2025: ['quatrieme_degre', 'quatrieme_degre']
     droit_exoneration_familial:
-      2025: [False, False]
+      2025: [false, false]
   output:
     droits_mutation:
       2025: [5500, 550]
@@ -32,11 +32,10 @@
     lien_parente:
       2025: ['neveu', 'neveu', 'neveu', 'neveu']
     droit_exoneration_familial:
-      2025: [True, False, True, True]
+      2025: [true, false, true, true]
   output:
     droits_mutation:
       2025: [528092.4, 545618.15, 33092.4, 0]
-# 50618.15
 
 - name: Droits de mutation à titre gratuit entre frères ou sœurs
   absolute_error_margin: 0.01
@@ -46,7 +45,7 @@
     lien_parente:
       2025: ['fratrie', 'fratrie', 'fratrie', 'fratrie']
     droit_exoneration_familial:
-      2025: [False, False, False, False]
+      2025: [false, false, false, false]
   output:
     droits_mutation:
       2025: [440387.6, 35387.6, 35, 0]
@@ -59,7 +58,7 @@
     lien_parente:
       2025: ['ascendant', 'ascendant', 'ascendant', 'ascendant']
     droit_exoneration_familial:
-      2025: [False, False, False, False]
+      2025: [false, false, false, false]
   output:
     droits_mutation:
       2025: [212961.95, 0, 0, 0]
@@ -72,7 +71,7 @@
     lien_parente:
       2025: ['arriere_petit_enfant', 'arriere_petit_enfant', 'arriere_petit_enfant', 'arriere_petit_enfant']
     droit_exoneration_familial:
-      2025: [True, False, True, True]
+      2025: [true, false, true, true]
   output:
     droits_mutation:
       2025: [1095665.5, 1110004.80, 10759.35, 0]
@@ -85,7 +84,7 @@
     lien_parente:
       2025: ['petit_enfant', 'petit_enfant', 'petit_enfant', 'petit_enfant']
     droit_exoneration_familial:
-      2025: [True, False, True, True]
+      2025: [true, false, true, true]
   output:
     droits_mutation:
       2025: [1083715.80, 1098055.05, 5448.35, 0]
@@ -98,7 +97,7 @@
     lien_parente:
       2025: ['enfant', 'enfant', 'enfant', 'enfant', 'enfant']
     droit_exoneration_familial:
-      2025: [True, False, True, True, True]
+      2025: [true, false, true, true, true]
   output:
     droits_mutation:
       2025: [1053055, 1067394.30, 828055.05, 1821.35, 0]
@@ -111,8 +110,7 @@
     lien_parente:
       2025: ['epoux_pacs', 'epoux_pacs', 'epoux_pacs', 'epoux_pacs']
     droit_exoneration_familial:
-      2025: [False, False, False, False]
+      2025: [false, false, false, false]
   output:
     droits_mutation:
       2025: [1075080.8, 219400.75, 1691.20, 0]
-# 1084080.7
