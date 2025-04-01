@@ -3,8 +3,8 @@ metadata:
   documentation_start: true
   short_label: Neveux et nièces
   order:
-  - abattement_neveuxnieces_donation
-  - abattement_neveuxnieces_succession
+  - donation
+  - succession
 documentation: |-
   On se réfère à l'article 790-C, les dispositions sont spéciales aux donations, l'abattement pour les neveux et nièces régit de 2005 à 2007.
   Article 790-C: https://www.legifrance.gouv.fr/codes/id/LEGIARTI000006305453/2005-12-31/
