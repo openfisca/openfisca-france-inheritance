@@ -134,6 +134,11 @@ Donation = build_entity(
             'label': 'Arrières-Petits-Enfants donataires',
             'doc': 'Les arrières-petits-enfants vivants au décès de leur parent donateur.'
             },
+        {
+            'key': 'parent_4eme_degre',
+            'label': 'Parent de 4ème degré donataires',
+            'doc': 'Les parents de 4ème degré vivants au décès de leur parent donateur.'
+            },
         ]
     )
 
