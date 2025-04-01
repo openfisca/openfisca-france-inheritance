@@ -161,6 +161,26 @@ class is_enfant_donataire(Variable):
         return individu.has_role(Donation.ENFANT_DONATAIRE)
 
 
+class is_petit_enfant_donataire(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Est un petit-enfant donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.PETIT_ENFANT_DONATAIRE)
+
+
+class is_arriere_petit_enfant_donataire(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Est un arrière-petit-enfant donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE)
+
+
 class is_frere_soeur(Variable):
     value_type = bool
     entity = Individu
