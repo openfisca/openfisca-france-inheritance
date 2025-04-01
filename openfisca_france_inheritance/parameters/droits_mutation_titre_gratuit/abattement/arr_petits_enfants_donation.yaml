@@ -16,7 +16,7 @@ values:
     value: 5310
 metadata:
   short_label: Arrières-petits-enfants (donation uniquement)
-  last_value_still_valid_on: "2023-04-01"
+  last_value_still_valid_on: "2025-01-25"
   unit: currency
   reference:
     2006-01-01:
@@ -38,8 +38,10 @@ metadata:
       title: Décret n°2011-645 du 9 juin 2011 - art. 1
       href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024152033
     2013-01-01:
-      title: LOI n°2012-958 du 16 août 2012 - art. 5 (V)
-      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000026288927
+      - title: LOI n°2012-958 du 16 août 2012 - art. 5 (V)
+        href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000026288927
+      - title: Article 790 D du code général des impôts
+        href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000026292594
   official_journal_date:
     2006-01-01: "2005-12-31"
     2008-01-01: "2008-12-27"
