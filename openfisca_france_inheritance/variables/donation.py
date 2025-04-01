@@ -174,28 +174,6 @@ class passif_propre_don(Variable):
 
 # TEMPORAIRE - formules initiales https://github.com/openfisca/openfisca-france-inheritance/pull/4 : 
 
-class LienParente(Enum):
-    __order__ = 'aucun quatrieme_degre neveu fratrie arriere_petit_enfant petit_enfant enfant ascendant epoux_pacs'
-    aucun = 'Aucun lien de parenté'
-    quatrieme_degre = 'Parent de 4ème degré'
-    neveu = 'Neveu ou Nièce'
-    fratrie = 'Frère ou soeur'
-    arriere_petit_enfant = 'Arrière petit enfant'
-    petit_enfant = 'Petit enfant'
-    enfant = 'Enfant'
-    ascendant = 'Mère, père, grand-mère, grand-père'
-    epoux_pacs = 'Epoux-se ou partenaire Pacs'
-
-
-class lien_parente(Variable):
-    value_type = Enum
-    possible_values = LienParente
-    default_value = LienParente.aucun
-    entity = Individu
-    label = 'Lien de parenté entre le donateur et le donataire'
-    definition_period = YEAR
-
-
 class droit_exoneration_familial(Variable):
     value_type = bool
     default_value = True
