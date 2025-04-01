@@ -1,0 +1,10 @@
+description: Donations
+metadata:
+  order:
+  - seuil_tranche_conjoint_donation_t1
+  - seuil_tranche_conjoint_donation_t2
+  - seuil_tranche_conjoint_donation_t3
+  - seuil_tranche_conjoint_donation_t4
+  - seuil_tranche_conjoint_donation_t5
+  - seuil_tranche_conjoint_donation_t6
+  - seuil_tranche_conjoint_donation_t7

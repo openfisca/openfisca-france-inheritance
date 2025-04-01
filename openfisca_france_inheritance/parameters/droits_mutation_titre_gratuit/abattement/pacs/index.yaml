@@ -3,8 +3,8 @@ metadata:
   documentation_start: true
   short_label: Individus Pacsés
   order:
-  - abattement_pacs_donation
-  - abattement_pacs_succession
+  - donation
+  - succession
 documentation: |-
   Création de la loi n°99-944 du 15 novembre 1999 - art. 1 () JORF 16 novembre 1999 du code civil.
 
