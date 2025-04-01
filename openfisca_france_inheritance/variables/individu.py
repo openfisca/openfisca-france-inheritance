@@ -3,6 +3,24 @@ from openfisca_core.model_api import *
 from openfisca_france_inheritance.entities import Donation, Individu, Succession
 
 
+AGE_INT_MINIMUM = -9999
+
+class age(Variable):
+    value_type = int
+    default_value = AGE_INT_MINIMUM
+    entity = Individu
+    label = 'Âge au premier jour du mois'
+    definition_period = MONTH
+    is_period_size_independent = True
+    set_input = set_input_dispatch_by_period
+
+class date_deces(Variable):
+    value_type = date
+    entity = Individu
+    label = 'Date du décès'
+    definition_period = ETERNITY
+
+
 class TypesRoleRepresentant(Enum):
     __order__ = 'decede enfant epoux parent freres_soeurs'  # Needed to preserve the enum order in Python 2
     decede = 'Personne décédée'
@@ -11,13 +29,6 @@ class TypesRoleRepresentant(Enum):
     epoux = 'Époux'
     parent = 'Parent'
     freres_soeurs = 'Frères et Soeurs'
-
-
-class date_deces(Variable):
-    value_type = date
-    entity = Individu
-    label = 'Date du décès'
-    definition_period = ETERNITY
 
 
 class date_donation(Variable):
@@ -120,6 +131,16 @@ class index_represente(Variable):
     definition_period = ETERNITY
 
 
+class is_donateur(Variable):
+    value_type = bool
+    entity = Individu
+    label = 'Est donateur'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.DONATEUR)
+
+
 class is_enfant(Variable):
     value_type = bool
     entity = Individu
@@ -138,6 +159,26 @@ class is_enfant_donataire(Variable):
 
     def formula(individu, period, parameters):
         return individu.has_role(Donation.ENFANT_DONATAIRE)
+
+
+class is_petit_enfant_donataire(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Est un petit-enfant donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.PETIT_ENFANT_DONATAIRE)
+
+
+class is_arriere_petit_enfant_donataire(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Est un arrière-petit-enfant donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE)
 
 
 class is_frere_soeur(Variable):
