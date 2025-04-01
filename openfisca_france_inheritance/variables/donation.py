@@ -7,12 +7,20 @@ from openfisca_france_inheritance.entities import Donation
 #     entity = Donations
 #     label = "Année de la donation"
 #     definition_period = ETERNITY
-#
-# class don(Variable):
-#     value_type = float
-#     entity = Donations
-#     label = "Don"
-#     definition_period = ETERNITY
+
+
+class don(Variable):
+    value_type = float
+    default_value = 0.0
+    entity = Donation
+    label = 'Montant de donation'
+    definition_period = YEAR
+    documentation = '''
+    Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
+    Assiette des droits de mutation à titre gratuit : 
+    https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
+    '''
+
 
 # # class don_recu(Variable):
 #     value_type = float
@@ -186,13 +194,6 @@ class exoneration_don_familial(Variable):
 
 # TEMPORAIRE - formules initiales https://github.com/openfisca/openfisca-france-inheritance/pull/4 : 
 
-class don(Variable):
-    value_type = float
-    default_value = 0.0
-    entity = Individu
-    label = 'Montant de donation'
-    definition_period = YEAR
-    reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
 
 
 class droits_mutation(Variable):
