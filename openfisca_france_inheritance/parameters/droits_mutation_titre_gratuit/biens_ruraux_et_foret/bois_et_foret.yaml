@@ -1,0 +1,18 @@
+description: Les droits de succession-donation sur les bois et les forêts
+values:
+  1979-07-01:
+    value: 0.75
+metadata:
+  short_label: Abattement sur les bois et les forêts
+  last_value_still_valid_on: "2023-04-01"
+  unit: /1
+  reference:
+    1979-07-01:
+      title: Création du texte de loi à portée générale
+      href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006310401/1979-07-01/
+  official_journal_date:
+    1979-07-01: "1979-07-01"
+documentation: |-
+  Les bois et les forêts et les parts de groupement forestier sont soumis aux droits de succession ou aux droits de donation sur seulement 25% de leur valeur. Le bénéfice de cet abattement de 75% est soumis à plusieurs conditions.
+    - Le directeur départemental de l'agriculture et de la forêt doit attester que les bois et forêts concernés sont susceptibles d'aménagement ou d'exploitation régulière, que les friches et landes sont susceptibles de reboisement et présentent une vocation forestière.
+    - Les héritiers ou bénéficiaires de la donation doivent s'engager à une exploitation normale pendant trente ans. Si le défunt avait acheté des parts de groupement forestier, l'exonération ne porte que sur les parts achetées depuis plus de deux ans.

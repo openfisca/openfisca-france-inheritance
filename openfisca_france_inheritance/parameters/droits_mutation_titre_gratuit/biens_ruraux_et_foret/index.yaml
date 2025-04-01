@@ -1,0 +1,7 @@
+description: Terres agricoles, biens ruraux, bois, et forêt
+metadata:
+  documentation_start: true
+  order:
+  - biens_ruraux_et_terres_agricoles
+  - bois_et_foret
+documentation: "Création de la loi au 1er juillet 1979, pas de modification portant sur la valeur dans les différentes versions de la loi (dernière version : 2017)."

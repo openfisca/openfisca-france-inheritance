@@ -1,0 +1,39 @@
+description: Pacte Dutreil - Durée de conservation des titres (Pré-transmission)
+values:
+  2003-08-05:
+    value: 2
+  2005-08-03:
+    value: 2
+  2007-09-26:
+    value: 2
+  2007-12-28:
+    value: 2
+  2011-07-30:
+    value: 2
+metadata:
+  short_label: Durée de conservation des titres (Pré-transmission)
+  last_value_still_valid_on: "2023-04-01"
+  unit: year
+  reference:
+    2003-08-05:
+      title: Loi n°2003-721 du 1 août 2003 - art. 43 () JORF 5 août 2003 en vigueur le 1er janvier 2004
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000001247356
+    2005-08-03:
+      title: Loi n°2005-882 du 2 août 2005 - art. 28 () JORF 3 août 2005
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000001293766
+    2007-09-26:
+      title: LOI n°2007-1822 du 24 décembre 2007 - art. 15 (V)
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000017853477
+    2007-12-28:
+      title: LOI n°2007-1824 du 25 décembre 2007 - art. 31
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000017839749
+    2011-07-30:
+      title: LOI n°2011-900 du 29 juillet 2011 - art. 8
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000024413825
+  official_journal_date:
+    2003-08-05: "2003-08-05"
+    2005-08-03: "2005-08-03"
+    2007-09-26: "2007-09-27"
+    2007-12-28: "2007-12-28"
+    2011-07-30: "2011-07-30"
+documentation: "Avant la transmission : s'engager à conserver une partie des titres pendant une durée de 2ans."

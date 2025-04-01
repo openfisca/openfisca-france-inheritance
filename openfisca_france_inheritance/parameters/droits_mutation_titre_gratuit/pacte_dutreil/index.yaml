@@ -1,0 +1,14 @@
+description: Pacte Dutreil
+metadata:
+  documentation_start: true
+  order:
+  - abattement
+  - bonus_donation
+  - duree_conservation_titre_pre_transmission
+  - duree_conservation_titre_post_transmission
+  - duree_fonction_direction
+documentation: |-
+  On se réfère à l'article 787 C du code général des impôts.
+  Le pacte Dutreil est Outil fiscal pour transmettre une entreprise par donation ou succession. Ce pacte permet d'aider à la stabilité des entreprises et la pérennité des emplois.
+  L'article 790 du CGI nous indique que les entreprises bénéficient d'une réduction de 50 % (en plus) lorsque le donateur est âgé de moins de soixante-dix ans. (https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000024430025)
+  Celui-ci est soumis à différentes conditions, voici les 3 conditions majeures :
