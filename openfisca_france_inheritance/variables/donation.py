@@ -172,15 +172,19 @@ class passif_propre_don(Variable):
     definition_period = ETERNITY
 
 
-# TEMPORAIRE - formules initiales https://github.com/openfisca/openfisca-france-inheritance/pull/4 : 
-
-class droit_exoneration_familial(Variable):
-    value_type = bool
-    default_value = True
-    entity = Individu
-    label = 'Droit à l exonération familial, True si le donateur a moins de 80 ans et le donataire plus de 18 ans'
+class exoneration_don_familial(Variable):
+    value_type = float
+    default_value = 0.0
+    entity = Donation
+    label = "Montant de l'exonération pour don familial"
     definition_period = YEAR
+    reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
+    documentation = '''
+    Exonération pour don familial applicable si le donateur a moins de 80 ans et le donataire plus de 18 ans.
+    '''
 
+
+# TEMPORAIRE - formules initiales https://github.com/openfisca/openfisca-france-inheritance/pull/4 : 
 
 class don(Variable):
     value_type = float
