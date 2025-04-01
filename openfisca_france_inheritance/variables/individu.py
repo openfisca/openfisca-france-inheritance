@@ -3,6 +3,13 @@ from openfisca_core.model_api import *
 from openfisca_france_inheritance.entities import Donation, Individu, Succession
 
 
+class date_deces(Variable):
+    value_type = date
+    entity = Individu
+    label = 'Date du décès'
+    definition_period = ETERNITY
+
+
 class TypesRoleRepresentant(Enum):
     __order__ = 'decede enfant epoux parent freres_soeurs'  # Needed to preserve the enum order in Python 2
     decede = 'Personne décédée'
@@ -11,13 +18,6 @@ class TypesRoleRepresentant(Enum):
     epoux = 'Époux'
     parent = 'Parent'
     freres_soeurs = 'Frères et Soeurs'
-
-
-class date_deces(Variable):
-    value_type = date
-    entity = Individu
-    label = 'Date du décès'
-    definition_period = ETERNITY
 
 
 class date_donation(Variable):
@@ -118,6 +118,16 @@ class index_represente(Variable):
     entity = Individu
     label = "Index de l'individu représenté par cet individu"
     definition_period = ETERNITY
+
+
+class is_donateur(Variable):
+    value_type = bool
+    entity = Individu
+    label = 'Est donateur'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.DONATEUR)
 
 
 class is_enfant(Variable):
