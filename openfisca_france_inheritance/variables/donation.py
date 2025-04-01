@@ -14,7 +14,7 @@ class don(Variable):
     default_value = 0.0
     entity = Donation
     label = 'Montant de donation'
-    definition_period = YEAR
+    definition_period = MONTH
     documentation = '''
     Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
     Assiette des droits de mutation à titre gratuit : 
