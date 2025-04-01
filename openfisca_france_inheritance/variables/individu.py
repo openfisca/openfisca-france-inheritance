@@ -3,6 +3,17 @@ from openfisca_core.model_api import *
 from openfisca_france_inheritance.entities import Donation, Individu, Succession
 
 
+AGE_INT_MINIMUM = -9999
+
+class age(Variable):
+    value_type = int
+    default_value = AGE_INT_MINIMUM
+    entity = Individu
+    label = 'Âge au premier jour du mois'
+    definition_period = MONTH
+    is_period_size_independent = True
+    set_input = set_input_dispatch_by_period
+
 class date_deces(Variable):
     value_type = date
     entity = Individu
