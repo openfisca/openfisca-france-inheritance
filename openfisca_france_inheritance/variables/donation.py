@@ -1,6 +1,6 @@
 from openfisca_core.model_api import *
 
-from openfisca_france_inheritance.entities import Donation
+from openfisca_france_inheritance.entities import Individu, Donation
 
 # class date(Variable):
 #     value_type = int
@@ -180,73 +180,87 @@ class passif_propre_don(Variable):
     definition_period = ETERNITY
 
 
-class exoneration_don_familial(Variable):
-    value_type = float
-    default_value = 0.0
-    entity = Donation
-    label = "Montant de l'exonération pour don familial"
-    definition_period = YEAR
-    reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
-    documentation = '''
-    Exonération pour don familial applicable si le donateur a moins de 80 ans et le donataire plus de 18 ans.
-    '''
+# TODO entité à confirmer, formule à compléter et tester
+# class exoneration_don_familial(Variable):
+#     value_type = float
+#     default_value = 0.0
+#     entity = Individu
+#     label = "Montant de l'exonération pour don familial s'appliquant au donataire"
+#     definition_period = YEAR
+#     reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
+# 
+#     def formula_2015_01_01(individu, period, parameters):
+#         parametres_period = parameters(period).droits_mutation_titre_gratuit
+# 
+#         age = individu('age', period)
+#         is_donateur = individu('is_donateur', period)
+#         age_donataire_eligible = ~is_donateur * ( age >= parametres_period.exoneration.age_minimal_donataire )
+#         # non modélisé : le donataire a fait l'objet d'une mesure d'émancipation au jour de la transmission
+# 
+#         # TODO au niveau de la Donation ? : 
+#         # age_donateur_eligible = is_donateur * ( age < parametres_period.exoneration.age_maximal_donateur )
+# 
+#         condition_lien_parente = (
+#             individu('is_enfant_donataire', period)
+#             + individu('is_petit_enfant_donataire', period)
+#             + individu('is_arriere_petit_enfant_donataire', period)
+#             )
+# 
+#         plafond_exoneration_don_familial = parametres_period.exoneration.exoneration_don_familial
+# 
+#         return age_donataire_eligible * condition_lien_parente * plafond_exoneration_don_familial
 
 
-# TEMPORAIRE - formules initiales https://github.com/openfisca/openfisca-france-inheritance/pull/4 : 
-
-
-
-class droits_mutation(Variable):
-    value_type = float
-    default_value = 0.0
-    entity = Individu
-    label = 'Droits de mutation à titre gratuit'
-    definition_period = YEAR
-    reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
-
-    def formula_2015_01_01(individu, period, parameters):
-        don = individu('don', period)
-        lien_parente = individu('lien_parente', period)
-        droit_exoneration_familial = individu(
-            'droit_exoneration_familial', period)
-        param = parameters(period).taxation_capital.donation
-
-        def calc_droits(abattement, taux, bareme):
-            exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
-            base_imposable = max_(don - exoneration_familial - abattement, 0)
-            if bareme:
-                return bareme.calc(base_imposable)
-            return taux * base_imposable
-
-        montant_droits_donation = select(
-            [
-                (lien_parente == LienParente.aucun),
-                (lien_parente == LienParente.quatrieme_degre),
-                (lien_parente == LienParente.neveu),
-                (lien_parente == LienParente.fratrie),
-                (lien_parente == LienParente.ascendant),
-                (lien_parente == LienParente.arriere_petit_enfant),
-                (lien_parente == LienParente.petit_enfant),
-                (lien_parente == LienParente.enfant),
-                (lien_parente == LienParente.epoux_pacs),
-                ],
-            [
-                calc_droits(0, param.taux_sans_parente, None),
-                calc_droits(0, param.taux_parent_4eme_degre, None),
-                calc_droits(param.abattement_neveu, param.taux_neveu, None),
-                calc_droits(param.abattement_fratrie, 0, param.bareme_fratrie),
-                calc_droits(param.abattement_ascendant, 0,
-                            param.bareme_ligne_directe),
-                calc_droits(param.abattement_arriere_petit_enfant,
-                            0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_petit_enfant,
-                            0, param.bareme_ligne_directe),
-                calc_droits(param.abattement_enfant, 0,
-                            param.bareme_ligne_directe),
-                calc_droits(param.abattement_epoux_pacs,
-                            0, param.bareme_epoux_pacs),
-                ]
-            )
-        return montant_droits_donation
-
-
+# TODO à migrer au regard de la représentation des liens de parenté dans openfisca_france_inheritance (cf. entité Donation)
+# class droits_mutation(Variable):
+#     value_type = float
+#     default_value = 0.0
+#     entity = Individu
+#     label = 'Droits de mutation à titre gratuit'
+#     definition_period = YEAR
+#     reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
+# 
+#     def formula_2015_01_01(individu, period, parameters):
+#         don = individu('don', period)
+#         lien_parente = individu('lien_parente', period)
+#         droit_exoneration_familial = individu(
+#             'droit_exoneration_familial', period)
+#         param = parameters(period).taxation_capital.donation
+# 
+#         def calc_droits(abattement, taux, bareme):
+#             exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
+#             base_imposable = max_(don - exoneration_familial - abattement, 0)
+#             if bareme:
+#                 return bareme.calc(base_imposable)
+#             return taux * base_imposable
+# 
+#         montant_droits_donation = select(
+#             [
+#                 (lien_parente == LienParente.aucun),
+#                 (lien_parente == LienParente.quatrieme_degre),
+#                 (lien_parente == LienParente.neveu),
+#                 (lien_parente == LienParente.fratrie),
+#                 (lien_parente == LienParente.ascendant),
+#                 (lien_parente == LienParente.arriere_petit_enfant),
+#                 (lien_parente == LienParente.petit_enfant),
+#                 (lien_parente == LienParente.enfant),
+#                 (lien_parente == LienParente.epoux_pacs),
+#                 ],
+#             [
+#                 calc_droits(0, param.taux_marginal_non_parents_donation, None),
+#                 calc_droits(0, param.taux_marginal_parents_degre4_donation, None),
+#                 calc_droits(param.abattement_neveuxnieces_donation, param.taux_neveu, None),
+#                 calc_droits(param.abattement_freres_soeurs, 0, param.bareme_fratrie),
+#                 calc_droits(param.abattement_ascendant, 0,
+#                             param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_arr_petits_enfants_donation,
+#                             0, param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_petits_enfants_donation,
+#                             0, param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_enfants_donation, 0,
+#                             param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_epoux_donation,  # ou, de même : abattement_pacs_donation
+#                             0, param.bareme_epoux_pacs),
+#                 ]
+#             )
+#         return montant_droits_donation
