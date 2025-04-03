@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 0.5.3 [#6](https://github.com/openfisca/openfisca-france-inheritance/pull/6)
+
+* Amélioration technique.
+* Détails :
+  - Ajout de la validation des paramètres
+
 ### 0.5.2 [#3](https://github.com/openfisca/openfisca-france-inheritance/pull/3)
 
 * Amélioration technique.
@@ -24,7 +30,7 @@
 
 * Amélioration technique.
 * Périodes concernées : toutes.
-* Zones impactées : 
+* Zones impactées :
   - `openfisca_france_inheritance/scenarios.py`
 * Détails :
   - Migre d'un `setup.py` à `pyproject.toml`
