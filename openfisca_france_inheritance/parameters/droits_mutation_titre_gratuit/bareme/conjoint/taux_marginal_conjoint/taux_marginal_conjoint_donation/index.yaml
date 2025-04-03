@@ -1,0 +1,10 @@
+description: Donations
+metadata:
+  order:
+  - taux_marginal_conjoint_donation_t1
+  - taux_marginal_conjoint_donation_t2
+  - taux_marginal_conjoint_donation_t3
+  - taux_marginal_conjoint_donation_t4
+  - taux_marginal_conjoint_donation_t5
+  - taux_marginal_conjoint_donation_t6
+  - taux_marginal_conjoint_donation_t7
