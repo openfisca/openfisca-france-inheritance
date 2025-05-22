@@ -132,9 +132,9 @@ class part_taxable_don(Variable):
         nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
 
         abattement = parameters(period).droits_mutation_titre_gratuit.abattement
-        abattement_epoux_donataire = abattement.abattement_epoux.abattement_epoux_donation
-        abattement_enfants_donataires = parameters(period).abattement.abattement_enfants.abattement_enfants_donation
-        abattement_freres_soeurs_donataires = parameters(period).abattement.abattement_freres_soeurs
+        abattement_epoux_donataire = abattement.conjoint.donation
+        abattement_enfants_donataires = abattement.enfants.donation
+        abattement_freres_soeurs_donataires = abattement.adelphite
 
         epoux_donataire = donation('epoux_donataire', period)
         enfants_donataires = nombre_enfants_donataires > 0
