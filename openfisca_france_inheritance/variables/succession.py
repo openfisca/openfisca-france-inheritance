@@ -85,8 +85,6 @@ class droits_sur_succession(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        bareme = parameters(period).droits_mutation_titre_gratuit.bareme
-        succession = bareme.bareme_ligne_directe
         return succession.sum(succession.members('droits', period))
 
 
