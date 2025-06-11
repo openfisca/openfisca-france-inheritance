@@ -4,5 +4,6 @@ metadata:
   order:
   - conjoint
   - pacs
-  - ligne_directe
+  - ligne_directe_donation
+  - ligne_directe_succession
   - autres
