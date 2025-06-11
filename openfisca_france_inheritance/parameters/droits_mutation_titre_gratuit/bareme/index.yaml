@@ -3,7 +3,7 @@ metadata:
   documentation_start: true
   order:
   - conjoint_donation
-  - conjoint
+  - conjoint_succession
   - pacs
   - ligne_directe_donation
   - ligne_directe_succession
