@@ -12,7 +12,7 @@ values:
     value: 4
 metadata:
   short_label: Durée de conservation des titres (Post-transmission)
-  last_value_still_valid_on: "2023-04-01"
+  last_value_still_valid_on: "2025-06-12"
   unit: year
   reference:
     2003-08-05:

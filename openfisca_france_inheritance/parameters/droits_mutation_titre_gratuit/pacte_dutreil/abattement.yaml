@@ -12,7 +12,7 @@ values:
     value: 0.75
 metadata:
   short_label: Abattement sur la valeur de l'entreprise
-  last_value_still_valid_on: "2023-04-01"
+  last_value_still_valid_on: "2025-06-12"
   unit: /1
   reference:
     2003-08-05:

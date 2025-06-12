@@ -12,7 +12,7 @@ values:
     value: 3
 metadata:
   short_label: Durée de la fonction de direction (Pré et Post transmission)
-  last_value_still_valid_on: "2023-04-01"
+  last_value_still_valid_on: "2025-06-12"
   unit: year
   reference:
     2003-08-05:

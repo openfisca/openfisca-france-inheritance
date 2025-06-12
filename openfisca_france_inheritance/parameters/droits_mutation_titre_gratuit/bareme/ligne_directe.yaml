@@ -285,7 +285,7 @@ brackets:
       value: 0.45
 metadata:
   short_label: Descendants en ligne directe
-  last_value_still_valid_on: "2023-04-01"
+  last_value_still_valid_on: "2025-06-12"
   rate_unit: /1
   threshold_unit: currency-EUR
   type: marginal_rate
