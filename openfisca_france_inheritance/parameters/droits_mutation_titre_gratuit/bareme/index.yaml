@@ -2,8 +2,7 @@ description: Seuils et taux d'imposition au titre des droits de mutation à titr
 metadata:
   documentation_start: true
   order:
-  - conjoint_donation
-  - conjoint_succession
+  - conjoint
   - pacs
   - ligne_directe
   - autres
