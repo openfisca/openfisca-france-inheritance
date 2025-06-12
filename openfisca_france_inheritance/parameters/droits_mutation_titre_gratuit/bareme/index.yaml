@@ -5,6 +5,5 @@ metadata:
   - conjoint_donation
   - conjoint_succession
   - pacs
-  - ligne_directe_donation
-  - ligne_directe_succession
+  - ligne_directe
   - autres

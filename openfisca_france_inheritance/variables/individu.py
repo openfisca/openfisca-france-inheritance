@@ -80,7 +80,7 @@ class droits(Variable):
     def formula(individu, period, parameters):
         part_taxable = individu.succession('part_taxable', period)
         dmtg = parameters(period).droits_mutation_titre_gratuit
-        bareme = dmtg.bareme.ligne_directe_succession
+        bareme = dmtg.bareme.ligne_directe
         droits = bareme.calc(part_taxable)
         return droits
 
