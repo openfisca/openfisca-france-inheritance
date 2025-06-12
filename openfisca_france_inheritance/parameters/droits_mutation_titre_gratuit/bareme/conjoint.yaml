@@ -1,4 +1,4 @@
-description: Barème applicable aux donations entre conjoints
+description: Barème des droits de mutation à titre gratuit applicable entre conjoints
 brackets:
 - threshold:
     1979-07-01:
@@ -283,7 +283,7 @@ brackets:
     2014-12-30:
       value: 0.45
 metadata:
-  short_label: Conjoint (Donation)
+  short_label: Conjoint
   last_value_still_valid_on: "2023-04-01"
   rate_unit: /1
   threshold_unit: currency-EUR
