@@ -24,25 +24,25 @@ brackets:
       value: 0
   rate:
     1979-07-01:
-      value: 0.5
+      value: 0.05
     1984-01-01:
-      value: 0.5
+      value: 0.05
     2002-01-01:
-      value: 0.5
+      value: 0.05
     2008-01-01:
-      value: 0.5
+      value: 0.05
     2009-01-01:
-      value: 0.5
+      value: 0.05
     2010-01-01:
-      value: 0.5
+      value: 0.05
     2011-01-01:
-      value: 0.5
+      value: 0.05
     2012-01-01:
-      value: 0.5
+      value: 0.05
     2013-01-01:
-      value: 0.5
+      value: 0.05
     2014-12-30:
-      value: 0.5
+      value: 0.05
 - threshold:
     1979-07-01:
       value: 50000
