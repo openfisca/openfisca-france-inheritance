@@ -29,7 +29,7 @@ class date_donation(Variable):
 
 
 class LienParente(Enum):
-    __order__ = 'inconnu aucun quatrieme_degre neveu fratrie arriere_petit_enfant petit_enfant enfant ascendant epoux pacs'  # Needed to preserve the enum order in Python 2
+    __order__ = 'inconnu aucun quatrieme_degre neveu adelphite arriere_petit_enfant petit_enfant enfant ascendant pacs epoux'  # Needed to preserve the enum order in Python 2
     inconnu = 'Inconnu'  # valeur neutre en terme de droits de mutation
     aucun = 'Aucun lien de parenté'
     quatrieme_degre = 'Parent de 4ème degré'
