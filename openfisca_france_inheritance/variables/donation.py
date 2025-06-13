@@ -176,3 +176,4 @@ class passif_propre_don(Variable):
     entity = Donation
     label = 'Passif propre'
     definition_period = ETERNITY
+
