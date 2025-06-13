@@ -1,5 +1,5 @@
 description: Taux de tarification de droits de mutation à titre gratuit \
-  entre parents jusqu'au 4e degré inclusivement et oncle/tante
+  entre parents jusqu'au 4e degré inclusivement (dont neveux/nièces et oncles/tantes)
 values:
   1979-07-01:
     value: 0.55
