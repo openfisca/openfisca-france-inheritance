@@ -120,7 +120,7 @@ class droits_donation(Variable):
 
     # TODO EN COURS - migration de la formule d'openfisca-france vers openfisca-france-inheritance
     def formula_2015_01_01(individu, period, parameters):
-        part_taxable_donations = individu.donation('part_taxable_don', period)  # don - exonération - abattement
+        part_taxable_donations = individu.donation('part_taxable_don', period)  # ( don - exonération ) - abattement
         
         role_representant = individu('role_representant', period)
         parametres_tarifs_droits = parameters(period).droits_mutation_titre_gratuit.bareme

@@ -133,23 +133,29 @@ class part_taxable_don(Variable):
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
+        # part_taxable_don = actif_imposable - abattement
+        
         actif_imposable_don = donation('actif_imposable_don', period)
+        
+        # identification des paramètres d'abattement
         nombre_enfants_donataires = donation('nombre_enfants_donataires', period)
         nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
 
-        abattement = parameters(period).droits_mutation_titre_gratuit.abattement
-        abattement_epoux_donataire = abattement.conjoint.donation
-        abattement_enfants_donataires = abattement.enfants.donation
-        abattement_freres_soeurs_donataires = abattement.adelphite
+        parametres_abattement_period = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
+        abattement_enfants_donataires = parametres_abattement_period.enfants.donation
+        abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
 
         epoux_donataire = donation('epoux_donataire', period)
         enfants_donataires = nombre_enfants_donataires > 0
         freres_soeurs_donataires = nombre_freres_soeurs_donataires > 0
 
+        # calcul de la part taxable
         part_taxable_epoux_donataire = max_(actif_imposable_don - abattement_epoux_donataire, 0)
         part_taxable_enfants_donataires = max_(actif_imposable_don / (nombre_enfants_donataires + 1 * (nombre_enfants_donataires == 0)) - abattement_enfants_donataires, 0)
         part_taxable_freres_soeurs_donataires = max_(actif_imposable_don - abattement_freres_soeurs_donataires, 0)
 
+        # Hypothèse sur la structure de l'entité Donation : 1 seul rôle de donataire existe/est actif par Donation
         return select(
             [
                 epoux_donataire > 0,
