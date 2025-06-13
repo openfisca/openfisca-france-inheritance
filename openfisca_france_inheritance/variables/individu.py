@@ -82,10 +82,67 @@ class date_donation(Variable):
 #         return degre_parente
 
 
-class droits(Variable):
+
+# TODO à migrer au regard de la représentation des liens de parenté dans openfisca_france_inheritance (cf. entité Donation)
+# class droits_mutation(Variable):
+#     value_type = float
+#     default_value = 0.0
+#     entity = Individu
+#     label = 'Droits de mutation à titre gratuit'
+#     definition_period = YEAR
+#     reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
+# 
+#     def formula_2015_01_01(individu, period, parameters):
+#         don = individu('don', period)
+#         lien_parente = individu('lien_parente', period)
+#         droit_exoneration_familial = individu(
+#             'droit_exoneration_familial', period)
+#         param = parameters(period).taxation_capital.donation
+#         # à migrer vers : param = parameters(period).droits_mutation_titre_gratuit.abattement ?
+# 
+#         def calc_droits(abattement, taux, bareme):
+#             exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
+#             base_imposable = max_(don - exoneration_familial - abattement, 0)
+#             if bareme:
+#                 return bareme.calc(base_imposable)
+#             return taux * base_imposable
+# 
+#         montant_droits_donation = select(
+#             [
+#                 (lien_parente == LienParente.aucun),
+#                 (lien_parente == LienParente.quatrieme_degre),
+#                 (lien_parente == LienParente.neveu),
+#                 (lien_parente == LienParente.fratrie),
+#                 (lien_parente == LienParente.ascendant),
+#                 (lien_parente == LienParente.arriere_petit_enfant),
+#                 (lien_parente == LienParente.petit_enfant),
+#                 (lien_parente == LienParente.enfant),
+#                 (lien_parente == LienParente.epoux_pacs),
+#                 ],
+#             [
+#                 calc_droits(0, param.taux_marginal_non_parents_donation, None),
+#                 calc_droits(0, param.taux_marginal_parents_degre4_donation, None),
+#                 calc_droits(param.abattement_neveuxnieces_donation, param.taux_neveu, None),
+#                 calc_droits(param.abattement_freres_soeurs, 0, param.bareme_fratrie),
+#                 calc_droits(param.ascendant, 0,
+#                             param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_arr_petits_enfants_donation,
+#                             0, param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_petits_enfants_donation,
+#                             0, param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_enfants_donation, 0,
+#                             param.bareme_ligne_directe),
+#                 calc_droits(param.abattement_epoux_donation,  # ou, de même : abattement_pacs_donation
+#                             0, param.bareme_epoux_pacs),
+#                 ]
+#             )
+#         return montant_droits_donation
+
+
+class droits_mutation(Variable):
     value_type = float
     entity = Individu
-    label = 'Droits sur parts taxables de donations et successions'
+    label = 'Droits de mutation à titre gratuit sur parts taxables de donations et successions'
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
