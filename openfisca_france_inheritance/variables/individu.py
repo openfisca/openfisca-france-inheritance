@@ -255,6 +255,45 @@ class role_representant(Variable):
     definition_period = ETERNITY
 
 
+class exoneration_don_familial(Variable):
+    value_type = float
+    default_value = 0.0
+    entity = Individu
+    label = "Montant de l'exonération pour don familial s'appliquant au donataire"
+    definition_period = YEAR
+    reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
+    documentation = '''
+    Les conditions d'âge de l'exonération s'appliquent au jour de la transmission
+    d'après l'article 790 G du CGI.
+    '''
+
+    def formula_2015_01_01(individu, period, parameters):
+        parametres_exoneration_period = parameters(period).droits_mutation_titre_gratuit.exoneration
+
+        # l'individu est le donataire et il a l'âge minimal requis
+        # non modélisé : le donataire a fait l'objet d'une mesure d'émancipation au jour de la transmission
+        age = individu('age', period)
+        is_donateur = individu('is_donateur', period)
+        age_donataire_eligible = ~is_donateur * ( age >= parametres_exoneration_period.age_minimal_donataire )
+        
+
+        # le donateur d'un don dont bénéficie l'individu à un âge en dessous du maximal fixé par l'exonération
+        is_donateur_individus_donations = individu.donation.members('is_donateur', period)
+        age_donateur_eligible = is_donateur_individus_donations * ( age < parametres_exoneration_period.age_maximal_donateur )
+
+        condition_lien_parente = (
+            individu('is_enfant_donataire', period)
+            + individu('is_petit_enfant_donataire', period)
+            + individu('is_arriere_petit_enfant_donataire', period)
+            )
+
+        eligibilite_exoneration = age_donateur_eligible * age_donataire_eligible * condition_lien_parente
+        plafond_exoneration_don_familial = parametres_exoneration_period.exoneration_don_familial
+
+        # TODO ajuster l'exonération au montant du dont pour qu'elle ne le dépasse pas
+        return eligibilite_exoneration * plafond_exoneration_don_familial
+
+
 class taux_sur_part_recue(Variable):
     value_type = float
     entity = Individu

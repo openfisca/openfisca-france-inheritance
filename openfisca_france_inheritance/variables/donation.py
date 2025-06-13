@@ -8,20 +8,6 @@ from openfisca_france_inheritance.entities import Individu, Donation
 #     label = "Année de la donation"
 #     definition_period = ETERNITY
 
-
-class don(Variable):
-    value_type = float
-    default_value = 0.0
-    entity = Donation
-    label = 'Montant de donation'
-    definition_period = MONTH
-    documentation = '''
-    Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
-    Assiette des droits de mutation à titre gratuit : 
-    https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
-    '''
-
-
 # # class don_recu(Variable):
 #     value_type = float
 #     entity = Donations
@@ -44,6 +30,18 @@ class don(Variable):
 #
 #         is_enfant_donataire_holder = donation('is_enfant_donataire', period)
 #         return self.sum_by_entity(is_enfant_donataire_holder)
+
+class don(Variable):
+    value_type = float
+    default_value = 0.0
+    entity = Donation
+    label = 'Montant de donation'
+    definition_period = MONTH
+    documentation = '''
+        Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
+        Assiette des droits de mutation à titre gratuit : 
+        https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
+    '''
 
 
 class actif_de_communaute_don(Variable):
@@ -131,7 +129,7 @@ class part_epoux_don(Variable):
 class part_taxable_don(Variable):
     value_type = float
     entity = Donation
-    label = 'Part taxable'
+    label = "Part taxable d'une donation"
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
@@ -178,37 +176,6 @@ class passif_propre_don(Variable):
     entity = Donation
     label = 'Passif propre'
     definition_period = ETERNITY
-
-
-# TODO entité à confirmer, formule à compléter et tester
-# class exoneration_don_familial(Variable):
-#     value_type = float
-#     default_value = 0.0
-#     entity = Individu
-#     label = "Montant de l'exonération pour don familial s'appliquant au donataire"
-#     definition_period = YEAR
-#     reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
-# 
-#     def formula_2015_01_01(individu, period, parameters):
-#         parametres_period = parameters(period).droits_mutation_titre_gratuit
-# 
-#         age = individu('age', period)
-#         is_donateur = individu('is_donateur', period)
-#         age_donataire_eligible = ~is_donateur * ( age >= parametres_period.exoneration.age_minimal_donataire )
-#         # non modélisé : le donataire a fait l'objet d'une mesure d'émancipation au jour de la transmission
-# 
-#         # TODO au niveau de la Donation ? : 
-#         # age_donateur_eligible = is_donateur * ( age < parametres_period.exoneration.age_maximal_donateur )
-# 
-#         condition_lien_parente = (
-#             individu('is_enfant_donataire', period)
-#             + individu('is_petit_enfant_donataire', period)
-#             + individu('is_arriere_petit_enfant_donataire', period)
-#             )
-# 
-#         plafond_exoneration_don_familial = parametres_period.exoneration.exoneration_don_familial
-# 
-#         return age_donataire_eligible * condition_lien_parente * plafond_exoneration_don_familial
 
 
 # TODO à migrer au regard de la représentation des liens de parenté dans openfisca_france_inheritance (cf. entité Donation)
