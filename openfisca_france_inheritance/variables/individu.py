@@ -352,7 +352,7 @@ class exoneration_don_familial(Variable):
     value_type = float
     default_value = 0.0
     entity = Individu
-    label = "Montant de l'exonération pour don familial s'appliquant au donataire"
+    label = "Montant de l'exonération pour don familial théorique à laquelle est éligible le donataire"
     definition_period = YEAR
     reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
     documentation = '''
@@ -383,7 +383,7 @@ class exoneration_don_familial(Variable):
         eligibilite_exoneration = age_donateur_eligible * age_donataire_eligible * condition_lien_parente
         plafond_exoneration_don_familial = parametres_exoneration_period.exoneration_don_familial
 
-        # TODO ajuster l'exonération au montant du dont pour qu'elle ne le dépasse pas
+        # exonération théorique (à confronter au montant du don dans le calcul du droit de mutation)
         return eligibilite_exoneration * plafond_exoneration_don_familial
 
 

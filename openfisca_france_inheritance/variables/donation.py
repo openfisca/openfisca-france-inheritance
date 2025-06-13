@@ -58,21 +58,30 @@ class actif_imposable_don(Variable):
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
-        part_epoux_don = donation('part_epoux_don', period)
-        actif_de_communaute_don = donation('actif_de_communaute_don', period)
-        passif_de_communaute_don = donation('passif_de_communaute_don', period)
-        actif_propre_don = donation('actif_propre_don', period)
-        passif_propre_don = donation('passif_propre_don', period)
-        assurance_vie_don = donation('assurance_vie_don', period)
-        return (
-            (1 - part_epoux_don)
-            * (
-                (actif_de_communaute_don - passif_de_communaute_don) / 2
-                + actif_propre_don
-                - passif_propre_don
-                - assurance_vie_don
-                )
-            )
+        # actif_imposable_don = don - exonération
+        
+        # part_epoux_don = donation('part_epoux_don', period)  # TODO devrait être l'actif imposable (don - exonération) de l'époux ?
+        # actif_de_communaute_don = donation('actif_de_communaute_don', period)
+        # passif_de_communaute_don = donation('passif_de_communaute_don', period)
+        # actif_propre_don = donation('actif_propre_don', period)
+        # passif_propre_don = donation('passif_propre_don', period)
+        # assurance_vie_don = donation('assurance_vie_don', period)
+        # return (
+        #     (1 - part_epoux_don)
+        #     * (
+        #         (actif_de_communaute_don - passif_de_communaute_don) / 2
+        #         + actif_propre_don
+        #         - passif_propre_don
+        #         - assurance_vie_don
+        #         )
+        #     )  
+        # => équivalent montant du don ?!
+
+        montant_don = donation('don', period)
+        exoneration_don_familial_individus = donation.members('exoneration_don_familial', period)
+
+        # TODO corriger la cardinalité des arrays (entités Donation et Individus mixées)
+        return max_(montant_don - exoneration_don_familial_individus, 0)
 
 
 class actif_propre_don(Variable):
