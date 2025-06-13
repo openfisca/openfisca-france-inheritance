@@ -85,7 +85,34 @@ class date_donation(Variable):
 class droits(Variable):
     value_type = float
     entity = Individu
-    label = 'Droits sur parts'
+    label = 'Droits sur parts taxables de donations et successions'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        droits_donation = individu.donation('droits_donation', period)
+        droits_succession = individu.donation('droits_succession', period)
+        
+        return droits_donation + droits_succession
+
+class droits_donation(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Droits sur parts taxables de donation'
+    definition_period = ETERNITY
+
+    # TODO
+    # def formula(individu, period, parameters):
+    #     part_taxable = individu.succession('part_taxable', period)
+    #     dmtg = parameters(period).droits_mutation_titre_gratuit
+    #     bareme = dmtg.bareme.ligne_directe
+    #     droits = bareme.calc(part_taxable)
+    #     return droits
+
+
+class droits_succession(Variable):
+    value_type = float
+    entity = Individu
+    label = 'Droits sur parts taxables de succession'
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
