@@ -86,13 +86,13 @@ Donation = build_entity(
             'key': 'epoux_donataire',
             'label': 'Époux donataire',
             'max': 1,
-            'doc': "L'époux de la personne donateur."
+            'doc': "L'époux de l'individu donateur."
             },
         {
             'key': 'pacs_donataire',
             'label': 'Partenaires liés par un PACS',
             'max': 1,
-            'doc': 'Le partenaire,lié par un PACS, de la personne donateur.'
+            'doc': "Le partenaire, lié par un PACS, de l'individu donateur."
             },
         {
             'key': 'enfant_donataire',
@@ -136,7 +136,7 @@ Donation = build_entity(
             },
         {
             'key': 'parent_4eme_degre',
-            'label': 'Parent de 4ème degré donataires',
+            'label': 'Parents de 4ème degré donataires',
             'doc': 'Les parents de 4ème degré vivants au décès de leur parent donateur.'
             },
         ]
