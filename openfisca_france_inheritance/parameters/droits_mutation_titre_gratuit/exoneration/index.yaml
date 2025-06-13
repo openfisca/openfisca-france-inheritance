@@ -2,4 +2,6 @@ description: Exonération pour don familial au titre des droits de mutation à t
 metadata:
   documentation_start: true
   order:
-  - age_donateur
+  - exoneration_don_familial
+  - age_maximal_donateur
+  - age_minimal_donataire

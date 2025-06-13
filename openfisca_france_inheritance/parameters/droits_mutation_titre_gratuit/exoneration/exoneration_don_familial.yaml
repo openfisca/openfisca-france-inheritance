@@ -1,10 +1,10 @@
-description: Plafond du montant de l'exonération pour don familial
+description: Plafond du montant de l'exonération pour don familial consenti par un même donateur à un même donataire
 values:
   2011-06-12:
     value: 31_865
 metadata:
-  last_value_still_valid_on: "2025-01-25"
-  unit: currency
+  last_value_still_valid_on: "2025-06-12"
+  unit: currency-EUR
   reference:
     2011-06-12:
       title: Article 790 G du code général des impôts
