@@ -1,5 +1,5 @@
 - name: Monsieur Dupont, Veuf et deux enfants
-  description: test
+  absolute_error_margin: 0.01
   period: 2014
   input:
     individus:
@@ -17,5 +17,9 @@
   output:
     is_enfant: [False, True, True]
     nombre_enfants: 2
+    actif_imposable: 300_000
     part_taxable: 50_000
-    droits_sur_succession: 8_194.35
+    droits: [8_194.35, 8_194.35, 8_194.35]  # TODO Ne pas calculer de droits pour la personne décédée ?
+    droits_sur_succession: 8_194.35 * 3
+    # 8_194.35 = application du barème "ligne directe" à la part taxable
+    # = (0,05 * 8_072) + (0,1 * (12_109-8_072)) + (0,15 * (15_932-12_109)) + (0,2 * (50_000-15_932))

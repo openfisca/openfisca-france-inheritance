@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 1.0.0 [#5](https://github.com/openfisca/openfisca-france-inheritance/pull/5)
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : toutes.
+* Zones impactées : 
+  - `parameters/*`
+* Détails :
+  - Harmonise l'ensemble des paramètres du modèles avec les barèmes IPP
+    * Ajoute l'ensemble des paramètres donations et succession des barèmes IPP
+    * Insère les paramètres pré-existants d'openfisca_france_inheritance dans l'arborescence IPP
+    * Passe en barèmes les paramètres de calcul de droits pour conjoint, pacs et descendant en ligne directe dans `parameters/droits_mutation_titre_gratuit/bareme/`
+    * Corrige certaines références et dates d'entrée en vigueur
+  - Permet à tous les tests de s'achever sans erreur en corrigeant `tests/donation/celib_frere_don.yaml`, `tests/succession/veuf_2_enfants.yaml`, et `tests/succession/homme_marie_3_enf.yaml`
+  - Met à jour les formules de `droits` et `droits_sur_succession` suite au renommage de paramètres et en cohérence avec les tests
+* Migration :
+  - Identifier les renommages et déplacements de paramètres avec la commande : `git log --first-parent --diff-filter=R --summary 92f7b597b^..63ae897d5`
+  - Identifier les ajouts de paramètres avec : `git log --first-parent --diff-filter=A --summary 92f7b597b^..63ae897d5`
+
 ### 0.5.3 [#6](https://github.com/openfisca/openfisca-france-inheritance/pull/6)
 
 * Amélioration technique.

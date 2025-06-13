@@ -16,7 +16,7 @@
   output:
     epoux_survivant: 1
     actif_imposable: 1_000_000
-    part_taxable: 924_000
+    part_taxable: 0
 
 - name: Succession homme marié avec 3 enfants
   description: exemple 1 de https://www.gestion-patrimoine.finance/gestion-privee/actualite/comment-calculer-le-montant-des-droits-de-succession/

@@ -85,8 +85,6 @@ class droits_sur_succession(Variable):
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        bareme = parameters(period).bareme
-        succession = bareme.bareme_ligne_directe
         return succession.sum(succession.members('droits', period))
 
 
@@ -163,10 +161,10 @@ class part_taxable(Variable):
         nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
         nombre_autre = succession('nombre_autre', period)
 
-        abattement = parameters(period).abattement
-        abattement_enfant = abattement.abattement_enfants.abattement_enfants_succession
-        abattement_freres_soeurs = abattement.abattement_freres_soeurs
-        abattement_autre = abattement.abattement_autre_succession
+        abattement = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_enfant = abattement.enfants.succession
+        abattement_freres_soeurs = abattement.adelphite
+        abattement_autre = abattement.autre_succession
 
         epoux_survivant = succession('epoux_survivant', period)
         enfants = nombre_enfants > 0
@@ -199,11 +197,11 @@ class part_taxable(Variable):
         nombre_freres_soeurs = succession('nombre_freres_soeurs', period)
         nombre_autre = succession('nombre_autre', period)
 
-        abattement = parameters(period).abattement
-        abattement_epoux_survivant = abattement.abattement_epoux.abattement_epoux_succession
-        abattement_enfant = abattement.abattement_enfants.abattement_enfants_succession
-        abattement_freres_soeurs = abattement.abattement_freres_soeurs
-        abattement_autre = abattement.abattement_autre_succession
+        abattement = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_epoux_survivant = abattement.conjoint.succession
+        abattement_enfant = abattement.enfants.succession
+        abattement_freres_soeurs = abattement.adelphite
+        abattement_autre = abattement.autre_succession
 
         epoux_survivant = succession('epoux_survivant', period)
         enfants = nombre_enfants > 0

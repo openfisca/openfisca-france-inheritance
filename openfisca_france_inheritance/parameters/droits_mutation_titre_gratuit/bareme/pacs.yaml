@@ -1,0 +1,64 @@
+description: Barème des droits de mutation à titre gratuit applicable aux individus pacsés
+brackets:
+- threshold:
+    2000-01-01:
+      value: 0
+    2002-01-01:
+      value: 0
+    2005-01-01:
+      value: 0
+    2007-08-22:
+      value: 0
+  rate:
+    2000-01-01:
+      value: 0.4
+    2002-01-01:
+      value: 0.4
+    2005-01-01:
+      value: 0.4
+    2007-08-22:
+      value: 0.4
+- threshold:
+    2000-01-01:
+      value: 100000
+    2002-01-01:
+      value: 15000
+    2005-01-01:
+      value: 15000
+    2007-08-22:
+      value: 15000
+  rate:
+    2000-01-01:
+      value: 0.5
+    2002-01-01:
+      value: 0.5
+    2005-01-01:
+      value: 0.5
+    2007-08-22:
+      value: 0.5
+metadata:
+  short_label: Barème Pacs
+  last_value_still_valid_on: "2023-04-01"
+  short_label_en: Scale
+  reference:
+    2000-01-01:
+      title: Loi n°99-944 du 15 novembre 1999 - art. 5 JORF 16 novembre 1999
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000761717
+    2002-01-01:
+      title: Ordonnance n°2000-916 du 19 septembre 2000 - art. 6 (V) JORF 22 septembre
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000219672
+    2005-01-01:
+      title: Loi n°2004-1484 du 30 décembre 2004 - art. 8 (V) JORF 31 décembre 2004
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000002433177
+    2007-08-22:
+      title: Loi n°2007-1223 du 21 août 2007 - art. 8 (V) JORF 22 août 2007
+      href: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000001502171
+  official_journal_date:
+    2000-01-01: "1999-11-16"
+    2002-01-01: "2000-09-22"
+    2005-01-01: "2004-12-31"
+    2007-08-22: "2007-08-22"
+  rate_unit: /1
+  threshold_unit: currency-EUR
+  type: marginal_rate
+documentation: Les successions entre partenaires de Pacs (Pacte civil de solidarité), régies de 2000 à 2007 par l’article 777 bis du Code général des impôts, étaient soumises à un taux de 40% pour la fraction de la part nette taxable n’excédant pas 15 000€ et à un taux de 50% pour le surplus.
