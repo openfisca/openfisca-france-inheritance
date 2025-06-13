@@ -1,17 +1,11 @@
 from openfisca_core.model_api import *
 
-from openfisca_france_inheritance.entities import Donation
+from openfisca_france_inheritance.entities import Individu, Donation
 
 # class date(Variable):
 #     value_type = int
 #     entity = Donations
 #     label = "Année de la donation"
-#     definition_period = ETERNITY
-#
-# class don(Variable):
-#     value_type = float
-#     entity = Donations
-#     label = "Don"
 #     definition_period = ETERNITY
 
 # # class don_recu(Variable):
@@ -37,6 +31,18 @@ from openfisca_france_inheritance.entities import Donation
 #         is_enfant_donataire_holder = donation('is_enfant_donataire', period)
 #         return self.sum_by_entity(is_enfant_donataire_holder)
 
+class don(Variable):
+    value_type = float
+    default_value = 0.0
+    entity = Donation
+    label = 'Montant de donation'
+    definition_period = MONTH
+    documentation = '''
+        Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
+        Assiette des droits de mutation à titre gratuit : 
+        https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
+    '''
+
 
 class actif_de_communaute_don(Variable):
     value_type = float
@@ -52,21 +58,30 @@ class actif_imposable_don(Variable):
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
-        part_epoux_don = donation('part_epoux_don', period)
-        actif_de_communaute_don = donation('actif_de_communaute_don', period)
-        passif_de_communaute_don = donation('passif_de_communaute_don', period)
-        actif_propre_don = donation('actif_propre_don', period)
-        passif_propre_don = donation('passif_propre_don', period)
-        assurance_vie_don = donation('assurance_vie_don', period)
-        return (
-            (1 - part_epoux_don)
-            * (
-                (actif_de_communaute_don - passif_de_communaute_don) / 2
-                + actif_propre_don
-                - passif_propre_don
-                - assurance_vie_don
-                )
-            )
+        # actif_imposable_don = don - exonération
+        
+        # part_epoux_don = donation('part_epoux_don', period)  # TODO devrait être l'actif imposable (don - exonération) de l'époux ?
+        # actif_de_communaute_don = donation('actif_de_communaute_don', period)
+        # passif_de_communaute_don = donation('passif_de_communaute_don', period)
+        # actif_propre_don = donation('actif_propre_don', period)
+        # passif_propre_don = donation('passif_propre_don', period)
+        # assurance_vie_don = donation('assurance_vie_don', period)
+        # return (
+        #     (1 - part_epoux_don)
+        #     * (
+        #         (actif_de_communaute_don - passif_de_communaute_don) / 2
+        #         + actif_propre_don
+        #         - passif_propre_don
+        #         - assurance_vie_don
+        #         )
+        #     )  
+        # => équivalent montant du don ?!
+
+        montant_don = donation('don', period)
+        exoneration_don_familial_individus = donation.members('exoneration_don_familial', period)
+
+        # TODO corriger la cardinalité des arrays (entités Donation et Individus mixées)
+        return max_(montant_don - exoneration_don_familial_individus, 0)
 
 
 class actif_propre_don(Variable):
@@ -123,27 +138,33 @@ class part_epoux_don(Variable):
 class part_taxable_don(Variable):
     value_type = float
     entity = Donation
-    label = 'Part taxable'
+    label = "Part taxable d'une donation"
     definition_period = ETERNITY
 
     def formula(donation, period, parameters):
+        # part_taxable_don = actif_imposable - abattement
+        
         actif_imposable_don = donation('actif_imposable_don', period)
+        
+        # identification des paramètres d'abattement
         nombre_enfants_donataires = donation('nombre_enfants_donataires', period)
         nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
 
-        abattement = parameters(period).droits_mutation_titre_gratuit.abattement
-        abattement_epoux_donataire = abattement.conjoint.donation
-        abattement_enfants_donataires = abattement.enfants.donation
-        abattement_freres_soeurs_donataires = abattement.adelphite
+        parametres_abattement_period = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
+        abattement_enfants_donataires = parametres_abattement_period.enfants.donation
+        abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
 
         epoux_donataire = donation('epoux_donataire', period)
         enfants_donataires = nombre_enfants_donataires > 0
         freres_soeurs_donataires = nombre_freres_soeurs_donataires > 0
 
+        # calcul de la part taxable
         part_taxable_epoux_donataire = max_(actif_imposable_don - abattement_epoux_donataire, 0)
         part_taxable_enfants_donataires = max_(actif_imposable_don / (nombre_enfants_donataires + 1 * (nombre_enfants_donataires == 0)) - abattement_enfants_donataires, 0)
         part_taxable_freres_soeurs_donataires = max_(actif_imposable_don - abattement_freres_soeurs_donataires, 0)
 
+        # Hypothèse sur la structure de l'entité Donation : 1 seul rôle de donataire existe/est actif par Donation
         return select(
             [
                 epoux_donataire > 0,
@@ -170,3 +191,4 @@ class passif_propre_don(Variable):
     entity = Donation
     label = 'Passif propre'
     definition_period = ETERNITY
+
