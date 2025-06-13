@@ -3,8 +3,7 @@ metadata:
   documentation_start: true
   short_label: Autres Individus (à l'exclusion de ligne directe, conjoint, pacs)
   order:
-  - seuils_adelphite
-  - taux_marginal_adelphite
+  - adelphite
   - taux_marginal_parents_degre4
   - taux_marginal_non_parents
 documentation: |-
