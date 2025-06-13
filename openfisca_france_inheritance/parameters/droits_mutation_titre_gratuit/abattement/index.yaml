@@ -2,6 +2,7 @@ description: Abattements au titre des droits de mutation à titre gratuit
 metadata:
   documentation_start: true
   order:
+  - ascendant
   - conjoint
   - pacs
   - enfants

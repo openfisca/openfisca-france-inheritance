@@ -226,6 +226,7 @@ class passif_propre_don(Variable):
 #         droit_exoneration_familial = individu(
 #             'droit_exoneration_familial', period)
 #         param = parameters(period).taxation_capital.donation
+#         # à migrer vers : param = parameters(period).droits_mutation_titre_gratuit.abattement ?
 # 
 #         def calc_droits(abattement, taux, bareme):
 #             exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
@@ -251,7 +252,7 @@ class passif_propre_don(Variable):
 #                 calc_droits(0, param.taux_marginal_parents_degre4_donation, None),
 #                 calc_droits(param.abattement_neveuxnieces_donation, param.taux_neveu, None),
 #                 calc_droits(param.abattement_freres_soeurs, 0, param.bareme_fratrie),
-#                 calc_droits(param.abattement_ascendant, 0,
+#                 calc_droits(param.ascendant, 0,
 #                             param.bareme_ligne_directe),
 #                 calc_droits(param.abattement_arr_petits_enfants_donation,
 #                             0, param.bareme_ligne_directe),
