@@ -295,7 +295,7 @@ class is_enfant(Variable):
 
 
 class is_enfant_donataire(Variable):
-    value_type = float
+    value_type = bool
     entity = Individu
     label = 'Est un enfant donataire'
     definition_period = ETERNITY
@@ -305,7 +305,7 @@ class is_enfant_donataire(Variable):
 
 
 class is_petit_enfant_donataire(Variable):
-    value_type = float
+    value_type = bool
     entity = Individu
     label = 'Est un petit-enfant donataire'
     definition_period = ETERNITY
@@ -315,7 +315,7 @@ class is_petit_enfant_donataire(Variable):
 
 
 class is_arriere_petit_enfant_donataire(Variable):
-    value_type = float
+    value_type = bool
     entity = Individu
     label = 'Est un arrière-petit-enfant donataire'
     definition_period = ETERNITY
