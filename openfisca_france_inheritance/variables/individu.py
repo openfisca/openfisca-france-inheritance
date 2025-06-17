@@ -471,6 +471,23 @@ class abattement_plafond(Variable):
         return abattement_plafond
 
 
+class actif_taxable_donataire(Variable):
+    value_type = float
+    entity = Individu
+    label = "Montant de la part d'actif taxable transmis à un donataire"
+    definition_period = MONTH
+    documentation = '''
+    actif_taxable_donataire
+    = actif_imposable_donataire - abattement_plafond
+    = (actif_brut_donne - exoneration_don_familial) - abattement_plafond
+    '''
+
+    def formula(individu, period, parameters):
+        actif_imposable_donataire = individu('actif_imposable_donataire', period)
+        abattement_plafond = individu('abattement_plafond', period)
+
+        return max_(actif_imposable_donataire - abattement_plafond, 0)
+
 
 class taux_sur_part_recue(Variable):
     value_type = float
