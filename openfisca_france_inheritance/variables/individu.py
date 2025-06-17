@@ -14,6 +14,7 @@ class age(Variable):
     is_period_size_independent = True
     set_input = set_input_dispatch_by_period
 
+
 class date_deces(Variable):
     value_type = date
     entity = Individu
@@ -48,7 +49,7 @@ class role_representant(Variable):
     possible_values = LienParente
     default_value = LienParente.inconnu
     entity = Individu
-    label = "Lien de parenté de l'individu par rapport au représenté"
+    label = "Lien de parenté de l'individu par rapport au représenté"  # donation et succession
     definition_period = ETERNITY
 
 
@@ -268,6 +269,19 @@ class is_donateur(Variable):
 
     def formula(individu, period, parameters):
         return individu.has_role(Donation.DONATEUR)
+
+
+class is_donataire(Variable):
+    value_type = bool
+    entity = Individu
+    label = 'Est donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        # TODO exclure les successions ?
+        is_donateur = individu('is_donateur', period)
+        # TODO ajouter : il existe une part d'actif brut donné à l'individu (montant > 0) ?
+        return not_(is_donateur)
 
 
 class is_enfant(Variable):
