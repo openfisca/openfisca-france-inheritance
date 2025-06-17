@@ -31,16 +31,25 @@ from openfisca_france_inheritance.entities import Individu, Donation
 #         is_enfant_donataire_holder = donation('is_enfant_donataire', period)
 #         return self.sum_by_entity(is_enfant_donataire_holder)
 
-class don(Variable):
+
+class actif_brut_donne(Variable):
     value_type = float
-    default_value = 0.0
     entity = Donation
-    label = 'Montant de donation'
-    definition_period = MONTH
+    label = "Montant de d'un actif brut donné"
+    definition_period = ETERNITY
     documentation = '''
-        Articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025)
-        Assiette des droits de mutation à titre gratuit : 
-        https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
+    Ce qui est donné de l'actif propre du donateur
+    et faisant l'objet d'une donation révélée à l'administration fiscale.
+
+    Don représenté par sa valeur financière brute (avant application de toute éventuelle exonération).
+
+    Le champ d'application des droits de mutation à titre gratuit est définie
+    par les articles 750 ter à 757 C :    
+    https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191746/#LEGISCTA000006191746
+
+    L'assiette des droits de mutation à titre gratuit est définie 
+    par les articles 758 à 776 quater du Code général des impôts (CGI, 01/04/2025) : 
+    https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
     '''
 
 
