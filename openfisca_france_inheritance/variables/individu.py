@@ -327,7 +327,7 @@ class is_arriere_petit_enfant_donataire(Variable):
 class is_frere_soeur(Variable):
     value_type = bool
     entity = Individu
-    label = 'Est une soeur ou un frère'
+    label = 'Est une soeur ou un frère (adelphite)'
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
@@ -421,8 +421,8 @@ class actif_imposable_donataire(Variable):
     label = "Actif imposable donataire"
     definition_period = MONTH
     documentation = '''
-    La part imposable du don brut reçu pour chaque Donation après exonération :
-    actif_imposable_donataire = actif_brut_donne - exonération
+    La part imposable du don brut reçu par un donataire après exonération :
+    actif_imposable_donataire = actif_brut_donne - exoneration_don_familial
     '''
 
     def formula(individu, period, parameters):
@@ -430,6 +430,46 @@ class actif_imposable_donataire(Variable):
         exoneration_don_familial = individu('exoneration_don_familial', period)
 
         return max_(actif_brut_donne - exoneration_don_familial, 0)
+
+
+class abattement_plafond(Variable):
+    value_type = float
+    entity = Individu
+    label = "Montant de l'abattement auquel est éligible un donataire"
+    definition_period = MONTH
+    documentation = '''
+    Montant théorique d'abattement sur donation auquel est éligible un donataire
+    (abattement applicable à la part d'actif imposable [brut - exonération] transmis).
+    '''
+
+    def formula(individu, period, parameters):
+        est_epoux_donataire = individu.has_role(Donation.EPOUX_DONATAIRE)
+        est_partenaire_pacs_donataire = individu.has_role(Donation.PACS_DONATAIRE)
+
+        est_partenaire_donataire = est_epoux_donataire + est_partenaire_pacs_donataire 
+        is_enfant_donataire = individu('is_enfant_donataire', period)
+        is_frere_soeur = individu('is_frere_soeur', period)
+
+        parametres_abattement_period = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
+        abattement_enfants_donataires = parametres_abattement_period.enfants.donation
+        abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
+
+        abattement_plafond = select(
+            [
+                est_partenaire_donataire,
+                is_enfant_donataire,
+                is_frere_soeur
+            ],
+            [
+                abattement_epoux_donataire,
+                abattement_enfants_donataires,
+                abattement_freres_soeurs_donataires
+            ]
+        )
+        
+        return abattement_plafond
+
 
 
 class taux_sur_part_recue(Variable):
