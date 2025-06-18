@@ -32,7 +32,7 @@ class date_donation(Variable):
 class LienParente(Enum):
     __order__ = 'inconnu aucun quatrieme_degre neveu adelphite arriere_petit_enfant petit_enfant enfant ascendant pacs epoux'  # Needed to preserve the enum order in Python 2
     inconnu = 'Inconnu'  # valeur neutre en terme de droits de mutation
-    aucun = 'Aucun lien de parenté'
+    aucun = 'Aucun lien de parenté'  # "non parent"
     quatrieme_degre = 'Parent de 4ème degré'
     neveu = 'Neveu ou Nièce'
     adelphite = 'Frère ou soeur'
@@ -51,6 +51,43 @@ class role_representant(Variable):
     entity = Individu
     label = "Lien de parenté de l'individu par rapport au représenté"  # donation et succession
     definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        # TODO Pour une succession
+        # Pour une donation
+        role_representant = select(
+            [
+                individu.has_role(Donation.DONATEUR),
+                individu.has_role(Donation.EPOUX_DONATAIRE),
+                individu.has_role(Donation.PACS_DONATAIRE),
+                individu.has_role(Donation.ENFANT_DONATAIRE),
+                individu.has_role(Donation.FRERE_SOEUR_DONATAIRE),
+                individu.has_role(Donation.PARENT_DONATAIRE),
+                individu.has_role(Donation.GRAND_PARENT_DONATAIRE),
+                individu.has_role(Donation.ARRIERE_GRAND_PARENT_DONATAIRE),
+                individu.has_role(Donation.NEVEU_NIECE_DONATAIRE),
+                individu.has_role(Donation.PETIT_ENFANT_DONATAIRE),
+                individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE),
+                individu.has_role(Donation.PARENT_4EME_DEGRE_DONATAIRE),
+                individu.has_role(Donation.NON_PARENT_DONATAIRE)
+            ],
+            [
+                'inconnu',  # TODO ajouter le cas donateur ou non appliqué ?
+                'epoux',
+                'pacs',
+                'enfant',
+                'adelphite',
+                'ascendant',
+                'ascendant',
+                'ascendant',
+                'neveu',
+                'petit_enfant',
+                'arriere_petit_enfant',
+                'quatrieme_degre',
+                'aucun'
+            ]
+        )
+        return role_representant
 
 
 # class degre_parente_civil(Variable):
@@ -102,11 +139,11 @@ class droits_mutation(Variable):
     value_type = float
     entity = Individu
     label = 'Droits de mutation à titre gratuit sur parts taxables de donations et successions'
-    definition_period = ETERNITY
+    definition_period = MONTH
 
     def formula(individu, period, parameters):
-        droits_donation = individu.donation('droits_donation', period)
-        droits_succession = individu.donation('droits_succession', period)
+        droits_donation = individu('droits_donation', period)
+        droits_succession = individu('droits_succession', period)
         
         return droits_donation + droits_succession
 
@@ -116,7 +153,7 @@ class droits_donation(Variable):
     default_value = 0.0
     entity = Individu
     label = 'Droits de mutation à titre gratuit sur parts taxables de donation'
-    definition_period = YEAR
+    definition_period = MONTH
     reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
 
     # TODO EN COURS - migration de la formule d'openfisca-france vers openfisca-france-inheritance
@@ -216,7 +253,7 @@ class droits_succession(Variable):
     value_type = float
     entity = Individu
     label = 'Droits sur parts taxables de succession'
-    definition_period = ETERNITY
+    definition_period = MONTH
 
     def formula(individu, period, parameters):
         part_taxable = individu.succession('part_taxable', period)
@@ -369,6 +406,7 @@ class exoneration_don_familial(Variable):
     entity = Individu
     label = "Montant de l'exonération pour don familial théorique à laquelle est éligible le donataire"
     definition_period = MONTH
+    calculate_output = calculate_output_add
     reference = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048838931/2023-12-31/"
     documentation = '''
     Le donataire d'une donation peut bénéficier d'une exonération pour don familial.
