@@ -327,10 +327,11 @@ class is_arriere_petit_enfant_donataire(Variable):
 class is_frere_soeur(Variable):
     value_type = bool
     entity = Individu
-    label = 'Est une soeur ou un frère (adelphite)'
+    label = 'Est une soeur ou un frère (adelphite en succession)'
     definition_period = ETERNITY
 
     def formula(individu, period, parameters):
+        # À vérifier : dédier à la succession ou en faire une variable généraliste ?
         return individu.has_role(Succession.FRERE_SOEUR)
 
 
@@ -426,10 +427,12 @@ class actif_imposable_donataire(Variable):
     '''
 
     def formula(individu, period, parameters):
+        is_donataire = individu('is_donataire', period)
+
         actif_brut_donne = individu.donation('actif_brut_donne', period)
         exoneration_don_familial = individu('exoneration_don_familial', period)
 
-        return max_(actif_brut_donne - exoneration_don_familial, 0)
+        return is_donataire * max_(actif_brut_donne - exoneration_don_familial, 0)
 
 
 class abattement_plafond(Variable):
@@ -448,7 +451,7 @@ class abattement_plafond(Variable):
 
         est_partenaire_donataire = est_epoux_donataire + est_partenaire_pacs_donataire 
         is_enfant_donataire = individu('is_enfant_donataire', period)
-        is_frere_soeur = individu('is_frere_soeur', period)
+        is_frere_soeur_donataire = individu('is_frere_soeur_donataire', period)
 
         parametres_abattement_period = parameters(period).droits_mutation_titre_gratuit.abattement
         abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
@@ -459,7 +462,7 @@ class abattement_plafond(Variable):
             [
                 est_partenaire_donataire,
                 is_enfant_donataire,
-                is_frere_soeur
+                is_frere_soeur_donataire
             ],
             [
                 abattement_epoux_donataire,
