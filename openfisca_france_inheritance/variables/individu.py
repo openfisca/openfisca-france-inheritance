@@ -30,8 +30,10 @@ class date_donation(Variable):
 
 
 class LienParente(Enum):
-    __order__ = 'inconnu aucun quatrieme_degre neveu adelphite arriere_petit_enfant petit_enfant enfant ascendant pacs epoux'  # Needed to preserve the enum order in Python 2
+    # le lien de parenté avec le représenté (le donateur pour une Donation)
+    __order__ = 'inconnu represente aucun quatrieme_degre neveu adelphite arriere_petit_enfant petit_enfant enfant ascendant pacs epoux'  # Needed to preserve the enum order in Python 2
     inconnu = 'Inconnu'  # valeur neutre en terme de droits de mutation
+    represente = 'Représenté'  # le représenté lui-même
     aucun = 'Aucun lien de parenté'  # "non parent"
     quatrieme_degre = 'Parent de 4ème degré'
     neveu = 'Neveu ou Nièce'
@@ -72,7 +74,7 @@ class role_representant(Variable):
                 individu.has_role(Donation.NON_PARENT_DONATAIRE)
             ],
             [
-                'inconnu',  # TODO ajouter le cas donateur ou non appliqué ?
+                'represente',
                 'epoux',
                 'pacs',
                 'enfant',
