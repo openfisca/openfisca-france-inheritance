@@ -508,6 +508,8 @@ class abattement_plafond(Variable):
         est_ascendant_donataire = est_parent_donataire + est_grand_parent_donataire + est_arriere_grand_parent_donataire
         est_partenaire_donataire = est_epoux_donataire + est_partenaire_pacs_donataire
         is_enfant_donataire = individu('is_enfant_donataire', period)
+        is_petit_enfant_donataire = individu('is_petit_enfant_donataire', period)
+        is_arriere_petit_enfant_donataire = individu('is_arriere_petit_enfant_donataire', period)
         is_frere_soeur_donataire = individu('is_frere_soeur_donataire', period)
         is_neveu_niece_donataire = individu('is_neveu_niece_donataire', period)
 
@@ -515,6 +517,8 @@ class abattement_plafond(Variable):
         abattement_ascendant = parametres_abattement_period.ascendant
         abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
         abattement_enfants_donataires = parametres_abattement_period.enfants.donation
+        abattement_petits_enfants_donataires = parametres_abattement_period.petits_enfants_donation
+        abattement_arrieres_petits_enfants_donataires = parametres_abattement_period.arr_petits_enfants_donation
         abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
         abattement_is_neveu_niece_donataire = parametres_abattement_period.neveuxnieces.donation
 
@@ -523,6 +527,8 @@ class abattement_plafond(Variable):
                 est_ascendant_donataire,
                 est_partenaire_donataire,
                 is_enfant_donataire,
+                is_petit_enfant_donataire,
+                is_arriere_petit_enfant_donataire,
                 is_frere_soeur_donataire,
                 is_neveu_niece_donataire
             ],
@@ -530,6 +536,8 @@ class abattement_plafond(Variable):
                 abattement_ascendant,
                 abattement_epoux_donataire,
                 abattement_enfants_donataires,
+                abattement_petits_enfants_donataires,
+                abattement_arrieres_petits_enfants_donataires,
                 abattement_freres_soeurs_donataires,
                 abattement_is_neveu_niece_donataire
             ]
