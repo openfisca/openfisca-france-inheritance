@@ -46,6 +46,15 @@ class LienParente(Enum):
     epoux = 'Epoux-se'
 
 
+# class lien_parente(Variable):
+#     value_type = Enum
+#     possible_values = LienParente
+#     default_value = LienParente.aucun
+#     entity = Individu
+#     label = 'Lien de parenté entre le donateur et le donataire'
+#     definition_period = YEAR
+
+
 class role_representant(Variable):
     value_type = Enum
     possible_values = LienParente
@@ -53,43 +62,15 @@ class role_representant(Variable):
     entity = Individu
     label = "Lien de parenté de l'individu par rapport au représenté"  # donation et succession
     definition_period = ETERNITY
-
-    def formula(individu, period, parameters):
-        # TODO Pour une succession
-        # Pour une donation
-        role_representant = select(
-            [
-                individu.has_role(Donation.DONATEUR),
-                individu.has_role(Donation.EPOUX_DONATAIRE),
-                individu.has_role(Donation.PACS_DONATAIRE),
-                individu.has_role(Donation.ENFANT_DONATAIRE),
-                individu.has_role(Donation.FRERE_SOEUR_DONATAIRE),
-                individu.has_role(Donation.PARENT_DONATAIRE),
-                individu.has_role(Donation.GRAND_PARENT_DONATAIRE),
-                individu.has_role(Donation.ARRIERE_GRAND_PARENT_DONATAIRE),
-                individu.has_role(Donation.NEVEU_NIECE_DONATAIRE),
-                individu.has_role(Donation.PETIT_ENFANT_DONATAIRE),
-                individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE),
-                individu.has_role(Donation.PARENT_4EME_DEGRE_DONATAIRE),
-                individu.has_role(Donation.NON_PARENT_DONATAIRE)
-            ],
-            [
-                'represente',
-                'epoux',
-                'pacs',
-                'enfant',
-                'adelphite',
-                'ascendant',
-                'ascendant',
-                'ascendant',
-                'neveu',
-                'petit_enfant',
-                'arriere_petit_enfant',
-                'quatrieme_degre',
-                'aucun'
-            ]
-        )
-        return role_representant
+    documentation = '''
+    La règle de la représentation permet à certains membres de la famille
+    d'une personne décédée d'hériter à sa place :
+    * Enfants du défunt et leurs propres descendants
+    * Frères et sœurs du défunt et leurs propres descendants
+    On dit qu'ils viennent par représentation.
+    La représentation n'a pas lieu en faveur des ascendants.
+    Source : https://www.service-public.fr/particuliers/vosdroits/F2128
+    '''
 
 
 # class degre_parente_civil(Variable):
@@ -161,35 +142,45 @@ class droits_donation(Variable):
     # TODO EN COURS - migration de la formule d'openfisca-france vers openfisca-france-inheritance
     def formula_2015_01_01(individu, period, parameters):
         part_taxable_donations = individu.donation('part_taxable_don', period)  # ( don - exonération ) - abattement
-        
-        role_representant = individu('role_representant', period)
+
         parametres_tarifs_droits = parameters(period).droits_mutation_titre_gratuit.bareme
+
+        est_parent_donataire = individu.has_role(Donation.PARENT_DONATAIRE)
+        est_grand_parent_donataire = individu.has_role(Donation.GRAND_PARENT_DONATAIRE)
+        est_arriere_grand_parent_donataire = individu.has_role(Donation.ARRIERE_GRAND_PARENT_DONATAIRE)
+        est_ascendant_donataire = est_parent_donataire + est_grand_parent_donataire + est_arriere_grand_parent_donataire
+
+        est_enfant_donataire = individu.has_role(Donation.ENFANT_DONATAIRE)
+        est_petit_enfant_donataire = individu.has_role(Donation.PETIT_ENFANT_DONATAIRE)
+        est_arriere_petit_enfant_donataire = individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE)
+        
+        est_ligne_directe = (
+            est_ascendant_donataire
+            + est_enfant_donataire
+            + est_petit_enfant_donataire
+            + est_arriere_petit_enfant_donataire
+            )
+
         droits_donations_par_bareme = select(
             [
-                (role_representant == LienParente.epoux),
-                (role_representant == LienParente.pacs),
-                (role_representant == LienParente.enfant),
-                (role_representant == LienParente.petit_enfant),
-                (role_representant == LienParente.arriere_petit_enfant),
-                (role_representant == LienParente.ascendant),
-                (role_representant == LienParente.adelphite)
+                individu.has_role(Donation.EPOUX_DONATAIRE),
+                individu.has_role(Donation.PACS_DONATAIRE),
+                est_ligne_directe,
+                individu.has_role(Donation.FRERE_SOEUR_DONATAIRE),
             ],
             [
                 parametres_tarifs_droits.conjoint.calc(part_taxable_donations),
                 parametres_tarifs_droits.pacs.calc(part_taxable_donations),  # TODO vérifier différence avec époux
-                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),  # enfant
-                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),  # petit_enfant
-                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),  # arriere_petit_enfant
-                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),  # ascendant
+                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),
                 parametres_tarifs_droits.autres.adelphite.calc(part_taxable_donations),
             ]
         )
 
         droits_donations_par_taux = select(
             [
-                (role_representant == LienParente.neveu), 
-                (role_representant == LienParente.quatrieme_degre),
-                (role_representant == LienParente.aucun) 
+                individu.has_role(Donation.NEVEU_NIECE_DONATAIRE),  # parent au 3ème degré
+                individu.has_role(Donation.PARENT_4EME_DEGRE_DONATAIRE),
+                individu.has_role(Donation.NON_PARENT_DONATAIRE) 
             ],
             [
                 parametres_tarifs_droits.autres.taux_parents_degre4 * part_taxable_donations,
@@ -412,6 +403,13 @@ class is_autre(Variable):
 #
 
 
+class existe_descendant_direct(Variable):
+    value_type = bool
+    entity = Individu
+    label = "L'individu a un descendant direct identifié"
+    definition_period = ETERNITY
+
+
 class exoneration_don_familial(Variable):
     value_type = float
     default_value = 0.0
@@ -453,10 +451,15 @@ class exoneration_don_familial(Variable):
         # non modélisé : "à défaut d'une telle descendance, 
         # d'un neveu ou d'une nièce ou par représentation, d'un petit-neveu ou d'une petite-nièce"
         # et : "tous les quinze ans"
+        # si le donataire a pour donateur un individu dans descendant direct, 
+        # le donataire bénéficie de l'exonération (des descendants directs)
+        situation_sans_descendant_direct = not_(individu.donation('existe_descendant_direct_donateur', period))
+        
         condition_lien_parente = (
             individu('is_enfant_donataire', period)
             + individu('is_petit_enfant_donataire', period)
             + individu('is_arriere_petit_enfant_donataire', period)
+            + situation_sans_descendant_direct
             )
 
         eligibilite_exoneration = conditions_age * condition_lien_parente
