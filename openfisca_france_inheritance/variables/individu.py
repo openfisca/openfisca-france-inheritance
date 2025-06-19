@@ -384,6 +384,16 @@ class is_frere_soeur_donataire(Variable):
         return individu.has_role(Donation.FRERE_SOEUR_DONATAIRE)
 
 
+class is_neveu_niece_donataire(Variable):
+    value_type = bool
+    entity = Individu
+    label = 'Est une nièce ou un neveu donataire'
+    definition_period = ETERNITY
+
+    def formula(individu, period, parameters):
+        return individu.has_role(Donation.NEVEU_NIECE_DONATAIRE)
+
+
 class is_autre(Variable):
     value_type = bool
     entity = Individu
@@ -488,28 +498,44 @@ class abattement_plafond(Variable):
     def formula(individu, period, parameters):
         est_epoux_donataire = individu.has_role(Donation.EPOUX_DONATAIRE)
         est_partenaire_pacs_donataire = individu.has_role(Donation.PACS_DONATAIRE)
+        est_parent_donataire = individu.has_role(Donation.PARENT_DONATAIRE)
+        est_grand_parent_donataire = individu.has_role(Donation.GRAND_PARENT_DONATAIRE)
+        est_arriere_grand_parent_donataire = individu.has_role(Donation.ARRIERE_GRAND_PARENT_DONATAIRE)
 
-        est_partenaire_donataire = est_epoux_donataire + est_partenaire_pacs_donataire 
+        est_ascendant_donataire = est_parent_donataire + est_grand_parent_donataire + est_arriere_grand_parent_donataire
+        est_partenaire_donataire = est_epoux_donataire + est_partenaire_pacs_donataire
         is_enfant_donataire = individu('is_enfant_donataire', period)
         is_frere_soeur_donataire = individu('is_frere_soeur_donataire', period)
+        is_neveu_niece_donataire = individu('is_neveu_niece_donataire', period)
 
         parametres_abattement_period = parameters(period).droits_mutation_titre_gratuit.abattement
+        abattement_ascendant = parametres_abattement_period.ascendant
         abattement_epoux_donataire = parametres_abattement_period.conjoint.donation
         abattement_enfants_donataires = parametres_abattement_period.enfants.donation
         abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
+        abattement_is_neveu_niece_donataire = parametres_abattement_period.neveuxnieces.donation
 
         abattement_plafond = select(
             [
+                est_ascendant_donataire,
                 est_partenaire_donataire,
                 is_enfant_donataire,
-                is_frere_soeur_donataire
+                is_frere_soeur_donataire,
+                is_neveu_niece_donataire
             ],
             [
+                abattement_ascendant,
                 abattement_epoux_donataire,
                 abattement_enfants_donataires,
-                abattement_freres_soeurs_donataires
+                abattement_freres_soeurs_donataires,
+                abattement_is_neveu_niece_donataire
             ]
         )
+
+        # INFO, pas d'abattement pour : 
+        # oncle/tante, 
+        # cousin germain, grand-oncle/tante, petit-neveu/niece
+        # autre cousin ou sans lien de parenté
         
         return abattement_plafond
 
