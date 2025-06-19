@@ -160,17 +160,18 @@ class droits_donation(Variable):
             + est_petit_enfant_donataire
             + est_arriere_petit_enfant_donataire
             )
+        
+        est_epoux_ou_pacs = individu.has_role(Donation.EPOUX_DONATAIRE) + individu.has_role(Donation.PACS_DONATAIRE)
+        # INFO parametres_tarifs_droits.pacs est abrogé à partir du 22/08/2007
 
         droits_donations_par_bareme = select(
             [
-                individu.has_role(Donation.EPOUX_DONATAIRE),
-                individu.has_role(Donation.PACS_DONATAIRE),
+                est_epoux_ou_pacs,
                 est_ligne_directe,
                 individu.has_role(Donation.FRERE_SOEUR_DONATAIRE),
             ],
             [
                 parametres_tarifs_droits.conjoint.calc(part_taxable_donations),
-                parametres_tarifs_droits.pacs.calc(part_taxable_donations),  # TODO vérifier différence avec époux
                 parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),
                 parametres_tarifs_droits.autres.adelphite.calc(part_taxable_donations),
             ]
