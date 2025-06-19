@@ -147,6 +147,22 @@ class nombre_freres_soeurs_donataires(Variable):
         return donation.sum(donation.members('is_frere_soeur_donataire', period))
 
 
+class existe_descendant_direct_donateur(Variable):
+    value_type = bool
+    entity = Donation
+    label = "Le donateur a un descendant direct identifié"
+    definition_period = ETERNITY
+
+    def formula(donation, period, parameters):
+       est_donateur = donation.members.has_role(Donation.DONATEUR) 
+
+       # à améliorer : ici, pour toutes les donations, on consulte la descendance de tous les individus impliqués
+       individus_connus_ont_descendants_directs = donation.members('existe_descendant_direct', period)
+
+       donateur_a_descendant_direct = est_donateur * individus_connus_ont_descendants_directs
+       return donation.sum(donateur_a_descendant_direct)
+
+
 class part_epoux_don(Variable):
     value_type = float
     entity = Donation
