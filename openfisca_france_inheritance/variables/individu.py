@@ -454,12 +454,12 @@ class exoneration_don_familial(Variable):
         # si le donataire a pour donateur un individu dans descendant direct, 
         # le donataire bénéficie de l'exonération (des descendants directs)
         situation_sans_descendant_direct = not_(individu.donation('existe_descendant_direct_donateur', period))
-        
+
         condition_lien_parente = (
             individu('is_enfant_donataire', period)
             + individu('is_petit_enfant_donataire', period)
             + individu('is_arriere_petit_enfant_donataire', period)
-            + situation_sans_descendant_direct
+            + (individu('is_neveu_niece_donataire', period) * situation_sans_descendant_direct)
             )
 
         eligibilite_exoneration = conditions_age * condition_lien_parente
