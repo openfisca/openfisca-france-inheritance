@@ -150,6 +150,9 @@ class droits_donation(Variable):
         est_arriere_grand_parent_donataire = individu.has_role(Donation.ARRIERE_GRAND_PARENT_DONATAIRE)
         est_ascendant_donataire = est_parent_donataire + est_grand_parent_donataire + est_arriere_grand_parent_donataire
 
+        est_epoux_ou_pacs = individu.has_role(Donation.EPOUX_DONATAIRE) + individu.has_role(Donation.PACS_DONATAIRE)
+        # INFO parametres_tarifs_droits.pacs est abrogé à partir du 22/08/2007
+
         est_enfant_donataire = individu.has_role(Donation.ENFANT_DONATAIRE)
         est_petit_enfant_donataire = individu.has_role(Donation.PETIT_ENFANT_DONATAIRE)
         est_arriere_petit_enfant_donataire = individu.has_role(Donation.ARRIERE_PETIT_ENFANT_DONATAIRE)
@@ -160,9 +163,6 @@ class droits_donation(Variable):
             + est_petit_enfant_donataire
             + est_arriere_petit_enfant_donataire
             )
-        
-        est_epoux_ou_pacs = individu.has_role(Donation.EPOUX_DONATAIRE) + individu.has_role(Donation.PACS_DONATAIRE)
-        # INFO parametres_tarifs_droits.pacs est abrogé à partir du 22/08/2007
 
         droits_donations_par_bareme = select(
             [

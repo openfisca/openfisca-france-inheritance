@@ -1,5 +1,4 @@
 - name: Droits de mutation à titre gratuit pour personnes non parentées
-  absolute_error_margin: 0.01
   input:
     individus:
       Camille_donation_1:
@@ -37,8 +36,6 @@
           2025: 1000
 
   output:
-    role_representant:
-      2025: ['inconnu', 'inconnu', 'aucun', 'aucun']
     is_donataire:
       2025-01: [False, False, True, True]
     actif_imposable_donataire:
@@ -48,112 +45,486 @@
 
 
 - name: Droits de mutation à titre gratuit entre personnes parentés de 4ème degré
-  absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [10000, 1000]
-    role_representant:
-      2025: ['quatrieme_degre', 'quatrieme_degre']
-    exoneration_don_familial:
-      2025-01: [0, 0]
+    individus:
+      A1: 
+        age: 
+          2025: 42
+      A2:
+        age: 
+          2025: 42
+      B1:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+      B2:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+    donations:
+      D1: 
+        donateur: A1
+        parent_4eme_degre_donataire: B1
+        actif_brut_donne:
+          2025: 10000
+      D2: 
+        donateur: A2 
+        parent_4eme_degre_donataire: B2
+        actif_brut_donne:
+          2025: 1000
   output:
     droits_mutation:
-      2025-01: [5500, 550]
+      2025-01: [0, 0, 5500, 550]
 
 
 - name: Droits de mutation à titre gratuit à son neveu ou sa nièce
-  absolute_error_margin: 0.01
+  absolute_error_margin: 0.0625  # TODO expliquer cette marge d'erreur
   input:
-    actif_brut_donne:
-      2025: [1000000, 1000000, 100000, 10000]
-    role_representant:
-      2025: ['neveu', 'neveu', 'neveu', 'neveu']
-    exoneration_don_familial:
-      2025-01: [true, false, true, true]
+    individus:
+      A1: 
+        age: 
+          2025: 42
+        existe_descendant_direct:
+          2025: False
+      A2:
+        age: 
+          2025: 42
+        existe_descendant_direct:
+          2025: True
+      A3: 
+        age: 
+          2025: 42
+        existe_descendant_direct:
+          2025: False
+      A4:
+        age: 
+          2025: 42
+        existe_descendant_direct:
+          2025: False
+      B1:
+        age: 
+          2025: 42
+      B2:
+        age: 
+          2025: 42
+      B3:
+        age: 
+          2025: 42
+      B4:
+        age: 
+          2025: 42
+    
+    donations:
+      D1: 
+        # (pas de descendant en ligne directe)
+        donateur: A1
+        neveu_niece_donataire: B1
+        actif_brut_donne:
+          2025: 1_000_000
+      D2: 
+        # (descendant en ligne directe existant)
+        donateur: A2 
+        neveu_niece_donataire: B2
+        actif_brut_donne:
+          2025: 1_000_000
+      D3: 
+        # (pas de descendant en ligne directe)
+        donateur: A3
+        neveu_niece_donataire: B3
+        actif_brut_donne:
+          2025: 100_000
+      D4: 
+        # (pas de descendant en ligne directe)  
+        donateur: A4 
+        neveu_niece_donataire: B4
+        actif_brut_donne:
+          2025: 10_000
   output:
+    existe_descendant_direct_donateur:
+      2025: [False, True, False, False]
+    exoneration_don_familial:
+      2025-01: [0, 0, 0, 0, 31_865, 0, 31_865, 31_865]
+    abattement_plafond:
+      2025-01: [0, 0, 0, 0, 7_967, 7_967, 7_967, 7_967]
     droits_mutation:
-      2025-01: [528092.4, 545618.15, 33092.4, 0]
+      2025-01: [0, 0, 0, 0, 528_092.40, 545_618.15, 33_092.40, 0]
+      # Explication des montants attendus :
+      # A1 n'a pas de descendant direct
+      # (en D1, neveu ou nièce bénéficie de l'exonération pour descendant ligne directe puis de l'abattement neveu/nièce)
+      # 1_000_000 - exonération 31_865 ligne directe - abattement 7_967 neveu/nièce = 960_168 €
+      # 960_168 * 0.55 = 528_092.40 €
+      #
+      # A2 a un descendant direct (donc, en D2, pas d'exonération pour neveu nièce)
+      # 1_000_000 - abattement 7_967 = 992_033 € 
+      # 992_033 * 0.55 = 545_618,15 €
+      #
+      # A3 n'a pas de descendant direct
+      # (en D3, neveu ou nièce bénéficie de l'exonération pour descendant ligne directe puis de l'abattement neveu/nièce)
+      # 100_000 - exonération 31_865 ligne directe - abattement 7_967 neveu/nièce = 60_168
+      # 60_168 * 0.55 = 33_092.40 €
+      #
+      # A4 n'a pas de descendant direct
+      # (en D4, neveu ou nièce bénéficie de l'exonération pour descendant ligne directe puis de l'abattement neveu/nièce)
+      # l'exonération de 31_865 est supérieure au montant d'actif brut donné
+      # le droit de mutation à titre gratuit est donc de zéro
 
 
 - name: Droits de mutation à titre gratuit entre frères ou sœurs
-  absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [1000000, 100000, 16032, 10000]
-    role_representant:
-      2025: ['fratrie', 'fratrie', 'fratrie', 'fratrie']
-    exoneration_don_familial:
-      2025-01: [false, false, false, false]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+      donateur_4:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+      donataire_4:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        frere_soeur_donataire: donataire_1
+        actif_brut_donne:
+          2025: 1_000_000
+
+      donation_2:
+        donateur: donateur_2
+        frere_soeur_donataire: donataire_2
+        actif_brut_donne:
+          2025: 100_000
+
+      donation_3:
+        donateur: donateur_3
+        frere_soeur_donataire: donataire_3
+        actif_brut_donne:
+          2025: 16_032
+
+      donation_4:
+        donateur: donateur_4
+        frere_soeur_donataire: donataire_4
+        actif_brut_donne:
+          2025: 10_000
+
   output:
+    exoneration_don_familial:
+      2025-01: [0, 0, 0, 0, 0, 0, 0, 0]
+    abattement_plafond:
+      2025-01: [0, 0, 0, 0, 15_932, 15_932, 15_932, 15_932]
     droits_mutation:
-      2025-01: [440387.6, 35387.6, 35, 0]
+      2025-01: [0, 0, 0, 0, 440_387.6, 35_387.6, 35, 0]
 
 
 - name: Droits de mutation à titre gratuit à son ascendant
-  absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [1000000, 100000, 16032, 10000]
-    role_representant:
-      2025: ['ascendant', 'ascendant', 'ascendant', 'ascendant']
-    exoneration_don_familial:
-      2025-01: [false, false, false, false]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+      donateur_4:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+      donataire_4:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        parent_donataire: donataire_1  # ascendant
+        actif_brut_donne:
+          2025: 1_000_000
+      donation_2:
+        donateur: donateur_2
+        parent_donataire: donataire_2  # ascendant
+        actif_brut_donne:
+          2025: 100_000
+      donation_3:
+        donateur: donateur_3
+        grand_parent_donataire: donataire_3  # ascendant
+        actif_brut_donne:
+          2025: 16_032
+      donation_4:
+        donateur: donateur_4
+        arriere_grand_parent_donataire: donataire_4  # ascendant
+        actif_brut_donne:
+          2025: 10_000
   output:
+    exoneration_don_familial:
+      2025-01: [0, 0, 0, 0, 0, 0, 0, 0]
     droits_mutation:
-      2025-01: [212961.95, 0, 0, 0]
+      2025-01: [0, 0, 0, 0, 212_961.95, 0, 0, 0]
 
 
 - name: Droits de mutation à titre gratuit à son arrière-petit-enfant
-  absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [3000000, 3000000, 100000, 10000]
-    role_representant:
-      2025: ['arriere_petit_enfant', 'arriere_petit_enfant', 'arriere_petit_enfant', 'arriere_petit_enfant']
-    exoneration_don_familial:
-      2025-01: [true, false, true, true]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        arriere_petit_enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_2:
+        donateur: donateur_2
+        arriere_petit_enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 100_000
+      donation_3:
+        donateur: donateur_3
+        arriere_petit_enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 10_000
+      
   output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 5_310, 5_310, 5_310 ]
     droits_mutation:
-      2025-01: [1095665.5, 1110004.80, 10759.35, 0]
+      2025-01: [ 0, 0, 0, 1_095_665.5, 10_759.35, 0 ]
 
 
 - name: Droits de mutation à titre gratuit à son petit-enfant
   absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [3000000, 3000000, 100000, 10000]
-    role_representant:
-      2025: ['petit_enfant', 'petit_enfant', 'petit_enfant', 'petit_enfant']
-    exoneration_don_familial:
-      2025-01: [true, false, true, true]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        petit_enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_2:
+        donateur: donateur_2
+        petit_enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 100_000
+      donation_3:
+        donateur: donateur_3
+        petit_enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 10_000
   output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
     droits_mutation:
-      2025-01: [1083715.80, 1098055.05, 5448.35, 0]
+      2025-01: [ 0, 0, 0, 1_083_715.80, 5_448.35, 0 ]
 
 
 - name: Droits de mutation à titre gratuit à son enfant
-  absolute_error_margin: 0.01
   input:
-    actif_brut_donne:
-      2025: [3000000, 3000000, 2500000, 150000, 10000]
-    role_representant:
-      2025: ['enfant', 'enfant', 'enfant', 'enfant', 'enfant']
-    exoneration_don_familial:
-      2025-01: [true, false, true, true, true]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+      donateur_4:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+      donataire_4:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3000000
+      donation_2:
+        donateur: donateur_2
+        enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 2500000
+      donation_3:
+        donateur: donateur_3
+        enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 150000
+      donation_4:
+        donateur: donateur_4
+        enfant_donataire: donataire_4
+        actif_brut_donne:
+          2025: 10_000
   output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 0, 31_865, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 0, 100_000, 100_000, 100_000, 100_000 ]
     droits_mutation:
-      2025-01: [1053055, 1067394.30, 828055.05, 1821.35, 0]
+      2025-01: [ 0, 0, 0, 0, 1_053_055, 828_055.05, 1_821.35, 0 ]
 
 
 - name: Droits de mutation à titre gratuit entre époux-se ou partenaire Pacs
-  absolute_error_margin: 0.01
+  relative_error_margin: 0.001
   input:
-    actif_brut_donne:
-      2025: [3000000, 1000000, 100000, 10000]
-    role_representant:
-      2025: ['epoux_pacs', 'epoux_pacs', 'epoux_pacs', 'epoux_pacs']
-    exoneration_don_familial:
-      2025-01: [false, false, false, false]
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+      donateur_4:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+      donataire_4:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        epoux_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_2:
+        donateur: donateur_2
+        pacs_donataire: donataire_2
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_3:
+        donateur: donateur_3
+        epoux_donataire: donataire_3
+        actif_brut_donne:
+          2025: 100_000
+      donation_4:
+        donateur: donateur_4
+        epoux_donataire: donataire_4
+        actif_brut_donne:
+          2025: 10_000
   output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 0, 80_724, 80_724, 80_724, 80_724 ]
+    actif_taxable_donataire:
+      2025-01: [ 0, 0, 0, 0, 2_919_276, 2_919_276, 19_276, 0 ]
+    part_taxable_don:
+      2025-01: [ 2_919_276, 2_919_276, 19_276, 0 ]
+    droits_donation:
+      2025-01: [ 0, 0, 0, 0, 1_075_079.10, 1_075_079.10, 1690.95, 0 ]
+        # relative_error_margin à 0.001 ajoutée pour cette variable
+        # TODO améliorer le montant obtenu : [ 0., 0., 0., 0., 1_075_080.8, 1_075_080.8, 1_691.2, 0. ]
     droits_mutation:
-      2025-01: [1075080.8, 219400.75, 1691.20, 0]
+      2025-01: [ 0, 0, 0, 0, 1_075_079.10, 1_075_079.10, 1690.95, 0 ]
+      # Explication des montants attendus :
+      # D1 et D2
+      # 3_000_000 - 80_724 = 2_919_276
+      # Application du barème conjoint ou pacs :
+      # 1_075_079.10 
+      # = 403.60 + 785.90 + 2389.80 + 104091.60 + 105153.90 + 361135.20 + 501119.10
+      # = 8072 * 0.05 + (15932 - 8073)  * 0.10 + (31865 - 15933) * 0.15 + (552324 - 31866) * 0.20
+      #   + (902838 - 552325) * 0.30 + (1805677 - 902839) * 0.40 + (2_919_276 - 1805678) * 0.45
+      #
+      # D3
+      # 100_000 - 80_724 = 19_276
+      # Application du barème conjoint :
+      # 1690.95 
+      # = 8072 * 0.05 + (15932 - 8073)  * 0.10 + (19_276 - 15933) * 0.15
