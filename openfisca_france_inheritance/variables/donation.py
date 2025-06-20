@@ -32,6 +32,30 @@ from openfisca_france_inheritance.entities import Individu, Donation
 #         return self.sum_by_entity(is_enfant_donataire_holder)
 
 
+class actif_brut(Variable):
+    value_type = float
+    entity = Donation
+    label = "Montant de la part d'actif brut disponible d'un donateur"
+    definition_period = ETERNITY
+
+    def formula(donation, period, parameters):
+        part_epoux_don = donation('part_epoux_don', period)
+        actif_de_communaute_don = donation('actif_de_communaute_don', period)
+        passif_de_communaute_don = donation('passif_de_communaute_don', period)
+        actif_propre_don = donation('actif_propre_don', period)
+        passif_propre_don = donation('passif_propre_don', period)
+        assurance_vie_don = donation('assurance_vie_don', period)
+        return (
+            (1 - part_epoux_don)
+            * (
+                (actif_de_communaute_don - passif_de_communaute_don) / 2
+                + actif_propre_don
+                - passif_propre_don
+                - assurance_vie_don
+                )
+            ) 
+
+
 class actif_brut_donne(Variable):
     value_type = float
     entity = Donation
@@ -73,25 +97,7 @@ class actif_imposable_don(Variable):
     '''
 
     def formula(donation, period, parameters):
-        # actif_imposable_don = don - exonération
-        
-        # part_epoux_don = donation('part_epoux_don', period)  # TODO devrait être l'actif imposable (don - exonération) de l'époux ?
-        # actif_de_communaute_don = donation('actif_de_communaute_don', period)
-        # passif_de_communaute_don = donation('passif_de_communaute_don', period)
-        # actif_propre_don = donation('actif_propre_don', period)
-        # passif_propre_don = donation('passif_propre_don', period)
-        # assurance_vie_don = donation('assurance_vie_don', period)
-        # return (
-        #     (1 - part_epoux_don)
-        #     * (
-        #         (actif_de_communaute_don - passif_de_communaute_don) / 2
-        #         + actif_propre_don
-        #         - passif_propre_don
-        #         - assurance_vie_don
-        #         )
-        #     )  
-        # => équivalent montant du don ?!
-
+        # actif_imposable_donation = actif_brut_donne - exonération selon relation donateur donataire
         is_donataire = ~ donation.members('is_donateur', period)
         actif_imposable_donataire = is_donataire * donation.members("actif_imposable_donataire", period)
         actif_imposable_donation = donation.sum(actif_imposable_donataire)
@@ -115,6 +121,8 @@ class assurance_vie_don(Variable):
     entity = Donation
     label = 'Assurance Vie'
     definition_period = ETERNITY
+    # TODO préciser la variable : 
+    # capital d'une assurance vie rachetée suivie de donation ?
 
 
 class epoux_donataire(Variable):
