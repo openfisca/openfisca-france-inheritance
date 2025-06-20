@@ -174,7 +174,7 @@ class part_taxable_don(Variable):
     value_type = float
     entity = Donation
     label = "Part taxable d'une donation à un donataire"
-    definition_period = ETERNITY
+    definition_period = MONTH
     documentation = '''
     La part taxable du don transmis à un individu donataire
     selon le lien de parenté entre cet individu et le donateur.
