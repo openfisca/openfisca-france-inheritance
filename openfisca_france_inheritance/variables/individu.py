@@ -198,7 +198,7 @@ class droits_donation(Variable):
 class droits_succession(Variable):
     value_type = float
     entity = Individu
-    label = 'Droits sur parts taxables de succession'
+    label = "Droits sur parts taxables des individus d'une succession"
     definition_period = MONTH
 
     def formula(individu, period, parameters):

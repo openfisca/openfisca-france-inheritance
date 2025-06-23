@@ -81,11 +81,11 @@ class epoux_survivant(Variable):
 class droits_sur_succession(Variable):
     value_type = float
     entity = Succession
-    label = 'Droits sur succession'
+    label = "Droits sur l'ensemble de la succession"
     definition_period = ETERNITY
 
     def formula(succession, period, parameters):
-        return succession.sum(succession.members('droits', period))
+        return succession.sum(succession.members('droits_succession', period))
 
 
 class nombre_enfants(Variable):
