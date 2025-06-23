@@ -426,7 +426,7 @@ class exoneration_don_familial(Variable):
     d'après l'article 790 G du CGI.
     '''
 
-    def formula_2015_01_01(individu, period, parameters):
+    def formula_2011_07_31(individu, period, parameters):
         parametres_exoneration_period = parameters(period).droits_mutation_titre_gratuit.exoneration
         age = individu('age', period)
 
@@ -483,7 +483,7 @@ class actif_imposable_donataire(Variable):
     def formula(individu, period, parameters):
         is_donataire = individu('is_donataire', period)
 
-        actif_brut_donne = individu.donation('actif_brut_donne', period)
+        actif_brut_donne = individu.donation('actif_brut_donne', period)  # part du donataire
         exoneration_don_familial = individu('exoneration_don_familial', period)
 
         return is_donataire * max_(actif_brut_donne - exoneration_don_familial, 0)
