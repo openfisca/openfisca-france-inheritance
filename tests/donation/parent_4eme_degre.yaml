@@ -1,0 +1,33 @@
+- name: Droits de mutation à titre gratuit entre personnes parentés de 4ème degré
+  input:
+    individus:
+      A1: 
+        age: 
+          2025: 42
+      A2:
+        age: 
+          2025: 42
+      B1:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+      B2:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+    donations:
+      D1: 
+        donateur: A1
+        parent_4eme_degre_donataire: B1
+        actif_brut_donne:
+          2025: 10000
+      D2: 
+        donateur: A2 
+        parent_4eme_degre_donataire: B2
+        actif_brut_donne:
+          2025: 1000
+  output:
+    droits_mutation:
+      2025-01: [0, 0, 5500, 550]

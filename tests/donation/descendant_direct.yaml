@@ -1,0 +1,154 @@
+- name: Droits de mutation à titre gratuit à son enfant
+  input:
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+      donateur_4:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+      donataire_4:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3000000
+      donation_2:
+        donateur: donateur_2
+        enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 2500000
+      donation_3:
+        donateur: donateur_3
+        enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 150000
+      donation_4:
+        donateur: donateur_4
+        enfant_donataire: donataire_4
+        actif_brut_donne:
+          2025: 10_000
+  output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 0, 31_865, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 0, 100_000, 100_000, 100_000, 100_000 ]
+    droits_mutation:
+      2025-01: [ 0, 0, 0, 0, 1_053_055, 828_055.05, 1_821.35, 0 ]
+
+- name: Droits de mutation à titre gratuit à son petit-enfant
+  absolute_error_margin: 0.01
+  input:
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        petit_enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_2:
+        donateur: donateur_2
+        petit_enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 100_000
+      donation_3:
+        donateur: donateur_3
+        petit_enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 10_000
+  output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
+    droits_mutation:
+      2025-01: [ 0, 0, 0, 1_083_715.80, 5_448.35, 0 ]
+
+
+- name: Droits de mutation à titre gratuit à son arrière-petit-enfant
+  input:
+    individus: 
+      donateur_1:
+        age: 
+          2025: 42
+      donateur_2:
+        age: 
+          2025: 42
+      donateur_3:
+        age: 
+          2025: 42
+
+      donataire_1:
+        age: 
+          2025: 42
+      donataire_2:
+        age: 
+          2025: 42
+      donataire_3:
+        age: 
+          2025: 42
+
+    donations:
+      donation_1:
+        donateur: donateur_1
+        arriere_petit_enfant_donataire: donataire_1
+        actif_brut_donne:
+          2025: 3_000_000
+      donation_2:
+        donateur: donateur_2
+        arriere_petit_enfant_donataire: donataire_2
+        actif_brut_donne:
+          2025: 100_000
+      donation_3:
+        donateur: donateur_3
+        arriere_petit_enfant_donataire: donataire_3
+        actif_brut_donne:
+          2025: 10_000
+      
+  output:
+    exoneration_don_familial:
+      2025-01: [ 0, 0, 0, 31_865, 31_865, 31_865 ]
+    abattement_plafond:
+      2025-01: [ 0, 0, 0, 5_310, 5_310, 5_310 ]
+    droits_mutation:
+      2025-01: [ 0, 0, 0, 1_095_665.5, 10_759.35, 0 ]

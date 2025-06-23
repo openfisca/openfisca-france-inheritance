@@ -1,0 +1,44 @@
+- name: Droits de mutation à titre gratuit pour personnes non parentées
+  input:
+    individus:
+      Camille_donation_1:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+      Camille_donation_2:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+      Claude:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+      Celeste:
+        age: 
+          2025: 42
+        exoneration_don_familial:
+          2025-01: 0
+
+    donations:
+      donation_1:
+        donateur: Camille_donation_1
+        non_parent_donataire: Claude
+        actif_brut_donne:
+          2025: 10000
+
+      donation_2:
+        donateur: Camille_donation_2
+        non_parent_donataire: Celeste
+        actif_brut_donne:
+          2025: 1000
+
+  output:
+    is_donataire:
+      2025-01: [False, False, True, True]
+    actif_imposable_donataire:
+      2025-01: [0, 0, 10000, 1000]
+    droits_mutation:
+      2025-01: [0, 0, 6000, 600]
