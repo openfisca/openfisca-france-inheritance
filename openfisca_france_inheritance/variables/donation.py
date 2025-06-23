@@ -34,7 +34,7 @@ from openfisca_france_inheritance.entities import Individu, Donation
 
 class actif_brut(Variable):
     value_type = float
-    entity = Donation
+    entity = Donation  # ou par individu (pour le donateur en particulier) ?
     label = "Montant de la part d'actif brut disponible d'un donateur"
     definition_period = ETERNITY
 
@@ -76,6 +76,32 @@ class actif_brut_donne(Variable):
     https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191747/
     '''
 
+    def formula(donation, period, parameters):
+        actif_brut = donation('actif_brut', period)
+
+        est_epoux_ou_pacs = donation.any(
+            donation.members.has_role(Donation.EPOUX_DONATAIRE) 
+            + donation.members.has_role(Donation.PACS_DONATAIRE))
+
+        is_enfant_donataire = donation.any(donation.members('is_enfant_donataire', period))
+        nombre_enfants_donataires = donation('nombre_enfants_donataires', period)
+
+        is_frere_soeur_donataire = donation.any(donation.members('is_frere_soeur_donataire', period))
+        nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
+        
+        part_enfant_donataire = actif_brut / (nombre_enfants_donataires + 1 * (nombre_enfants_donataires == 0))
+        part_frere_soeur_donataire = actif_brut / (nombre_freres_soeurs_donataires + 1 * (nombre_freres_soeurs_donataires == 0))
+
+        # Hypothèse sur la structure de l'entité Donation : 
+        # 1 seul rôle de donataire existe/est actif par Donation
+        return (
+            est_epoux_ou_pacs * actif_brut
+            ) + (
+                is_enfant_donataire * part_enfant_donataire
+                ) + (
+                    is_frere_soeur_donataire * part_frere_soeur_donataire
+                )
+
 
 class actif_de_communaute_don(Variable):
     value_type = float
@@ -112,8 +138,8 @@ class actif_propre_don(Variable):
     definition_period = ETERNITY
     documentation = '''
     Montant des biens qui appartiennent exclusivement à un donateur et qu'il peut trasmettre.
-    Un actif propre peut être une part d'un actif commun.
     '''
+    # à distinguer des parts d'un actif commun (voir actif_brut)
 
 
 class assurance_vie_don(Variable):
@@ -190,17 +216,6 @@ class part_taxable_don(Variable):
 
     def formula(donation, period, parameters):
         actif_taxable_donataire = donation.members('actif_taxable_donataire', period)
-        
-        # TODO vérifier périmètre résidu ancienne formule : 
-        # nombre_enfants_donataires = donation('nombre_enfants_donataires', period)
-        # nombre_freres_soeurs_donataires = donation('nombre_freres_soeurs_donataires', period)
-        # 
-        # part_taxable_epoux_donataire = max_(actif_imposable_don - abattement_epoux_donataire, 0)
-        # part_taxable_enfants_donataires = max_(actif_imposable_don / (nombre_enfants_donataires + 1 * (nombre_enfants_donataires == 0)) - abattement_enfants_donataires, 0)
-        # part_taxable_freres_soeurs_donataires = max_(actif_imposable_don - abattement_freres_soeurs_donataires, 0)
-
-        # Hypothèse sur la structure de l'entité Donation : 
-        # 1 seul rôle de donataire existe/est actif par Donation
         return donation.sum(actif_taxable_donataire)
 
 
@@ -216,4 +231,3 @@ class passif_propre_don(Variable):
     entity = Donation
     label = 'Passif propre'
     definition_period = ETERNITY
-

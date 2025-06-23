@@ -1,21 +1,32 @@
 - name: Monsieur Dupont, Veuf et deux enfants
-  description: test
-  period: 2014
+  absolute_error_margin: 0.45
+  period: 2014-01
   input:
     individus:
       papa:
+        age: 70
         date_donation: 2014-01-01
       fifi:
+        age: 42
         date_donation: 9999-01-01
       loulou:
+        age: 42
         date_donation: 9999-01-01
     donations:
       donation_0:
         donateur: papa
         enfant_donataire: ["fifi", "loulou"]
-        actif_propre_don: 300_000
+        actif_brut: 300_000  # actif propre
   output:
     is_enfant_donataire: [False, True, True]
     nombre_enfants_donataires: 2
-    part_taxable_don: 50_000
-    #droits_sur_donation: 8_194.35
+    actif_brut_donne: 300_000 / 2  # par enfant donataire
+    exoneration_don_familial: [0, 31_865, 31_865]
+    actif_imposable_donataire: [0, 118_135, 118_135]  # actif_brut_donne - exoneration_don_familial
+    abattement_plafond: [0, 100_000, 100_000]
+    actif_taxable_donataire: [0, 18_135, 18_135]  # actif_imposable_donataire - abattement_plafond
+    part_taxable_don: 18_135 * 2
+    droits_donation: [0, 1820.90, 1820.90]
+    # = (8072 * 0.05) + ((12109 - 8073) * 0.10) + ((15932 - 12110) * 0.15) + ((18_135 - 15933) * 0.20)
+    # = 403.60 + 403.60 + 573.30 + 440.40
+    # = 1820.90

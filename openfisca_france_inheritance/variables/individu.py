@@ -139,9 +139,9 @@ class droits_donation(Variable):
     definition_period = MONTH
     reference = 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000030061736'
 
-    # TODO EN COURS - migration de la formule d'openfisca-france vers openfisca-france-inheritance
-    def formula_2015_01_01(individu, period, parameters):
-        part_taxable_donations = individu.donation('part_taxable_don', period)  # ( don - exonération ) - abattement
+    def formula_2011_07_31(individu, period, parameters):
+        actif_taxable_donataire = individu('actif_taxable_donataire', period)  
+        # actif_taxable_donataire = ( actif_brut_donne - exoneration_don_familial ) - abattement_plafond
 
         parametres_tarifs_droits = parameters(period).droits_mutation_titre_gratuit.bareme
 
@@ -171,9 +171,9 @@ class droits_donation(Variable):
                 individu.has_role(Donation.FRERE_SOEUR_DONATAIRE),
             ],
             [
-                parametres_tarifs_droits.conjoint.calc(part_taxable_donations),
-                parametres_tarifs_droits.ligne_directe.calc(part_taxable_donations),
-                parametres_tarifs_droits.autres.adelphite.calc(part_taxable_donations),
+                parametres_tarifs_droits.conjoint.calc(actif_taxable_donataire),
+                parametres_tarifs_droits.ligne_directe.calc(actif_taxable_donataire),
+                parametres_tarifs_droits.autres.adelphite.calc(actif_taxable_donataire),
             ]
         )
 
@@ -184,63 +184,15 @@ class droits_donation(Variable):
                 individu.has_role(Donation.NON_PARENT_DONATAIRE) 
             ],
             [
-                parametres_tarifs_droits.autres.taux_parents_degre4 * part_taxable_donations,
-                parametres_tarifs_droits.autres.taux_parents_degre4 * part_taxable_donations,
-                parametres_tarifs_droits.autres.taux_non_parents * part_taxable_donations
+                parametres_tarifs_droits.autres.taux_parents_degre4 * actif_taxable_donataire,
+                parametres_tarifs_droits.autres.taux_parents_degre4 * actif_taxable_donataire,
+                parametres_tarifs_droits.autres.taux_non_parents * actif_taxable_donataire
             ]
         )
     
         # Seul rôle non couvert : LienParente.inconnu
         # dans ce cas, droit de mutation attendu à zéro (et impossibilité de la donation)
-
         return droits_donations_par_bareme + droits_donations_par_taux
-
-        ### ancienne formule en cours de migration :
-        
-        # don = individu('don', period)
-        # lien_parente = individu('lien_parente', period)
-        # droit_exoneration_familial = individu(
-        #     'droit_exoneration_familial', period)
-        # param = parameters(period).taxation_capital.donation
-        # # à migrer vers : param = parameters(period).droits_mutation_titre_gratuit.abattement ?
-        # 
-        # def calc_droits(abattement, taux, bareme):
-        #     exoneration_familial = param.exoneration_don_familial * droit_exoneration_familial
-        #     base_imposable = max_(don - exoneration_familial - abattement, 0)
-        #     if bareme:
-        #         return bareme.calc(base_imposable)
-        #     return taux * base_imposable
-        #
-        # montant_droits_donation = select(
-        #     [
-        #         (lien_parente == LienParente.aucun),
-        #         (lien_parente == LienParente.quatrieme_degre), 
-        #         (lien_parente == LienParente.neveu), 
-        #         (lien_parente == LienParente.fratrie), 
-        #         (lien_parente == LienParente.ascendant), 
-        #         (lien_parente == LienParente.arriere_petit_enfant), 
-        #         (lien_parente == LienParente.petit_enfant),
-        #         (lien_parente == LienParente.enfant), 
-        #         (lien_parente == LienParente.epoux_pacs), 
-        #         ],
-        #     [
-        #         calc_droits(0, param.taux_marginal_non_parents_donation, None),
-        #         calc_droits(0, param.taux_marginal_parents_degre4_donation, None),
-        #         calc_droits(param.abattement_neveuxnieces_donation, param.taux_neveu, None),
-        #         calc_droits(param.abattement_freres_soeurs, 0, param.bareme_fratrie), 
-        #         calc_droits(param.ascendant, 0,
-        #                     param.bareme_ligne_directe), 
-        #         calc_droits(param.abattement_arr_petits_enfants_donation,
-        #                     0, param.bareme_ligne_directe), 
-        #         calc_droits(param.abattement_petits_enfants_donation,
-        #                     0, param.bareme_ligne_directe), 
-        #         calc_droits(param.abattement_enfants_donation, 0,
-        #                     param.bareme_ligne_directe), 
-        #         calc_droits(param.abattement_epoux_donation,  # ou, de même : abattement_pacs_donation
-        #                     0, param.bareme_epoux_pacs), 
-        #         ]
-        #     )
-        # return montant_droits_donation
 
 
 class droits_succession(Variable):
