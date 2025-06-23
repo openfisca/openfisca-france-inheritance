@@ -32,6 +32,7 @@
       - Renomme `actif_propre_don` en `actif_brut_donne`, part d'`actif_brut` par donataire
       - Ajoute `existe_descendant_direct_donateur`
       - Corrige le calcul d'`actif_imposable_don`
+    * Transcrit en barème openfisca les paramètres de seuils et de taux de tarification des droits de mutation à titre gratuit `/parameters/droits_mutation_titre_gratuit/bareme/*` (donation et succession)
 
 # 1.0.0 [#5](https://github.com/openfisca/openfisca-france-inheritance/pull/5)
 
