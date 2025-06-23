@@ -2,7 +2,7 @@
 
 # 
 
-> Initialement proposé sur [openfisca-france #2418](https://github.com/openfisca/openfisca-france/pull/2418)
+> Initialement proposé sur [openfisca-france #2466](https://github.com/openfisca/openfisca-france/pull/2466)
 
 * Évolution du système socio-fiscal.
 * Périodes concernées : à partir du 31/07/2011.
