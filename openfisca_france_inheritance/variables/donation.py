@@ -117,12 +117,12 @@ class actif_imposable_don(Variable):
     definition_period = ETERNITY
     documentation = '''
     actif_imposable_don = actif imposable de l'individu donataire de la donation
-
-    Hypothèse sur la structure de l'entité Donation : 
-    1 seul rôle de donataire existe/est actif par Donation
     '''
 
     def formula(donation, period, parameters):
+        # Hypothèse sur la structure de l'entité Donation : 
+        # 1 seul rôle de donataire existe/est actif par Donation.
+        #
         # actif_imposable_donation = actif_brut_donne - exonération selon relation donateur donataire
         is_donataire = ~ donation.members('is_donateur', period)
         actif_imposable_donataire = is_donataire * donation.members("actif_imposable_donataire", period)

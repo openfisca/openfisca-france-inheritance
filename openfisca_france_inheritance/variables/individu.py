@@ -46,15 +46,6 @@ class LienParente(Enum):
     epoux = 'Epoux-se'
 
 
-# class lien_parente(Variable):
-#     value_type = Enum
-#     possible_values = LienParente
-#     default_value = LienParente.aucun
-#     entity = Individu
-#     label = 'Lien de parenté entre le donateur et le donataire'
-#     definition_period = YEAR
-
-
 class role_representant(Variable):
     value_type = Enum
     possible_values = LienParente
