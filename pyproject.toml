@@ -1,6 +1,6 @@
 [project]
 name = "OpenFisca-France-Inheritance"
-version = "1.0.0"
+version = "2.0.0"
 description = "OpenFisca Rules as Code model for France Inheritance Tax."
 readme = "README.md"
 keywords = ["microsimulation", "tax", "inheritance", "rac", "rules-as-code", "france"]

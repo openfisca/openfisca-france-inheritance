@@ -1,8 +1,6 @@
 # CHANGELOG
 
-# 
-
-> Initialement proposé sur [openfisca-france #2466](https://github.com/openfisca/openfisca-france/pull/2466)
+# 2.0.0 [#4](https://github.com/openfisca/openfisca-france-inheritance/pull/4)
 
 * Évolution du système socio-fiscal.
 * Périodes concernées : à partir du 31/07/2011.
@@ -21,6 +19,7 @@
       - Ajoute les rôles `parent_4eme_degre_donataire` et `non_parent_donataire`
     * Ajoute `parameters/droits_mutation_titre_gratuit/abattement/ascendant.yaml`
     * Ajoute `parameters/droits_mutation_titre_gratuit/exoneration/`
+    * Renomme `parameters/droits_mutation_titre_gratuit/abattement/neveuxnieces.yaml` en `.../neveux_nieces.yaml`
     * Aux individus 
       - Ajoute `age`, `is_donateur`, `is_donataire`, `is_petit_enfant_donataire`, `is_arriere_petit_enfant_donataire`, `is_neveu_niece_donataire`, `existe_descendant_direct`
       - Migre `is_enfant_donataire` de nombre à booléen
