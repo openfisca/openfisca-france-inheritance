@@ -53,6 +53,6 @@ check-all-yaml:
 	yamllint tests
 
 test: clean check-syntax-errors check-style
-	@# Launch tests from openfisca_france_inheritance/tests directory (and not .) because TaxBenefitSystem must be initialized
+	@# Launch tests from openfisca-france-inheritance/tests directory (and not .) because TaxBenefitSystem must be initialized
 	@# before parsing source files containing formulas.
 	openfisca test --country-package openfisca_france_inheritance tests
