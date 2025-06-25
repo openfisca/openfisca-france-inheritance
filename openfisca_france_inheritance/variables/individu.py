@@ -464,7 +464,7 @@ class abattement_plafond(Variable):
         abattement_petits_enfants_donataires = parametres_abattement_period.petits_enfants_donation
         abattement_arrieres_petits_enfants_donataires = parametres_abattement_period.arr_petits_enfants_donation
         abattement_freres_soeurs_donataires = parametres_abattement_period.adelphite
-        abattement_is_neveu_niece_donataire = parametres_abattement_period.neveuxnieces.donation
+        abattement_is_neveu_niece_donataire = parametres_abattement_period.neveux_nieces.donation
 
         abattement_plafond = select(
             [
