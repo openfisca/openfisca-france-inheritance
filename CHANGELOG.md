@@ -1,5 +1,38 @@
 # CHANGELOG
 
+# 2.0.0 [#4](https://github.com/openfisca/openfisca-france-inheritance/pull/4)
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : à partir du 31/07/2011.
+* Zones impactées : 
+  - `entities.py`
+  - `variables/individu.py`
+  - `variables/donation.py`
+  - `variables/succession.py`
+  - `parameters/droits_mutation_titre_gratuit/abattement/*`
+  - `parameters/droits_mutation_titre_gratuit/bareme/*`
+  - `parameters/droits_mutation_titre_gratuit/exoneration/*`
+* Détails :
+  - Ajoute le calcul des donations incluant les exonérations pour don familial et les abattements
+    * À l'entité Donation
+      - Renomme le rôle `arrière_grand_parent_donataire` en `arriere_grand_parent_donataire`
+      - Ajoute les rôles `parent_4eme_degre_donataire` et `non_parent_donataire`
+    * Ajoute `parameters/droits_mutation_titre_gratuit/abattement/ascendant.yaml`
+    * Ajoute `parameters/droits_mutation_titre_gratuit/exoneration/`
+    * Renomme `parameters/droits_mutation_titre_gratuit/abattement/neveuxnieces.yaml` en `.../neveux_nieces.yaml`
+    * Aux individus 
+      - Ajoute `age`, `is_donateur`, `is_donataire`, `is_petit_enfant_donataire`, `is_arriere_petit_enfant_donataire`, `is_neveu_niece_donataire`, `existe_descendant_direct`
+      - Migre `is_enfant_donataire` de nombre à booléen
+      - Migre `role_representant` du type `TypesRoleRepresentant` à `LienParente`
+      - Renomme `droits` en `droits_mutation` et ajoute `droits_succession`
+      - Ajoute `droits_donation` et ses dispositifs internes `exoneration_don_familial`, `actif_imposable_donataire`, `abattement_plafond`, `actif_taxable_donataire`
+    * Aux donations
+      - Ajoute `actif_brut` comme premier niveau d'actif propre impliqué dans une donation
+      - Renomme `actif_propre_don` en `actif_brut_donne`, part d'`actif_brut` par donataire
+      - Ajoute `existe_descendant_direct_donateur`
+      - Corrige le calcul d'`actif_imposable_don`
+    * Transcrit en barème openfisca les paramètres de seuils et de taux de tarification des droits de mutation à titre gratuit `/parameters/droits_mutation_titre_gratuit/bareme/*` (donation et succession)
+
 # 1.0.0 [#5](https://github.com/openfisca/openfisca-france-inheritance/pull/5)
 
 * Évolution du système socio-fiscal.

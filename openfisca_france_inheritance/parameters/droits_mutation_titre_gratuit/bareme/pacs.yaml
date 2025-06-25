@@ -8,7 +8,7 @@ brackets:
     2005-01-01:
       value: 0
     2007-08-22:
-      value: 0
+      value: null
   rate:
     2000-01-01:
       value: 0.4
@@ -17,7 +17,7 @@ brackets:
     2005-01-01:
       value: 0.4
     2007-08-22:
-      value: 0.4
+      value: null
 - threshold:
     2000-01-01:
       value: 100000
@@ -26,7 +26,7 @@ brackets:
     2005-01-01:
       value: 15000
     2007-08-22:
-      value: 15000
+      value: null
   rate:
     2000-01-01:
       value: 0.5
@@ -35,7 +35,7 @@ brackets:
     2005-01-01:
       value: 0.5
     2007-08-22:
-      value: 0.5
+      value: null
 metadata:
   short_label: Barème Pacs
   last_value_still_valid_on: "2023-04-01"
@@ -61,4 +61,8 @@ metadata:
   rate_unit: /1
   threshold_unit: currency-EUR
   type: marginal_rate
-documentation: Les successions entre partenaires de Pacs (Pacte civil de solidarité), régies de 2000 à 2007 par l’article 777 bis du Code général des impôts, étaient soumises à un taux de 40% pour la fraction de la part nette taxable n’excédant pas 15 000€ et à un taux de 50% pour le surplus.
+documentation: |- 
+  Les successions entre partenaires de Pacs (Pacte civil de solidarité),
+  régies de 2000 à 2007 par l’article 777 bis du Code général des impôts,
+  étaient soumises à un taux de 40% pour la fraction de la part nette taxable
+  n’excédant pas 15 000€ et à un taux de 50% pour le surplus.
