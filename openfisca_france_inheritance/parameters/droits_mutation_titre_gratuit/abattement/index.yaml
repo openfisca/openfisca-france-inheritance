@@ -2,7 +2,6 @@ description: Abattements au titre des droits de mutation à titre gratuit
 metadata:
   documentation_start: true
   order:
-  - ascendant
   - conjoint
   - pacs
   - enfants
@@ -11,4 +10,5 @@ metadata:
   - neveux_nieces
   - arr_petits_enfants_donation
   - personnes_handicapees
+  - ascendant
   - autre_succession
