@@ -32,25 +32,25 @@
         donateur: donateur_1
         frere_soeur_donataire: donataire_1
         actif_brut_donne:
-          2025: 1_000_000
+          ETERNITY: 1_000_000
 
       donation_2:
         donateur: donateur_2
         frere_soeur_donataire: donataire_2
         actif_brut_donne:
-          2025: 100_000
+          ETERNITY: 100_000
 
       donation_3:
         donateur: donateur_3
         frere_soeur_donataire: donataire_3
         actif_brut_donne:
-          2025: 16_032
+          ETERNITY: 16_032
 
       donation_4:
         donateur: donateur_4
         frere_soeur_donataire: donataire_4
         actif_brut_donne:
-          2025: 10_000
+          ETERNITY: 10_000
 
   output:
     exoneration_don_familial:

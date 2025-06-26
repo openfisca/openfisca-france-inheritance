@@ -22,12 +22,12 @@
         donateur: A1
         parent_4eme_degre_donataire: B1
         actif_brut_donne:
-          2025: 10000
+          ETERNITY: 10000
       D2: 
         donateur: A2 
         parent_4eme_degre_donataire: B2
         actif_brut_donne:
-          2025: 1000
+          ETERNITY: 1000
   output:
     droits_mutation:
       2025-01: [0, 0, 5500, 550]

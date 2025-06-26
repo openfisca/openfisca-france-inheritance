@@ -41,25 +41,25 @@
         donateur: A1
         neveu_niece_donataire: B1
         actif_brut_donne:
-          2025: 1_000_000
+          ETERNITY: 1_000_000
       D2: 
         # (descendant en ligne directe existant)
         donateur: A2 
         neveu_niece_donataire: B2
         actif_brut_donne:
-          2025: 1_000_000
+          ETERNITY: 1_000_000
       D3: 
         # (pas de descendant en ligne directe)
         donateur: A3
         neveu_niece_donataire: B3
         actif_brut_donne:
-          2025: 100_000
+          ETERNITY: 100_000
       D4: 
         # (pas de descendant en ligne directe)  
         donateur: A4 
         neveu_niece_donataire: B4
         actif_brut_donne:
-          2025: 10_000
+          ETERNITY: 10_000
   output:
     existe_descendant_direct_donateur:
       2025: [False, True, False, False]

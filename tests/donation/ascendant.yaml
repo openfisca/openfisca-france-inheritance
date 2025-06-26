@@ -32,22 +32,22 @@
         donateur: donateur_1
         parent_donataire: donataire_1  # ascendant
         actif_brut_donne:
-          2025: 1_000_000
+          ETERNITY: 1_000_000
       donation_2:
         donateur: donateur_2
         parent_donataire: donataire_2  # ascendant
         actif_brut_donne:
-          2025: 100_000
+          ETERNITY: 100_000
       donation_3:
         donateur: donateur_3
         grand_parent_donataire: donataire_3  # ascendant
         actif_brut_donne:
-          2025: 16_032
+          ETERNITY: 16_032
       donation_4:
         donateur: donateur_4
         arriere_grand_parent_donataire: donataire_4  # ascendant
         actif_brut_donne:
-          2025: 10_000
+          ETERNITY: 10_000
   output:
     exoneration_don_familial:
       2025-01: [0, 0, 0, 0, 0, 0, 0, 0]

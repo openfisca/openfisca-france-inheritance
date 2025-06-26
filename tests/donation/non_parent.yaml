@@ -27,13 +27,13 @@
         donateur: Camille_donation_1
         non_parent_donataire: Claude
         actif_brut_donne:
-          2025: 10000
+          ETERNITY: 10000
 
       donation_2:
         donateur: Camille_donation_2
         non_parent_donataire: Celeste
         actif_brut_donne:
-          2025: 1000
+          ETERNITY: 1000
 
   output:
     is_donataire:
