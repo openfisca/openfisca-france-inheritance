@@ -64,3 +64,112 @@ Ceci créera un environnement virtuel. Dans cet environnement isolé, `OpenFisca
 ```sh
 poetry run pip list
 ```
+
+## Exécuter l'API web
+
+> Mémo : les librairies contenant l'API web sont référencées par le fichier `pyproject.toml` au travers de l'option `web-api` d'`openfisca-core[web-api]`. On suppose ici qu'elles ont été installées à l'étape précédente.
+
+Pour exécuter l'API web et tester des requêtes, deux terminaux sont utilisés : 
+* un terminal permettant d'exécuter l'API web avec la commande `openfisca serve`
+* un terminal permettant d'envoyer des requêtes à l'API web (ou votre outil favori d'envoi de requêtes)
+
+
+### Exécution avec `openfisca serve`
+
+Dans un premier terminal, exécuter l'API web requiert la commande `openfisca serve` qui a été installée sur votre machine à l'étape précédente.
+
+Il est par exemple possible de tester sa bonne présence en consultant ses options disponibles avec : 
+```sh
+$ poetry run openfisca serve --help
+
+usage: openfisca serve [-h] [-c COUNTRY_PACKAGE] [-e [EXTENSIONS ...]]
+                       [-r [REFORMS ...]] [-p PORT]
+                       [--tracker-url TRACKER_URL]
+                       [--tracker-idsite TRACKER_IDSITE]
+                       [--tracker-token TRACKER_TOKEN]
+                       [--welcome-message WELCOME_MESSAGE]
+                       [-f CONFIGURATION_FILE]
+
+options:
+  -h, --help            show this help message and exit
+  -c COUNTRY_PACKAGE, --country-package COUNTRY_PACKAGE
+                        country package to use. If not provided, an automatic
+                        detection will be attempted by scanning the python
+                        packages installed in your environment which name
+                        contains the word "openfisca".
+  ...
+```
+où `poetry run` permet d'exécuter la commande qui suit - `openfisca serve --help` - dans l'environnement virtuel où les librairies Python du dépôt ont été installées.
+
+Puis exécuter l'API web avec la commande suivante : 
+
+```sh
+$ poetry run openfisca serve --country-package openfisca_france_inheritance 
+
+[2025-04-11 14:40:23 +0200] [92209] [INFO] Starting gunicorn 21.2.0
+[2025-04-11 14:40:23 +0200] [92209] [INFO] Listening at: http://127.0.0.1:5000 (92209)
+[2025-04-11 14:40:23 +0200] [92209] [INFO] Using worker: sync
+[2025-04-11 14:40:23 +0200] [92381] [INFO] Booting worker with pid: 92381
+[2025-04-11 14:40:23 +0200] [92382] [INFO] Booting worker with pid: 92382
+[2025-04-11 14:40:23 +0200] [92383] [INFO] Booting worker with pid: 92383
+```
+
+Comme l'indique la commande, l'API est par défaut disponible sur `http://127.0.0.1:5000`.
+Pour en savoir plus sur les différentes options de configuration de l'API telles que la définition du port, il est également possible de consulter la documentation officielle : https://openfisca.org/doc/openfisca-python-api/openfisca_serve.html
+
+### Exemple de requête
+
+Dans un second terminal, il est possible d'utiliser la commande `curl` afin d'envoyer une requête de calcul à l'endpoint `/calculate`.
+
+> Pour en savoir plus sur les endpoints disponibles consulter la documentation officielle openfisca : https://openfisca.org/doc/openfisca-web-api/endpoints.html 
+
+Un exemple de requête (payload) `donation.json` est disponible dans le répertoire `openfisca_france_inheritance/situation_examples/`. Afin de l'envoyer à `/calculate`, exécuter : 
+
+```sh
+$ cd openfisca_france_inheritance/situation_examples/
+$ curl -X POST http://127.0.0.1:5000/calculate -H 'Content-Type: application/json' -d @donation.json
+```
+
+> ou `curl -X POST http://127.0.0.1:5000/calculate -H 'Content-Type: application/json' -d @donation.json | jq` utilisant `jq` pour la mise en forme de l'affichage.
+
+L'API répondra en complétant la question qui a été envoyée : les `null` seront remplacés par les valeurs calculées. 
+
+Exemple de réponse : 
+
+```json
+{
+  "donations": {
+    "donation_1": {
+      "actif_brut_donne": {
+        "ETERNITY": 200000
+      },
+      "donateur": "Camille",
+      "enfant_donataire": "Claude"
+    }
+  },
+  "individus": {
+    "Camille": {
+      "age": {
+        "2025-01": "60"
+      }
+    },
+    "Claude": {
+      "abattement_plafond": {
+        "2025-01": 100000.0
+      },
+      "age": {
+        "2025-01": "40"
+      },
+      "droits_donation": {
+        "2025-01": 11821.35
+      },
+      "exoneration_don_familial": {
+        "2025-01": 31865.0
+      }
+    }
+  },
+  "successions": {}
+}
+```
+
+Pour en savoir plus sur l'usage de l'endpoint `/calculate`, consulter : https://openfisca.org/doc/openfisca-web-api/input-output-data.html
