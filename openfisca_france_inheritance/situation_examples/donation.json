@@ -1,0 +1,33 @@
+{
+    "individus": {
+        "Camille": {
+            "age": {
+                "2025-01": "60"
+            }
+        },
+        "Claude": {
+            "age": {
+                "2025-01": "40"
+            },
+            "exoneration_don_familial": {
+                "2025-01": null
+            },
+            "abattement_plafond": {
+                "2025-01": null
+            },
+            "droits_donation": {
+                "2025-01": null
+            }
+        }
+    },
+    "donations": {
+        "donation_1": {
+            "donateur": "Camille",
+            "enfant_donataire": "Claude",
+            "actif_brut_donne": {
+                "ETERNITY": 200000
+            }
+        }
+    },
+    "successions": {}
+}
